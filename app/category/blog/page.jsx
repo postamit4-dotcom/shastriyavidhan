@@ -1,0 +1,26 @@
+import Link from "next/link";
+import { excludedContent } from "@/lib/site-data";
+
+export const metadata = {
+  title: "Blog Archive Under Review",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
+
+export default function BlogArchivePage() {
+  return (
+    <section className="page-hero compact">
+      <p className="eyebrow">Archive Review</p>
+      <h1>Blog posts need content review</h1>
+      <p>
+        {excludedContent.publishedPosts} posts are excluded from the public booking experience
+        until they are reviewed for relevance, religious accuracy, and SEO quality.
+      </p>
+      <Link className="primary-button" href="/services">
+        View puja services
+      </Link>
+    </section>
+  );
+}

@@ -1,0 +1,10 @@
+.next
+node_modules
+.npm-cache
+.env
+.env.*
+.vercel
+storage/*.jsonl
+storage/*.log
+!.gitkeep
+*.log
