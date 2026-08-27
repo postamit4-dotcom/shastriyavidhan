@@ -7,6 +7,7 @@ import { contact, site } from "@/lib/site-data";
 
 export default function SiteHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [countdown, setCountdown] = useState("00:00:00");
 
   useEffect(() => {
     document.body.classList.toggle("menu-open", mobileMenuOpen);
@@ -25,10 +26,31 @@ export default function SiteHeader() {
     };
   }, [mobileMenuOpen]);
 
+  useEffect(() => {
+    function updateCountdown() {
+      const now = new Date();
+      const endOfDay = new Date(now);
+      endOfDay.setHours(23, 59, 59, 999);
+      const diff = Math.max(0, endOfDay.getTime() - now.getTime());
+      const hours = Math.floor(diff / 3600000);
+      const minutes = Math.floor((diff % 3600000) / 60000);
+      const seconds = Math.floor((diff % 60000) / 1000);
+      setCountdown(
+        `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`,
+      );
+    }
+
+    updateCountdown();
+    const timer = window.setInterval(updateCountdown, 1000);
+
+    return () => window.clearInterval(timer);
+  }, []);
+
   return (
     <>
       <div className="apple-ribbon" role="region" aria-label="Announcement">
-        <span>Guided Vedic puja booking for families in India and worldwide.</span>
+        <span>Priority puja requests are open today.</span>
+        <strong className="timer-countdown">{countdown}</strong>
         <a
           href={contact.whatsappLink}
           target="_blank"

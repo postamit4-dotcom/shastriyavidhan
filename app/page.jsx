@@ -47,34 +47,83 @@ export default function HomePage() {
     <>
       {/* 1. APPLE FULL-BLEED HERO SECTION */}
       <section className="apple-hero-fullbleed" aria-label="Hero Introduction">
-        <div className="container">
-          <span className="apple-eyebrow">Shastriya Vidhan Special</span>
-          <h1 className="apple-hero-title">
-            Puja at Home. Sacred. Seamless.
-          </h1>
-          <p className="apple-hero-subtitle">
-            Book verified Vedic Pandit Jis for authentic pujas at home, in sacred temples, or over live 1-on-1 video.
-          </p>
+        <div className="container apple-hero-grid">
+          <div className="apple-hero-copy">
+            <div className="social-proof-badge">
+              <span className="stars" aria-hidden="true">★★★★★</span>
+              <span>Trusted by families across Delhi NCR and worldwide</span>
+            </div>
 
-          <div className="apple-hero-ctas">
-            <a href="#book-pandit-ji" className="apple-btn-pill apple-btn-primary" id="hero-book-cta">
-              Book Pandit Ji
-            </a>
-            <a href="#puja-finder" className="apple-link" style={{ fontSize: "1.1rem" }}>
-              <span>Compare all pujas</span>
-              <ChevronRight size={15} className="apple-link-chevron" aria-hidden="true" />
-            </a>
+            <span className="apple-eyebrow">Shastriya Vidhan Special</span>
+            <h1 className="apple-hero-title">
+              Book <span className="text-gradient">Pandit Ji</span> for puja at home, temple or online.
+            </h1>
+            <p className="apple-hero-subtitle">
+              Plan authentic Vedic pujas with clear vidhi, samagri guidance, quote confirmation, and family-friendly coordination before payment.
+            </p>
+
+            <div className="apple-hero-ctas">
+              <a href="#book-pandit-ji" className="apple-btn-pill apple-btn-primary" id="hero-book-cta">
+                Book Pandit Ji
+                <ChevronRight size={17} aria-hidden="true" />
+              </a>
+              <a href={contact.whatsappLink} target="_blank" rel="noopener noreferrer" className="apple-btn-pill apple-btn-secondary">
+                <MessageCircle size={17} aria-hidden="true" />
+                WhatsApp Booking Desk
+              </a>
+            </div>
+
+            <div className="trust-badge-grid" aria-label="Booking highlights">
+              <div className="badge-item">
+                <Check size={16} aria-hidden="true" />
+                <span>Manual availability check</span>
+              </div>
+              <div className="badge-item">
+                <Check size={16} aria-hidden="true" />
+                <span>Home, temple and online puja</span>
+              </div>
+              <div className="badge-item">
+                <Check size={16} aria-hidden="true" />
+                <span>Samagri checklist before booking</span>
+              </div>
+              <div className="badge-item">
+                <Check size={16} aria-hidden="true" />
+                <span>No payment before quote clarity</span>
+              </div>
+              <div className="badge-item">
+                <Check size={16} aria-hidden="true" />
+                <span>Hindi, Sanskrit and English support</span>
+              </div>
+              <div className="badge-item">
+                <Check size={16} aria-hidden="true" />
+                <span>NRI video-call friendly</span>
+              </div>
+            </div>
           </div>
 
           <div className="apple-hero-stage">
-            <img
-              src="/images/diwali-puja.webp"
-              alt="Authentic Vedic Puja arrangement with traditional lamps"
-              className="apple-hero-media"
-              fetchPriority="high"
-              width="1200"
-              height="480"
-            />
+            <div className="image-border-gradient">
+              <img
+                src="/images/diwali-puja.webp"
+                alt="Authentic Vedic Puja arrangement with traditional lamps"
+                className="apple-hero-media"
+                fetchPriority="high"
+                width="1200"
+                height="900"
+              />
+            </div>
+
+            <div className="floating-stats-card">
+              <div className="avatar-group" aria-hidden="true">
+                <span className="avatar">OM</span>
+                <span className="avatar">SV</span>
+                <span className="avatar">PJ</span>
+              </div>
+              <div className="stats-text">
+                <strong>Request-first</strong>
+                <span>Availability, quote, and samagri confirmed manually.</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
