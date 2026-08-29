@@ -47,6 +47,11 @@ export default function SiteFooter() {
           <div className="apple-footer-col">
             <h4>Service Areas</h4>
             <ul className="apple-footer-links">
+              <li>
+                <Link href="/locations" style={{ color: "var(--apple-blue)" }}>
+                  All Service Locations
+                </Link>
+              </li>
               {locationPages.map((loc) => (
                 <li key={loc.city}>
                   <Link href={loc.href}>{loc.city} ({loc.badge})</Link>

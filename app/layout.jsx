@@ -3,9 +3,11 @@ import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import MobileStickyBar from "@/components/MobileStickyBar";
 import { site } from "@/lib/site-data";
+import { absoluteUrl, siteGraphJsonLd } from "@/lib/seo";
 
 export const metadata = {
   metadataBase: new URL(site.productionUrl),
+  applicationName: site.name,
   title: {
     default: `${site.name} | Puja Made Peaceful - Book Pandit Ji for Authentic Vedic Puja`,
     template: `%s | ${site.name}`,
@@ -14,10 +16,21 @@ export const metadata = {
   alternates: {
     canonical: "/",
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   openGraph: {
     title: `${site.name} | Puja Made Peaceful`,
     description: site.description,
-    url: site.productionUrl,
+    url: absoluteUrl("/"),
     siteName: site.name,
     images: [
       {
@@ -39,6 +52,8 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  const jsonLd = siteGraphJsonLd();
+
   return (
     <html lang="en">
       <head>
@@ -48,6 +63,7 @@ export default function RootLayout({ children }) {
           href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap"
           rel="stylesheet"
         />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </head>
       <body>
         <a className="skip-link" href="#main-content">

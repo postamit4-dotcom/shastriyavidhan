@@ -3,9 +3,10 @@ import { excludedContent } from "@/lib/site-data";
 
 export const metadata = {
   title: "Blog Archive Under Review",
+  description: "Reviewed blog archive placeholder for Shastriya Vidhan.",
   robots: {
     index: false,
-    follow: false,
+    follow: true,
   },
 };
 

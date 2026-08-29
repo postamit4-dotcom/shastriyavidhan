@@ -39,9 +39,11 @@ import {
   site,
   trustPillars,
 } from "@/lib/site-data";
+import { homePageJsonLd } from "@/lib/seo";
 
 export default function HomePage() {
   const [openFaq, setOpenFaq] = useState(0);
+  const jsonLd = homePageJsonLd();
 
   return (
     <>
@@ -368,10 +370,10 @@ export default function HomePage() {
                 <span className="apple-product-tag">{loc.badge}</span>
                 <h3 style={{ fontSize: "1.2rem", fontWeight: 700, margin: "4px 0" }}>{loc.city}</h3>
                 <p style={{ fontSize: "0.88rem", color: "var(--text-secondary)", marginBottom: "16px" }}>{loc.coverage}</p>
-                <a href="#book-pandit-ji" className="apple-link apple-link-sm" style={{ fontWeight: 500 }}>
-                  <span>Book in {loc.city}</span>
+                <Link href={loc.href} className="apple-link apple-link-sm" style={{ fontWeight: 500 }}>
+                  <span>View {loc.city} options</span>
                   <ChevronRight size={13} className="apple-link-chevron" />
-                </a>
+                </Link>
               </div>
             ))}
           </div>
@@ -489,6 +491,8 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     </>
   );
 }

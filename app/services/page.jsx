@@ -1,22 +1,34 @@
 import Link from "next/link";
 import { ChevronRight, MessageCircle } from "lucide-react";
 import ServiceCard from "@/components/ServiceCard";
-import { contact, serviceCategories, servicesByCategory, site } from "@/lib/site-data";
+import { contact, serviceCategories, servicesByCategory } from "@/lib/site-data";
+import { basePageMetadata, servicesDirectoryJsonLd } from "@/lib/seo";
 
-export const metadata = {
-  title: "All Vedic Pujas — Directory & Comparison",
-  description:
-    "Explore authentic Shastriya Vidhan puja services by category: festival pujas, Lord Shiva rituals, path and jaap, and temple coordination.",
-  alternates: {
-    canonical: "/services",
-  },
-};
+const title = "All Vedic Pujas - Directory & Comparison";
+const description =
+  "Explore authentic Shastriya Vidhan puja services by category: festival pujas, Lord Shiva rituals, path and jaap, and temple coordination.";
+
+export const metadata = basePageMetadata({
+  title,
+  description,
+  path: "/services",
+  image: "/images/rudrabhishek-puja.webp",
+  imageAlt: "Shastriya Vidhan Vedic puja services directory",
+});
 
 export default function ServicesPage() {
+  const jsonLd = servicesDirectoryJsonLd();
+
   return (
     <>
       <section className="section-apple" style={{ backgroundColor: "var(--apple-gray-bg)", paddingBottom: "48px" }}>
         <div className="container">
+          <nav aria-label="Breadcrumb" className="service-breadcrumb">
+            <Link href="/">Home</Link>
+            <ChevronRight size={14} aria-hidden="true" />
+            <span>Puja Services</span>
+          </nav>
+
           <div className="apple-section-header" style={{ marginBottom: "24px" }}>
             <span className="apple-eyebrow">Directory</span>
             <h1>All Vedic Puja Services</h1>
@@ -70,6 +82,8 @@ export default function ServicesPage() {
           </section>
         );
       })}
+
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     </>
   );
 }

@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import ContactForm from "@/components/ContactForm";
 import { contact, getServiceBySlug, servicePages, site } from "@/lib/site-data";
+import { absoluteUrl, canonicalPath, servicePageJsonLd } from "@/lib/seo";
 
 export function generateStaticParams() {
   return servicePages.map((service) => ({ slug: service.slug }));
@@ -45,12 +46,23 @@ export async function generateMetadata({ params }) {
     description: service.description,
     keywords: uniqueKeywords(service),
     alternates: {
-      canonical: `/${service.slug}`,
+      canonical: canonicalPath(`/${service.slug}`),
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+        "max-video-preview": -1,
+      },
     },
     openGraph: {
       title: pageTitle,
       description: service.description,
-      url: `${site.productionUrl}/${service.slug}/`,
+      url: absoluteUrl(`/${service.slug}`),
       siteName: site.name,
       images: [
         {
@@ -81,61 +93,7 @@ export default async function ServicePage({ params }) {
 
   const pageH1 = service.pageH1 || service.title;
   const hasFaqs = Array.isArray(service.faqs) && service.faqs.length > 0;
-  const jsonLd = [
-    {
-      "@context": "https://schema.org",
-      "@type": "Service",
-      name: service.title,
-      serviceType: service.category,
-      description: service.description,
-      url: `${site.productionUrl}/${service.slug}/`,
-      provider: {
-        "@type": "Organization",
-        name: site.name,
-        url: site.productionUrl,
-        telephone: contact.phone,
-      },
-      areaServed: service.locations,
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        {
-          "@type": "ListItem",
-          position: 1,
-          name: "Home",
-          item: site.productionUrl,
-        },
-        {
-          "@type": "ListItem",
-          position: 2,
-          name: "Puja Services",
-          item: `${site.productionUrl}/services/`,
-        },
-        {
-          "@type": "ListItem",
-          position: 3,
-          name: service.title,
-          item: `${site.productionUrl}/${service.slug}/`,
-        },
-      ],
-    },
-    hasFaqs
-      ? {
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          mainEntity: service.faqs.map((faq) => ({
-            "@type": "Question",
-            name: faq.question,
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: faq.answer,
-            },
-          })),
-        }
-      : null,
-  ].filter(Boolean);
+  const jsonLd = servicePageJsonLd(service);
 
   return (
     <>

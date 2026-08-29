@@ -1,21 +1,33 @@
-import { CalendarCheck, MapPin, MessageCircle, PhoneCall, ShieldCheck, Mail, Sparkles } from "lucide-react";
+import Link from "next/link";
+import { ChevronRight, MapPin, MessageCircle, PhoneCall } from "lucide-react";
 import ContactForm from "@/components/ContactForm";
-import { contact, site } from "@/lib/site-data";
+import { contact } from "@/lib/site-data";
+import { basePageMetadata, contactPageJsonLd } from "@/lib/seo";
 
-export const metadata = {
-  title: "Contact & Pandit Ji Booking Desk",
-  description:
-    "Contact Shastriya Vidhan for Pandit Ji booking assistance in Noida, Delhi, Gurugram, and Online Video Puja coordination.",
-  alternates: {
-    canonical: "/contact",
-  },
-};
+const title = "Contact & Pandit Ji Booking Desk";
+const description =
+  "Contact Shastriya Vidhan for Pandit Ji booking assistance in Noida, Delhi, Gurugram, Ujjain, and Online Video Puja coordination.";
+
+export const metadata = basePageMetadata({
+  title,
+  description,
+  path: "/contact",
+  imageAlt: "Contact Shastriya Vidhan Pandit Ji booking desk",
+});
 
 export default function ContactPage() {
+  const jsonLd = contactPageJsonLd();
+
   return (
     <>
       <section className="section-wrapper bg-sand-light" style={{ paddingBottom: "48px" }}>
         <div className="container">
+          <nav aria-label="Breadcrumb" className="service-breadcrumb">
+            <Link href="/">Home</Link>
+            <ChevronRight size={14} aria-hidden="true" />
+            <span>Contact</span>
+          </nav>
+
           <div className="section-head-center">
             <span className="badge-pill badge-saffron" style={{ marginBottom: "12px" }}>
               24/7 Spiritual Booking Desk
@@ -80,6 +92,8 @@ export default function ContactPage() {
           <ContactForm />
         </div>
       </section>
+
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     </>
   );
 }

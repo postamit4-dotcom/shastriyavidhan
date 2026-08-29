@@ -7,7 +7,7 @@ export const metadata = {
   description: "WordPress to Node.js migration notes for Shastriya Vidhan.",
   robots: {
     index: false,
-    follow: false,
+    follow: true,
   },
 };
 

@@ -86,7 +86,7 @@ export default function SiteHeader() {
             <Link href="/#pandits" className="apple-menu-item">
               Pandit Standards
             </Link>
-            <Link href="/#locations" className="apple-menu-item">
+            <Link href="/locations" className="apple-menu-item">
               Locations
             </Link>
             <Link href="/#guides" className="apple-menu-item">
@@ -167,7 +167,7 @@ export default function SiteHeader() {
                 <span>Pandit Ji Standards</span>
                 <ChevronRight size={16} />
               </Link>
-              <Link href="/#locations" className="mobile-nav-link" onClick={() => setMobileMenuOpen(false)}>
+              <Link href="/locations" className="mobile-nav-link" onClick={() => setMobileMenuOpen(false)}>
                 <span>Locations</span>
                 <ChevronRight size={16} />
               </Link>

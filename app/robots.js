@@ -1,4 +1,4 @@
-import { site } from "@/lib/site-data";
+import { absoluteUrl } from "@/lib/seo";
 
 export default function robots() {
   return {
@@ -6,9 +6,9 @@ export default function robots() {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/category/blog", "/migration-notes"],
+        disallow: ["/api/"],
       },
     ],
-    sitemap: `${site.productionUrl}/sitemap.xml`,
+    sitemap: absoluteUrl("/sitemap.xml"),
   };
 }
