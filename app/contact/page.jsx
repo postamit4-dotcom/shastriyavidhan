@@ -30,11 +30,11 @@ export default function ContactPage() {
 
           <div className="section-head-center">
             <span className="badge-pill badge-saffron" style={{ marginBottom: "12px" }}>
-              24/7 Spiritual Booking Desk
+              Booking Desk
             </span>
             <h1>Contact Shastriya Vidhan</h1>
             <p>
-              Have questions about auspicious muhurat, samagri requirements, or Pandit Ji availability? Our Vedic coordination team is here to assist your family.
+              Have questions about muhurat, samagri requirements, or Pandit Ji availability? Share your request and the booking desk will review the details before confirmation.
             </p>
           </div>
 
@@ -45,7 +45,7 @@ export default function ContactPage() {
                 <PhoneCall size={22} />
               </div>
               <h2 style={{ fontSize: "1.1rem", fontWeight: 700, marginBottom: "4px" }}>Call Booking Desk</h2>
-              <p style={{ fontSize: "0.88rem", color: "var(--muted-text)", marginBottom: "12px" }}>Mon - Sun (7:00 AM - 9:00 PM)</p>
+              <p style={{ fontSize: "0.88rem", color: "var(--muted-text)", marginBottom: "12px" }}>Response window is confirmed by the booking desk</p>
               <a href={`tel:${contact.phone}`} className="btn-pill btn-sm btn-outline" style={{ width: "100%" }}>
                 {contact.displayPhone}
               </a>
@@ -57,7 +57,7 @@ export default function ContactPage() {
                 <MessageCircle size={22} />
               </div>
               <h2 style={{ fontSize: "1.1rem", fontWeight: 700, marginBottom: "4px" }}>WhatsApp Assistance</h2>
-              <p style={{ fontSize: "0.88rem", color: "var(--muted-text)", marginBottom: "12px" }}>Instant responses &amp; samagri lists</p>
+              <p style={{ fontSize: "0.88rem", color: "var(--muted-text)", marginBottom: "12px" }}>Manual response and samagri guidance</p>
               <a href={contact.whatsappLink} target="_blank" rel="noopener noreferrer" className="btn-pill btn-sm btn-whatsapp" style={{ width: "100%" }}>
                 Chat on WhatsApp
               </a>
@@ -71,7 +71,7 @@ export default function ContactPage() {
               <h2 style={{ fontSize: "1.1rem", fontWeight: 700, marginBottom: "4px" }}>Coverage Areas</h2>
               <p style={{ fontSize: "0.88rem", color: "var(--muted-text)", marginBottom: "12px" }}>Noida, Delhi, Gurugram, Ujjain &amp; Global Online</p>
               <span className="badge-pill badge-saffron" style={{ display: "inline-block" }}>
-                Full NCR Coverage
+                Request areas listed
               </span>
             </div>
           </div>

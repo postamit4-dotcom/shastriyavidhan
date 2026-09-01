@@ -29,9 +29,9 @@ export default function PujaFinder() {
       if (activeCategory === "festivals") {
         matchesCat = svc.category === "Festival Pujas";
       } else if (activeCategory === "shiva") {
-        matchesCat = svc.category === "Lord Shiva Pujas";
+        matchesCat = svc.category === "Shiva Pujas" || ["Maha Shivratri", "Mahamrityunjaya"].includes(svc.navTitle);
       } else if (activeCategory === "path-jaap") {
-        matchesCat = svc.category === "Path and Jaap Services";
+        matchesCat = svc.category === "Path/Jaap/Katha";
       } else if (activeCategory === "online") {
         matchesCat = svc.modes.includes("Online");
       }
@@ -135,10 +135,10 @@ export default function PujaFinder() {
               {/* Apple Dual Actions */}
               <div className="apple-product-actions">
                 <a href="#book-pandit-ji" className="apple-btn-pill apple-btn-primary" style={{ padding: "8px 18px" }}>
-                  Book
+                  Request Quote
                 </a>
                 <Link href={`/${service.slug}`} className="apple-link apple-link-sm">
-                  <span>Learn more</span>
+                  <span>View details</span>
                   <ChevronRight size={13} className="apple-link-chevron" aria-hidden="true" />
                 </Link>
               </div>
@@ -147,7 +147,7 @@ export default function PujaFinder() {
         </div>
 
         <div style={{ textAlign: "center", marginTop: "44px" }}>
-          <Link href="/services" className="apple-link" style={{ fontSize: "1.1rem", fontWeight: 500 }}>
+          <Link href="/puja-services" className="apple-link" style={{ fontSize: "1.1rem", fontWeight: 500 }}>
             <span>Compare all {servicePages.length} Vedic pujas</span>
             <ChevronRight size={16} className="apple-link-chevron" aria-hidden="true" />
           </Link>

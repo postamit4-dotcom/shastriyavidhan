@@ -8,13 +8,44 @@ import {
   Languages,
   MapPin,
   MessageCircle,
+  PhoneCall,
 } from "lucide-react";
+import BookingOptionButton from "@/components/BookingOptionButton";
 import ContactForm from "@/components/ContactForm";
-import { contact, getServiceBySlug, servicePages, site } from "@/lib/site-data";
-import { absoluteUrl, canonicalPath, servicePageJsonLd } from "@/lib/seo";
+import ServiceCard from "@/components/ServiceCard";
+import {
+  contact,
+  getCategoryBySlug,
+  getServiceBySlug,
+  pathForCategory,
+  serviceCategoryAssignments,
+  servicePages,
+  site,
+} from "@/lib/site-data";
+import {
+  absoluteUrl,
+  basePageMetadata,
+  breadcrumbJsonLd,
+  canonicalPath,
+  servicePageJsonLd,
+} from "@/lib/seo";
+import {
+  getModePageBySlug,
+  getPolicyBySlug,
+  getSupportPageBySlug,
+  modePages,
+  policyPages,
+  supportCtaLinks,
+  supportPages,
+} from "@/lib/page-content";
 
 export function generateStaticParams() {
-  return servicePages.map((service) => ({ slug: service.slug }));
+  return [
+    ...servicePages.map((service) => ({ slug: service.slug })),
+    ...policyPages.map((page) => ({ slug: page.slug })),
+    ...modePages.map((page) => ({ slug: page.slug })),
+    ...supportPages.map((page) => ({ slug: page.slug })),
+  ];
 }
 
 function uniqueKeywords(service) {
@@ -36,6 +67,35 @@ export async function generateMetadata({ params }) {
   const service = getServiceBySlug(slug);
 
   if (!service) {
+    const policy = getPolicyBySlug(slug);
+    if (policy) {
+      return basePageMetadata({
+        title: policy.title,
+        description: policy.description,
+        path: policy.href,
+      });
+    }
+
+    const modePage = getModePageBySlug(slug);
+    if (modePage) {
+      return basePageMetadata({
+        title: modePage.title,
+        description: modePage.description,
+        path: modePage.href,
+        image: modePage.services[0]?.image.local || "/images/diwali-puja.webp",
+        imageAlt: `${modePage.title} Shastriya Vidhan service mode`,
+      });
+    }
+
+    const supportPage = getSupportPageBySlug(slug);
+    if (supportPage) {
+      return basePageMetadata({
+        title: supportPage.title,
+        description: supportPage.description,
+        path: supportPage.href,
+      });
+    }
+
     return {};
   }
 
@@ -46,7 +106,7 @@ export async function generateMetadata({ params }) {
     description: service.description,
     keywords: uniqueKeywords(service),
     alternates: {
-      canonical: canonicalPath(`/${service.slug}`),
+      canonical: absoluteUrl(canonicalPath(`/${service.slug}`)),
     },
     robots: {
       index: true,
@@ -83,8 +143,494 @@ export async function generateMetadata({ params }) {
   };
 }
 
+function genericPageJsonLd(page, parent = "Help") {
+  const url = absoluteUrl(page.href);
+  const breadcrumbItems =
+    page.href === "/help"
+      ? [
+          { name: "Home", path: "/" },
+          { name: page.title, path: page.href },
+        ]
+      : [
+          { name: "Home", path: "/" },
+          { name: parent, path: parent === "Puja Services" ? "/puja-services" : "/help" },
+          { name: page.title, path: page.href },
+        ];
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": `${url}#webpage`,
+        url,
+        name: page.title,
+        description: page.description,
+        inLanguage: "en-IN",
+        isPartOf: {
+          "@id": `${absoluteUrl("/")}#website`,
+        },
+        breadcrumb: {
+          "@id": `${url}#breadcrumb`,
+        },
+      },
+      breadcrumbJsonLd(breadcrumbItems, page.href),
+    ],
+  };
+}
+
+function renderListItem(item) {
+  if (typeof item === "string") {
+    return <span>{item}</span>;
+  }
+
+  return <Link href={item.href}>{item.label}</Link>;
+}
+
+function PolicyPage({ policy }) {
+  const jsonLd = genericPageJsonLd(policy);
+
+  return (
+    <>
+      <section className="section-apple" style={{ backgroundColor: "var(--apple-gray-bg)", paddingBottom: "48px" }}>
+        <div className="container">
+          <nav aria-label="Breadcrumb" className="service-breadcrumb">
+            <Link href="/">Home</Link>
+            <ChevronRight size={14} aria-hidden="true" />
+            <Link href="/help">Help</Link>
+            <ChevronRight size={14} aria-hidden="true" />
+            <span>{policy.title}</span>
+          </nav>
+
+          <div className="apple-section-header" style={{ marginBottom: "24px" }}>
+            <span className="apple-eyebrow">{site.name}</span>
+            <h1>{policy.title}</h1>
+            <p>{policy.description}</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="section-apple">
+        <div className="container">
+          <div className="apple-product-card" style={{ maxWidth: "900px", margin: "0 auto", textAlign: "left" }}>
+            <ul style={{ display: "grid", gap: "14px", listStyle: "none" }}>
+              {policy.items.map((item) => (
+                <li key={item} style={{ display: "flex", gap: "10px", alignItems: "flex-start" }}>
+                  <Check size={17} aria-hidden="true" style={{ color: "var(--apple-green)", marginTop: "3px" }} />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+            <p style={{ color: "var(--text-tertiary)", marginTop: "24px" }}>
+              For booking support, contact {contact.displayPhone} or use the booking form.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+    </>
+  );
+}
+
+function SupportPage({ page }) {
+  const jsonLd = genericPageJsonLd(page);
+  const ctaLinks = supportCtaLinks();
+  const isHelpRoot = page.href === "/help";
+
+  return (
+    <>
+      <section className="section-apple" style={{ backgroundColor: "var(--apple-gray-bg)", paddingBottom: "48px" }}>
+        <div className="container">
+          <nav aria-label="Breadcrumb" className="service-breadcrumb">
+            <Link href="/">Home</Link>
+            <ChevronRight size={14} aria-hidden="true" />
+            {isHelpRoot ? null : (
+              <>
+                <Link href="/help">Help</Link>
+                <ChevronRight size={14} aria-hidden="true" />
+              </>
+            )}
+            <span>{page.title}</span>
+          </nav>
+
+          <div className="apple-section-header" style={{ marginBottom: "24px" }}>
+            <span className="apple-eyebrow">{page.eyebrow}</span>
+            <h1>{page.title}</h1>
+            <p>{page.description}</p>
+          </div>
+
+          <div style={{ display: "flex", justifyContent: "center", gap: "12px", flexWrap: "wrap" }}>
+            {ctaLinks.map((link) =>
+              link.external ? (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  target={link.href.startsWith("http") ? "_blank" : undefined}
+                  rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                  className="apple-btn-pill apple-btn-secondary"
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <Link key={link.href} href={link.href} className="apple-btn-pill apple-btn-primary">
+                  {link.label}
+                </Link>
+              ),
+            )}
+          </div>
+        </div>
+      </section>
+
+      <section className="section-apple">
+        <div className="container">
+          <div className="service-inclusion-grid">
+            {page.sections.map((section) => (
+              <article key={section.title} className="apple-product-card" style={{ textAlign: "left" }}>
+                <span className="apple-product-tag">{section.title}</span>
+                <h2>{section.title}</h2>
+                <p className="apple-product-desc">{section.body}</p>
+                <ul>
+                  {section.items.map((item) => (
+                    <li key={typeof item === "string" ? item : item.href}>
+                      <Check size={16} aria-hidden="true" />
+                      {renderListItem(item)}
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+    </>
+  );
+}
+
+function ModePage({ page }) {
+  const jsonLd = genericPageJsonLd(page, "Puja Services");
+
+  return (
+    <>
+      <section className="section-apple service-premium-hero">
+        <div className="container">
+          <nav aria-label="Breadcrumb" className="service-breadcrumb">
+            <Link href="/">Home</Link>
+            <ChevronRight size={14} aria-hidden="true" />
+            <Link href="/puja-services">Puja Services</Link>
+            <ChevronRight size={14} aria-hidden="true" />
+            <span>{page.title}</span>
+          </nav>
+
+          <div className="service-apple-hero-grid">
+            <div>
+              <span className="apple-eyebrow">{page.eyebrow}</span>
+              <h1>{page.h1}</h1>
+              <p>{page.description}</p>
+              <div className="service-hero-actions">
+                <Link href="/book-puja" className="apple-btn-pill apple-btn-primary">
+                  Request {page.title}
+                </Link>
+                <a
+                  href={contact.whatsappLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="apple-btn-pill apple-btn-secondary"
+                >
+                  <MessageCircle size={17} aria-hidden="true" />
+                  Ask Booking Desk
+                </a>
+              </div>
+              <p className="service-hero-note">
+                Request first. Final availability, quote, samagri, and booking terms are confirmed before payment.
+              </p>
+            </div>
+
+            <div className="service-hero-visual-card">
+              <img
+                src={page.services[0]?.image.local || "/images/diwali-puja.webp"}
+                alt={page.services[0]?.image.alt || page.title}
+                width="736"
+                height="552"
+              />
+              <div className="service-hero-floating-card">
+                <span>{page.mode?.badge || "Request mode"}</span>
+                <strong>{page.mode?.tagline || "Reviewed before confirmation"}</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section-apple">
+        <div className="container">
+          <div className="apple-product-card" style={{ maxWidth: "900px", margin: "0 auto", textAlign: "left" }}>
+            <h2 className="apple-product-title">How this mode works</h2>
+            <p className="apple-product-desc">{page.intro}</p>
+            <div className="apple-product-specs" style={{ textAlign: "left" }}>
+              <div>
+                <strong>Best for:</strong> {page.mode?.bestFor}
+              </div>
+              <div>
+                <strong>Prepare:</strong> {page.mode?.prepare}
+              </div>
+              <div>
+                <strong>Includes:</strong> {page.mode?.includes}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section-apple" style={{ backgroundColor: "var(--apple-gray-bg)" }}>
+        <div className="container">
+          <div className="apple-section-header">
+            <span className="apple-eyebrow">Matching services</span>
+            <h2>Pujas that currently support {page.serviceMode.toLowerCase()} requests.</h2>
+          </div>
+
+          <div className="apple-products-grid">
+            {page.services.map((service) => (
+              <ServiceCard key={service.slug} service={service} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+    </>
+  );
+}
+
+const defaultBookingAssurances = [
+  {
+    title: "Request-first booking",
+    body: "Confirm timing, quote, and fit before payment.",
+  },
+  {
+    title: "Clear preparation",
+    body: "Samagri and puja mode details are reviewed upfront.",
+  },
+  {
+    title: "Family-ready support",
+    body: "Coordinate home, online, or temple puja with guidance.",
+  },
+];
+
+function ServiceFormatsSection({ service }) {
+  if (!service.serviceFormats?.length) return null;
+
+  return (
+    <section className="section-apple service-detail-section">
+      <div className="container">
+        <div className="apple-section-header">
+          <span className="apple-eyebrow">{service.serviceFormatsEyebrow || "Formats"}</span>
+          <h2>{service.serviceFormatsHeading || "Choose how you would like to perform the Path."}</h2>
+          {service.serviceFormatsDescription ? <p>{service.serviceFormatsDescription}</p> : null}
+        </div>
+
+        <div className="service-detail-card-grid">
+          {service.serviceFormats.map((format) => (
+            <article className="service-detail-card" key={format.title}>
+              {format.tag ? <span className="apple-product-tag">{format.tag}</span> : null}
+              <h3>{format.title}</h3>
+              <p>{format.body}</p>
+              {format.items?.length ? (
+                <ul className="service-detail-list">
+                  {format.items.map((item) => (
+                    <li key={item}>
+                      <Check size={16} aria-hidden="true" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
+              <BookingOptionButton
+                city={service.prefilledCity}
+                formatName={format.title}
+                label={format.ctaLabel || "Select format"}
+                mode={format.mode || service.prefilledMode}
+                note={format.note}
+                service={service.formServiceName || service.title}
+              />
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ServicePackageSection({ service }) {
+  if (!service.packageOptions?.length) return null;
+
+  return (
+    <section className="section-apple service-detail-section">
+      <div className="container">
+        <div className="apple-section-header">
+          <span className="apple-eyebrow">{service.packageOptionsEyebrow || "Options"}</span>
+          <h2>{service.packageOptionsHeading || "Compare puja options."}</h2>
+          {service.packageOptionsDescription ? <p>{service.packageOptionsDescription}</p> : null}
+        </div>
+
+        <div className="service-detail-card-grid">
+          {service.packageOptions.map((option) => (
+            <article className="service-detail-card" key={option.id || option.name}>
+              <span className="service-detail-meta">{option.estimatedDuration}</span>
+              <h3>{option.name}</h3>
+              <p>{option.shortDescription}</p>
+              <div className="service-detail-facts">
+                {option.panditCount ? (
+                  <span>
+                    <strong>Pandit Ji:</strong> {option.panditCount}
+                  </span>
+                ) : null}
+                <span>
+                  <strong>Price:</strong> {option.priceLabel}
+                </span>
+                {option.suitedFor?.length ? (
+                  <span>
+                    <strong>Suited for:</strong> {option.suitedFor.join(", ")}
+                  </span>
+                ) : null}
+              </div>
+              {option.includes?.length ? (
+                <ul className="service-detail-list">
+                  {option.includes.map((item) => (
+                    <li key={item}>
+                      <Check size={16} aria-hidden="true" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
+              {option.optional?.length ? (
+                <p className="service-detail-note">Optional: {option.optional.join(", ")}.</p>
+              ) : null}
+              <BookingOptionButton
+                city={service.prefilledCity}
+                label={option.ctaLabel || "Select option"}
+                mode={option.mode || service.prefilledMode}
+                note={option.note}
+                packageName={option.name}
+                service={service.formServiceName || service.title}
+              />
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ServiceComparisonSection({ service }) {
+  if (!service.comparison?.rows?.length) return null;
+
+  return (
+    <section className="section-apple service-detail-section">
+      <div className="container">
+        <div className="apple-section-header">
+          <span className="apple-eyebrow">{service.comparison.eyebrow || "Comparison"}</span>
+          <h2>{service.comparison.heading}</h2>
+          {service.comparison.description ? <p>{service.comparison.description}</p> : null}
+        </div>
+
+        <div className="service-table-wrap">
+          <table className="service-comparison-table">
+            <thead>
+              <tr>
+                {service.comparison.columns.map((column) => (
+                  <th scope="col" key={column}>
+                    {column}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {service.comparison.rows.map((row) => (
+                <tr key={row[0]}>
+                  <th scope="row">{row[0]}</th>
+                  {row.slice(1).map((cell) => (
+                    <td key={cell}>{cell}</td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ServiceSamagriSection({ service }) {
+  if (!service.samagriGroups?.length) return null;
+
+  return (
+    <section className="section-apple service-detail-section">
+      <div className="container">
+        <div className="apple-section-header">
+          <span className="apple-eyebrow">{service.samagriGroupsEyebrow || "Preparation"}</span>
+          <h2>{service.samagriGroupsHeading || "Samagri and home preparation."}</h2>
+          {service.samagriGroupsDescription ? <p>{service.samagriGroupsDescription}</p> : null}
+        </div>
+
+        <div className="service-samagri-grid">
+          {service.samagriGroups.map((group) => (
+            <article className="service-detail-card" key={group.title}>
+              <h3>{group.title}</h3>
+              <ul className="service-detail-list">
+                {group.items.map((item) => (
+                  <li key={item}>
+                    <Check size={16} aria-hidden="true" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ServiceRelatedLinksSection({ service }) {
+  if (!service.relatedLinks?.length) return null;
+
+  return (
+    <section className="section-apple service-detail-section">
+      <div className="container">
+        <div className="apple-section-header">
+          <span className="apple-eyebrow">Related guidance</span>
+          <h2>Useful links before booking.</h2>
+        </div>
+
+        <div className="service-related-link-row">
+          {service.relatedLinks.map((link) => (
+            <Link key={link.href} href={link.href} className="apple-btn-pill apple-btn-secondary">
+              {link.label}
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default async function ServicePage({ params }) {
   const { slug } = await params;
+  const policy = getPolicyBySlug(slug);
+  if (policy) return <PolicyPage policy={policy} />;
+
+  const modePage = getModePageBySlug(slug);
+  if (modePage) return <ModePage page={modePage} />;
+
+  const supportPage = getSupportPageBySlug(slug);
+  if (supportPage) return <SupportPage page={supportPage} />;
+
   const service = getServiceBySlug(slug);
 
   if (!service) {
@@ -94,6 +640,9 @@ export default async function ServicePage({ params }) {
   const pageH1 = service.pageH1 || service.title;
   const hasFaqs = Array.isArray(service.faqs) && service.faqs.length > 0;
   const jsonLd = servicePageJsonLd(service);
+  const assignment = serviceCategoryAssignments[service.slug];
+  const primaryCategory = assignment?.primary ? getCategoryBySlug(assignment.primary) : undefined;
+  const bookingAssurances = service.bookingAssurances || defaultBookingAssurances;
 
   return (
     <>
@@ -102,19 +651,25 @@ export default async function ServicePage({ params }) {
           <nav aria-label="Breadcrumb" className="service-breadcrumb">
             <Link href="/">Home</Link>
             <ChevronRight size={14} aria-hidden="true" />
-            <Link href="/services">Services</Link>
+            <Link href="/puja-services">Puja Services</Link>
             <ChevronRight size={14} aria-hidden="true" />
+            {primaryCategory ? (
+              <>
+                <Link href={pathForCategory(primaryCategory)}>{primaryCategory.name}</Link>
+                <ChevronRight size={14} aria-hidden="true" />
+              </>
+            ) : null}
             <span>{service.navTitle || service.title}</span>
           </nav>
 
           <div className="service-apple-hero-grid">
             <div>
-              <span className="apple-eyebrow">{service.category}</span>
+              <span className="apple-eyebrow">{service.heroEyebrow || service.category}</span>
               <h1>{pageH1}</h1>
               <p>{service.description}</p>
               <div className="service-hero-actions">
                 <a href="#booking-section" className="apple-btn-pill apple-btn-primary">
-                  Book this Puja
+                  {service.primaryCtaLabel || "Request Quote"}
                 </a>
                 <a
                   href={contact.whatsappLink}
@@ -122,30 +677,28 @@ export default async function ServicePage({ params }) {
                   rel="noopener noreferrer"
                   className="apple-btn-pill apple-btn-secondary"
                 >
-                  <MessageCircle size={17} />
-                  WhatsApp Assistance
+                  <MessageCircle size={17} aria-hidden="true" />
+                  {service.whatsappCtaLabel || "WhatsApp Assistance"}
                 </a>
+                {service.callCtaLabel ? (
+                  <a href={`tel:${contact.phone}`} className="apple-btn-pill apple-btn-secondary">
+                    <PhoneCall size={17} aria-hidden="true" />
+                    {service.callCtaLabel}
+                  </a>
+                ) : null}
               </div>
               <p className="service-hero-note">
-                Request first. Availability, quote, samagri, and booking terms should be
-                confirmed before payment.
+                {service.heroNote ||
+                  "Request first. Availability, quote, samagri, and booking terms should be confirmed before payment."}
               </p>
               <div className="service-authority-grid" aria-label="Booking assurances">
-                <div>
-                  <Check size={16} aria-hidden="true" />
-                  <span>Request-first booking</span>
-                  <strong>Confirm timing, quote, and fit before payment.</strong>
-                </div>
-                <div>
-                  <Check size={16} aria-hidden="true" />
-                  <span>Clear preparation</span>
-                  <strong>Samagri and puja mode details are reviewed upfront.</strong>
-                </div>
-                <div>
-                  <Check size={16} aria-hidden="true" />
-                  <span>Family-ready support</span>
-                  <strong>Coordinate home, online, or temple puja with guidance.</strong>
-                </div>
+                {bookingAssurances.map((item) => (
+                  <div key={item.title}>
+                    <Check size={16} aria-hidden="true" />
+                    <span>{item.title}</span>
+                    <strong>{item.body}</strong>
+                  </div>
+                ))}
               </div>
             </div>
 
@@ -204,6 +757,10 @@ export default async function ServicePage({ params }) {
         </section>
       ) : null}
 
+      <ServiceFormatsSection service={service} />
+      <ServicePackageSection service={service} />
+      <ServiceComparisonSection service={service} />
+
       <section className="section-apple service-longform-section">
         <div className="container service-content-shell">
           {service.tableOfContents?.length ? (
@@ -253,6 +810,9 @@ export default async function ServicePage({ params }) {
           </div>
         </section>
       ) : null}
+
+      <ServiceSamagriSection service={service} />
+      <ServiceRelatedLinksSection service={service} />
 
       <section className="section-apple">
         <div className="container">
@@ -348,11 +908,15 @@ export default async function ServicePage({ params }) {
         <div className="container">
           <div className="apple-section-header">
             <span className="apple-eyebrow">Priority Request</span>
-            <h2>Book {service.title}.</h2>
+            <h2>Request a quote for {service.title}.</h2>
             <p>{contact.responsePromise}</p>
           </div>
 
-          <ContactForm prefilledService={service.title} />
+          <ContactForm
+            prefilledCity={service.prefilledCity}
+            prefilledMode={service.prefilledMode}
+            prefilledService={service.formServiceName || service.title}
+          />
         </div>
       </section>
 

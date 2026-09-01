@@ -3,19 +3,16 @@ import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import MobileStickyBar from "@/components/MobileStickyBar";
 import { site } from "@/lib/site-data";
-import { absoluteUrl, siteGraphJsonLd } from "@/lib/seo";
+import { siteGraphJsonLd } from "@/lib/seo";
 
 export const metadata = {
-  metadataBase: new URL(site.productionUrl),
+  metadataBase: new URL(`${site.productionUrl}/`),
   applicationName: site.name,
   title: {
     default: `${site.name} | Puja Made Peaceful - Book Pandit Ji for Authentic Vedic Puja`,
     template: `%s | ${site.name}`,
   },
   description: site.description,
-  alternates: {
-    canonical: "/",
-  },
   robots: {
     index: true,
     follow: true,
@@ -30,7 +27,6 @@ export const metadata = {
   openGraph: {
     title: `${site.name} | Puja Made Peaceful`,
     description: site.description,
-    url: absoluteUrl("/"),
     siteName: site.name,
     images: [
       {

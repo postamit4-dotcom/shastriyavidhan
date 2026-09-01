@@ -1,18 +1,53 @@
 "use client";
 
-import { MessageCircle, PhoneCall, Calendar } from "lucide-react";
-import { contact } from "@/lib/site-data";
+import { useEffect, useMemo, useState } from "react";
+import { usePathname } from "next/navigation";
+import { ClipboardList, MessageCircle } from "lucide-react";
+import { contact, servicePages } from "@/lib/site-data";
 
 export default function MobileStickyBar() {
+  const pathname = usePathname();
+  const [isSuppressed, setIsSuppressed] = useState(false);
+
+  const isServicePage = useMemo(
+    () => servicePages.some((service) => pathname === `/${service.slug}`),
+    [pathname],
+  );
+
+  useEffect(() => {
+    if (!isServicePage) return undefined;
+
+    const targets = ["booking-section", "booking-form-wrapper", "site-footer"]
+      .map((id) => document.getElementById(id))
+      .filter(Boolean);
+
+    if (targets.length === 0) return undefined;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        setIsSuppressed(entries.some((entry) => entry.isIntersecting));
+      },
+      { rootMargin: "0px 0px -12% 0px", threshold: 0.01 },
+    );
+
+    targets.forEach((target) => observer.observe(target));
+
+    return () => observer.disconnect();
+  }, [isServicePage, pathname]);
+
+  if (!isServicePage || isSuppressed) {
+    return null;
+  }
+
   return (
     <aside className="apple-mobile-bar" aria-label="Mobile quick actions">
       <a
-        href="#book-pandit-ji"
+        href={`${pathname}#booking-section`}
         className="apple-mobile-bar-btn apple-btn-primary"
         id="apple-mobile-book-btn"
       >
-        <Calendar size={15} aria-hidden="true" />
-        <span>Book Puja</span>
+        <ClipboardList size={15} aria-hidden="true" />
+        <span>Request Quote</span>
       </a>
 
       <a
@@ -24,17 +59,7 @@ export default function MobileStickyBar() {
         aria-label="Chat on WhatsApp"
       >
         <MessageCircle size={15} aria-hidden="true" />
-        <span>WhatsApp</span>
-      </a>
-
-      <a
-        href={`tel:${contact.phone}`}
-        className="apple-mobile-bar-btn apple-btn-dark"
-        id="apple-mobile-call-btn"
-        aria-label={`Call Pandit Ji booking line ${contact.displayPhone}`}
-      >
-        <PhoneCall size={15} aria-hidden="true" />
-        <span>Call</span>
+        <span>WhatsApp Us</span>
       </a>
     </aside>
   );

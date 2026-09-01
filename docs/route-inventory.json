@@ -1,0 +1,860 @@
+{
+  "site": "Shastriya Vidhan",
+  "canonicalHost": "https://www.shastriyavidhan.com",
+  "generatedAt": "2026-08-30T12:04:49.793Z",
+  "source": "repository_inventory_without_live_status_checks",
+  "routeCount": 51,
+  "routes": [
+    {
+      "currentUrl": "/",
+      "pageTitleOrH1": "Home",
+      "pageType": "home",
+      "statusCode": "repository_inventory",
+      "canonicalUrl": "/",
+      "indexState": "index",
+      "existingParent": null,
+      "inboundNavigationLocation": [
+        "header",
+        "html_sitemap"
+      ],
+      "intendedFinalUrl": "/",
+      "action": "keep",
+      "evidenceStatus": "verified",
+      "notes": ""
+    },
+    {
+      "currentUrl": [
+        "/services",
+        "/category/services"
+      ],
+      "pageTitleOrH1": "Puja Services",
+      "pageType": "commercial_hub",
+      "statusCode": "repository_inventory",
+      "canonicalUrl": "/puja-services",
+      "indexState": "index",
+      "existingParent": null,
+      "inboundNavigationLocation": [
+        "header",
+        "footer",
+        "html_sitemap"
+      ],
+      "intendedFinalUrl": "/puja-services",
+      "action": "redirect",
+      "evidenceStatus": "verified",
+      "notes": ""
+    },
+    {
+      "currentUrl": "/how-it-works",
+      "pageTitleOrH1": "How It Works",
+      "pageType": "help",
+      "statusCode": "repository_inventory",
+      "canonicalUrl": "/how-it-works",
+      "indexState": "index",
+      "existingParent": null,
+      "inboundNavigationLocation": [
+        "header",
+        "footer",
+        "html_sitemap"
+      ],
+      "intendedFinalUrl": "/how-it-works",
+      "action": "keep",
+      "evidenceStatus": "verified",
+      "notes": ""
+    },
+    {
+      "currentUrl": "/locations",
+      "pageTitleOrH1": "Locations",
+      "pageType": "locations_hub",
+      "statusCode": "repository_inventory",
+      "canonicalUrl": "/locations",
+      "indexState": "index",
+      "existingParent": null,
+      "inboundNavigationLocation": [
+        "header",
+        "footer",
+        "html_sitemap"
+      ],
+      "intendedFinalUrl": "/locations",
+      "action": "keep",
+      "evidenceStatus": "partially_verified",
+      "notes": ""
+    },
+    {
+      "currentUrl": "/guides",
+      "pageTitleOrH1": "Puja Guides",
+      "pageType": "guides_hub",
+      "statusCode": "repository_inventory",
+      "canonicalUrl": "/guides",
+      "indexState": "index",
+      "existingParent": null,
+      "inboundNavigationLocation": [
+        "header",
+        "footer",
+        "html_sitemap"
+      ],
+      "intendedFinalUrl": "/guides",
+      "action": "keep",
+      "evidenceStatus": "partially_verified",
+      "notes": ""
+    },
+    {
+      "currentUrl": "/about",
+      "pageTitleOrH1": "About",
+      "pageType": "about",
+      "statusCode": "repository_inventory",
+      "canonicalUrl": "/about",
+      "indexState": "index",
+      "existingParent": null,
+      "inboundNavigationLocation": [
+        "header",
+        "footer",
+        "html_sitemap"
+      ],
+      "intendedFinalUrl": "/about",
+      "action": "keep",
+      "evidenceStatus": "partially_verified",
+      "notes": ""
+    },
+    {
+      "currentUrl": "/pandit-standards",
+      "pageTitleOrH1": "Pandit Standards",
+      "pageType": "trust",
+      "statusCode": "repository_inventory",
+      "canonicalUrl": "/pandit-standards",
+      "indexState": "index",
+      "existingParent": null,
+      "inboundNavigationLocation": [
+        "footer",
+        "html_sitemap"
+      ],
+      "intendedFinalUrl": "/pandit-standards",
+      "action": "keep",
+      "evidenceStatus": "partially_verified",
+      "notes": ""
+    },
+    {
+      "currentUrl": [
+        "/pricing-inclusions"
+      ],
+      "pageTitleOrH1": "Pricing & Inclusions",
+      "pageType": "help",
+      "statusCode": "repository_inventory",
+      "canonicalUrl": "/pricing-and-inclusions",
+      "indexState": "index",
+      "existingParent": null,
+      "inboundNavigationLocation": [
+        "footer",
+        "html_sitemap"
+      ],
+      "intendedFinalUrl": "/pricing-and-inclusions",
+      "action": "redirect",
+      "evidenceStatus": "partially_verified",
+      "notes": ""
+    },
+    {
+      "currentUrl": "/book-puja",
+      "pageTitleOrH1": "Book Puja",
+      "pageType": "booking",
+      "statusCode": "repository_inventory",
+      "canonicalUrl": "/book-puja",
+      "indexState": "index",
+      "existingParent": null,
+      "inboundNavigationLocation": [
+        "header",
+        "footer",
+        "html_sitemap"
+      ],
+      "intendedFinalUrl": "/book-puja",
+      "action": "keep",
+      "evidenceStatus": "verified",
+      "notes": ""
+    },
+    {
+      "currentUrl": "/contact",
+      "pageTitleOrH1": "Contact",
+      "pageType": "contact",
+      "statusCode": "repository_inventory",
+      "canonicalUrl": "/contact",
+      "indexState": "index",
+      "existingParent": null,
+      "inboundNavigationLocation": [
+        "footer",
+        "html_sitemap"
+      ],
+      "intendedFinalUrl": "/contact",
+      "action": "keep",
+      "evidenceStatus": "partially_verified",
+      "notes": ""
+    },
+    {
+      "currentUrl": "/faqs",
+      "pageTitleOrH1": "Frequently Asked Questions",
+      "pageType": "help",
+      "statusCode": "repository_inventory",
+      "canonicalUrl": "/faqs",
+      "indexState": "index",
+      "existingParent": null,
+      "inboundNavigationLocation": [
+        "footer",
+        "html_sitemap"
+      ],
+      "intendedFinalUrl": "/faqs",
+      "action": "keep",
+      "evidenceStatus": "partially_verified",
+      "notes": ""
+    },
+    {
+      "currentUrl": "/site-map",
+      "pageTitleOrH1": "Site Map",
+      "pageType": "html_sitemap",
+      "statusCode": "repository_inventory",
+      "canonicalUrl": "/site-map",
+      "indexState": "index",
+      "existingParent": null,
+      "inboundNavigationLocation": [
+        "footer",
+        "html_sitemap"
+      ],
+      "intendedFinalUrl": "/site-map",
+      "action": "keep",
+      "evidenceStatus": "not_applicable",
+      "notes": ""
+    },
+    {
+      "currentUrl": "/migration-notes",
+      "pageTitleOrH1": "Migration Notes",
+      "pageType": "internal_status",
+      "statusCode": "repository_inventory",
+      "canonicalUrl": "/migration-notes",
+      "indexState": "noindex",
+      "existingParent": null,
+      "inboundNavigationLocation": [],
+      "intendedFinalUrl": "/migration-notes",
+      "action": "keep",
+      "evidenceStatus": "not_applicable",
+      "notes": ""
+    },
+    {
+      "currentUrl": "/category/blog",
+      "pageTitleOrH1": "Blog Archive Under Review",
+      "pageType": "content_review",
+      "statusCode": "repository_inventory",
+      "canonicalUrl": "/category/blog",
+      "indexState": "noindex",
+      "existingParent": null,
+      "inboundNavigationLocation": [],
+      "intendedFinalUrl": "/category/blog",
+      "action": "keep",
+      "evidenceStatus": "unverified",
+      "notes": ""
+    },
+    {
+      "currentUrl": "/puja-at-home",
+      "pageTitleOrH1": "Puja at Home",
+      "pageType": "mode_hub",
+      "statusCode": "repository_inventory",
+      "canonicalUrl": "/puja-at-home",
+      "indexState": "index",
+      "existingParent": "puja-services",
+      "inboundNavigationLocation": [
+        "footer",
+        "html_sitemap"
+      ],
+      "intendedFinalUrl": "/puja-at-home",
+      "action": "keep",
+      "evidenceStatus": "partially_verified",
+      "notes": ""
+    },
+    {
+      "currentUrl": [
+        "/locations/online-puja"
+      ],
+      "pageTitleOrH1": "Online Puja",
+      "pageType": "mode_hub",
+      "statusCode": "repository_inventory",
+      "canonicalUrl": "/online-puja",
+      "indexState": "index",
+      "existingParent": "puja-services",
+      "inboundNavigationLocation": [
+        "footer",
+        "html_sitemap"
+      ],
+      "intendedFinalUrl": "/online-puja",
+      "action": "redirect",
+      "evidenceStatus": "partially_verified",
+      "notes": ""
+    },
+    {
+      "currentUrl": "/help",
+      "pageTitleOrH1": "Help",
+      "pageType": "help",
+      "statusCode": "repository_inventory",
+      "canonicalUrl": "/help",
+      "indexState": "index",
+      "existingParent": "help",
+      "inboundNavigationLocation": [
+        "footer",
+        "html_sitemap"
+      ],
+      "intendedFinalUrl": "/help",
+      "action": "keep",
+      "evidenceStatus": "partially_verified",
+      "notes": ""
+    },
+    {
+      "currentUrl": "/complaints-resolution",
+      "pageTitleOrH1": "Complaints & Resolution",
+      "pageType": "help",
+      "statusCode": "repository_inventory",
+      "canonicalUrl": "/complaints-resolution",
+      "indexState": "index",
+      "existingParent": "help",
+      "inboundNavigationLocation": [
+        "footer",
+        "html_sitemap"
+      ],
+      "intendedFinalUrl": "/complaints-resolution",
+      "action": "keep",
+      "evidenceStatus": "partially_verified",
+      "notes": ""
+    },
+    {
+      "currentUrl": "/payment-safety",
+      "pageTitleOrH1": "Payment Safety",
+      "pageType": "help",
+      "statusCode": "repository_inventory",
+      "canonicalUrl": "/payment-safety",
+      "indexState": "index",
+      "existingParent": "help",
+      "inboundNavigationLocation": [
+        "footer",
+        "html_sitemap"
+      ],
+      "intendedFinalUrl": "/payment-safety",
+      "action": "keep",
+      "evidenceStatus": "partially_verified",
+      "notes": ""
+    },
+    {
+      "currentUrl": "/editorial-sourcing-policy",
+      "pageTitleOrH1": "Editorial & Sourcing Policy",
+      "pageType": "help",
+      "statusCode": "repository_inventory",
+      "canonicalUrl": "/editorial-sourcing-policy",
+      "indexState": "index",
+      "existingParent": "help",
+      "inboundNavigationLocation": [
+        "footer",
+        "html_sitemap"
+      ],
+      "intendedFinalUrl": "/editorial-sourcing-policy",
+      "action": "keep",
+      "evidenceStatus": "partially_verified",
+      "notes": ""
+    },
+    {
+      "currentUrl": [
+        "/policies/privacy"
+      ],
+      "pageTitleOrH1": "Privacy Policy",
+      "pageType": "policy",
+      "statusCode": "repository_inventory",
+      "canonicalUrl": "/privacy-policy",
+      "indexState": "index",
+      "existingParent": "help",
+      "inboundNavigationLocation": [
+        "footer",
+        "html_sitemap"
+      ],
+      "intendedFinalUrl": "/privacy-policy",
+      "action": "redirect",
+      "evidenceStatus": "partially_verified",
+      "notes": ""
+    },
+    {
+      "currentUrl": [
+        "/policies/terms"
+      ],
+      "pageTitleOrH1": "Terms of Service",
+      "pageType": "policy",
+      "statusCode": "repository_inventory",
+      "canonicalUrl": "/terms",
+      "indexState": "index",
+      "existingParent": "help",
+      "inboundNavigationLocation": [
+        "footer",
+        "html_sitemap"
+      ],
+      "intendedFinalUrl": "/terms",
+      "action": "redirect",
+      "evidenceStatus": "partially_verified",
+      "notes": ""
+    },
+    {
+      "currentUrl": [
+        "/policies/booking-cancellation"
+      ],
+      "pageTitleOrH1": "Cancellation & Refund Policy",
+      "pageType": "policy",
+      "statusCode": "repository_inventory",
+      "canonicalUrl": "/cancellation-refund-policy",
+      "indexState": "index",
+      "existingParent": "help",
+      "inboundNavigationLocation": [
+        "footer",
+        "html_sitemap"
+      ],
+      "intendedFinalUrl": "/cancellation-refund-policy",
+      "action": "redirect",
+      "evidenceStatus": "partially_verified",
+      "notes": ""
+    },
+    {
+      "currentUrl": [
+        "/policies/disclaimer"
+      ],
+      "pageTitleOrH1": "Religious & Legal Disclaimer",
+      "pageType": "policy",
+      "statusCode": "repository_inventory",
+      "canonicalUrl": "/religious-legal-disclaimer",
+      "indexState": "index",
+      "existingParent": "help",
+      "inboundNavigationLocation": [
+        "footer",
+        "html_sitemap"
+      ],
+      "intendedFinalUrl": "/religious-legal-disclaimer",
+      "action": "redirect",
+      "evidenceStatus": "partially_verified",
+      "notes": ""
+    },
+    {
+      "currentUrl": "/puja-services/featured-pujas",
+      "pageTitleOrH1": "Featured Pujas",
+      "pageType": "service_category",
+      "statusCode": "repository_inventory",
+      "canonicalUrl": "/puja-services/featured-pujas",
+      "indexState": "index",
+      "existingParent": "puja-services",
+      "inboundNavigationLocation": [
+        "footer",
+        "html_sitemap"
+      ],
+      "intendedFinalUrl": "/puja-services/featured-pujas",
+      "action": "keep",
+      "evidenceStatus": "partially_verified",
+      "notes": "4 linked services currently meet the category publication gate."
+    },
+    {
+      "currentUrl": "/puja-services/festival-pujas",
+      "pageTitleOrH1": "Festival Pujas",
+      "pageType": "service_category",
+      "statusCode": "repository_inventory",
+      "canonicalUrl": "/puja-services/festival-pujas",
+      "indexState": "index",
+      "existingParent": "puja-services",
+      "inboundNavigationLocation": [
+        "footer",
+        "html_sitemap"
+      ],
+      "intendedFinalUrl": "/puja-services/festival-pujas",
+      "action": "keep",
+      "evidenceStatus": "partially_verified",
+      "notes": "7 linked services currently meet the category publication gate."
+    },
+    {
+      "currentUrl": "/puja-services/shiva-pujas",
+      "pageTitleOrH1": "Shiva Pujas",
+      "pageType": "service_category",
+      "statusCode": "repository_inventory",
+      "canonicalUrl": "/puja-services/shiva-pujas",
+      "indexState": "index",
+      "existingParent": "puja-services",
+      "inboundNavigationLocation": [
+        "footer",
+        "html_sitemap"
+      ],
+      "intendedFinalUrl": "/puja-services/shiva-pujas",
+      "action": "keep",
+      "evidenceStatus": "partially_verified",
+      "notes": "3 linked services currently meet the category publication gate."
+    },
+    {
+      "currentUrl": "/puja-services/vishnu-krishna",
+      "pageTitleOrH1": "Vishnu & Krishna Pujas",
+      "pageType": "service_category",
+      "statusCode": "repository_inventory",
+      "canonicalUrl": "/puja-services/vishnu-krishna",
+      "indexState": "index",
+      "existingParent": "puja-services",
+      "inboundNavigationLocation": [
+        "footer",
+        "html_sitemap"
+      ],
+      "intendedFinalUrl": "/puja-services/vishnu-krishna",
+      "action": "keep",
+      "evidenceStatus": "partially_verified",
+      "notes": "3 linked services currently meet the category publication gate."
+    },
+    {
+      "currentUrl": "/puja-services/devi-pujas",
+      "pageTitleOrH1": "Devi Pujas",
+      "pageType": "service_category",
+      "statusCode": "repository_inventory",
+      "canonicalUrl": "/puja-services/devi-pujas",
+      "indexState": "index",
+      "existingParent": "puja-services",
+      "inboundNavigationLocation": [
+        "footer",
+        "html_sitemap"
+      ],
+      "intendedFinalUrl": "/puja-services/devi-pujas",
+      "action": "keep",
+      "evidenceStatus": "partially_verified",
+      "notes": "4 linked services currently meet the category publication gate."
+    },
+    {
+      "currentUrl": "/puja-services/family-sanskar",
+      "pageTitleOrH1": "Family Sanskar",
+      "pageType": "service_category",
+      "statusCode": "repository_inventory",
+      "canonicalUrl": "/puja-services/family-sanskar",
+      "indexState": "noindex",
+      "existingParent": "puja-services",
+      "inboundNavigationLocation": [],
+      "intendedFinalUrl": "/puja-services/family-sanskar",
+      "action": "hide",
+      "evidenceStatus": "partially_verified",
+      "notes": "1 linked service(s); keep noindex until the category-quality gate passes."
+    },
+    {
+      "currentUrl": "/puja-services/path-jaap-katha",
+      "pageTitleOrH1": "Path/Jaap/Katha",
+      "pageType": "service_category",
+      "statusCode": "repository_inventory",
+      "canonicalUrl": "/puja-services/path-jaap-katha",
+      "indexState": "noindex",
+      "existingParent": "puja-services",
+      "inboundNavigationLocation": [],
+      "intendedFinalUrl": "/puja-services/path-jaap-katha",
+      "action": "hide",
+      "evidenceStatus": "partially_verified",
+      "notes": "3 linked service(s); keep noindex until the category-quality gate passes."
+    },
+    {
+      "currentUrl": [
+        "/puja-services/graha-dosh-shanti"
+      ],
+      "pageTitleOrH1": "Graha/Dosh/Shanti",
+      "pageType": "service_category",
+      "statusCode": "repository_inventory",
+      "canonicalUrl": "/graha-dosh-shanti",
+      "indexState": "noindex",
+      "existingParent": "puja-services",
+      "inboundNavigationLocation": [],
+      "intendedFinalUrl": "/graha-dosh-shanti",
+      "action": "hide",
+      "evidenceStatus": "partially_verified",
+      "notes": "2 linked service(s); keep noindex until the category-quality gate passes."
+    },
+    {
+      "currentUrl": "/puja-services/hanuman-ganesh",
+      "pageTitleOrH1": "Hanuman & Ganesh",
+      "pageType": "service_category",
+      "statusCode": "repository_inventory",
+      "canonicalUrl": "/puja-services/hanuman-ganesh",
+      "indexState": "noindex",
+      "existingParent": "puja-services",
+      "inboundNavigationLocation": [],
+      "intendedFinalUrl": "/puja-services/hanuman-ganesh",
+      "action": "hide",
+      "evidenceStatus": "partially_verified",
+      "notes": "3 linked service(s); keep noindex until the category-quality gate passes."
+    },
+    {
+      "currentUrl": "/locations/noida",
+      "pageTitleOrH1": "Noida",
+      "pageType": "location",
+      "statusCode": "repository_inventory",
+      "canonicalUrl": "/locations/noida",
+      "indexState": "noindex",
+      "existingParent": "locations",
+      "inboundNavigationLocation": [],
+      "intendedFinalUrl": "/locations/noida",
+      "action": "hide",
+      "evidenceStatus": "partially_verified",
+      "notes": "Location page exists for direct review but is hidden from sitemap/header/footer until service coverage is owner-verified."
+    },
+    {
+      "currentUrl": "/locations/delhi",
+      "pageTitleOrH1": "Delhi",
+      "pageType": "location",
+      "statusCode": "repository_inventory",
+      "canonicalUrl": "/locations/delhi",
+      "indexState": "noindex",
+      "existingParent": "locations",
+      "inboundNavigationLocation": [],
+      "intendedFinalUrl": "/locations/delhi",
+      "action": "hide",
+      "evidenceStatus": "partially_verified",
+      "notes": "Location page exists for direct review but is hidden from sitemap/header/footer until service coverage is owner-verified."
+    },
+    {
+      "currentUrl": "/locations/gurugram",
+      "pageTitleOrH1": "Gurugram",
+      "pageType": "location",
+      "statusCode": "repository_inventory",
+      "canonicalUrl": "/locations/gurugram",
+      "indexState": "noindex",
+      "existingParent": "locations",
+      "inboundNavigationLocation": [],
+      "intendedFinalUrl": "/locations/gurugram",
+      "action": "hide",
+      "evidenceStatus": "partially_verified",
+      "notes": "Location page exists for direct review but is hidden from sitemap/header/footer until service coverage is owner-verified."
+    },
+    {
+      "currentUrl": "/locations/ujjain",
+      "pageTitleOrH1": "Ujjain",
+      "pageType": "location",
+      "statusCode": "repository_inventory",
+      "canonicalUrl": "/locations/ujjain",
+      "indexState": "noindex",
+      "existingParent": "locations",
+      "inboundNavigationLocation": [],
+      "intendedFinalUrl": "/locations/ujjain",
+      "action": "hide",
+      "evidenceStatus": "partially_verified",
+      "notes": "Location page exists for direct review but is hidden from sitemap/header/footer until service coverage is owner-verified."
+    },
+    {
+      "currentUrl": "/book-pandit-ji-online-for-diwali-puja",
+      "pageTitleOrH1": "Diwali Lakshmi Ganesh Puja",
+      "pageType": "service",
+      "statusCode": "repository_inventory",
+      "canonicalUrl": "/book-pandit-ji-online-for-diwali-puja",
+      "indexState": "index",
+      "existingParent": "puja-services",
+      "inboundNavigationLocation": [
+        "html_sitemap"
+      ],
+      "intendedFinalUrl": "/book-pandit-ji-online-for-diwali-puja",
+      "action": "keep",
+      "evidenceStatus": "partially_verified",
+      "notes": "Preserved migrated WordPress service slug."
+    },
+    {
+      "currentUrl": "/book-pandit-ji-online-for-janmashtami-puja",
+      "pageTitleOrH1": "Krishna Janmashtami Puja",
+      "pageType": "service",
+      "statusCode": "repository_inventory",
+      "canonicalUrl": "/book-pandit-ji-online-for-janmashtami-puja",
+      "indexState": "index",
+      "existingParent": "puja-services",
+      "inboundNavigationLocation": [
+        "html_sitemap"
+      ],
+      "intendedFinalUrl": "/book-pandit-ji-online-for-janmashtami-puja",
+      "action": "keep",
+      "evidenceStatus": "partially_verified",
+      "notes": "Preserved migrated WordPress service slug."
+    },
+    {
+      "currentUrl": "/book-pandit-ji-online-for-education-puja",
+      "pageTitleOrH1": "Saraswati Education Puja",
+      "pageType": "service",
+      "statusCode": "repository_inventory",
+      "canonicalUrl": "/book-pandit-ji-online-for-education-puja",
+      "indexState": "index",
+      "existingParent": "puja-services",
+      "inboundNavigationLocation": [
+        "html_sitemap"
+      ],
+      "intendedFinalUrl": "/book-pandit-ji-online-for-education-puja",
+      "action": "keep",
+      "evidenceStatus": "partially_verified",
+      "notes": "Preserved migrated WordPress service slug."
+    },
+    {
+      "currentUrl": "/book-pandit-ji-online-for-holika-dahan-puja",
+      "pageTitleOrH1": "Holika Dahan Puja",
+      "pageType": "service",
+      "statusCode": "repository_inventory",
+      "canonicalUrl": "/book-pandit-ji-online-for-holika-dahan-puja",
+      "indexState": "index",
+      "existingParent": "puja-services",
+      "inboundNavigationLocation": [
+        "html_sitemap"
+      ],
+      "intendedFinalUrl": "/book-pandit-ji-online-for-holika-dahan-puja",
+      "action": "keep",
+      "evidenceStatus": "partially_verified",
+      "notes": "Preserved migrated WordPress service slug."
+    },
+    {
+      "currentUrl": "/book-pandit-ji-online-for-ram-navami-puja",
+      "pageTitleOrH1": "Ram Navami Puja",
+      "pageType": "service",
+      "statusCode": "repository_inventory",
+      "canonicalUrl": "/book-pandit-ji-online-for-ram-navami-puja",
+      "indexState": "index",
+      "existingParent": "puja-services",
+      "inboundNavigationLocation": [
+        "html_sitemap"
+      ],
+      "intendedFinalUrl": "/book-pandit-ji-online-for-ram-navami-puja",
+      "action": "keep",
+      "evidenceStatus": "partially_verified",
+      "notes": "Preserved migrated WordPress service slug."
+    },
+    {
+      "currentUrl": "/book-pandit-ji-online-for-tulsi-vivah",
+      "pageTitleOrH1": "Tulsi Vivah Puja",
+      "pageType": "service",
+      "statusCode": "repository_inventory",
+      "canonicalUrl": "/book-pandit-ji-online-for-tulsi-vivah",
+      "indexState": "index",
+      "existingParent": "puja-services",
+      "inboundNavigationLocation": [
+        "html_sitemap"
+      ],
+      "intendedFinalUrl": "/book-pandit-ji-online-for-tulsi-vivah",
+      "action": "keep",
+      "evidenceStatus": "partially_verified",
+      "notes": "Preserved migrated WordPress service slug."
+    },
+    {
+      "currentUrl": "/book-pandit-ji-online-for-bagualmukhi-puja",
+      "pageTitleOrH1": "Baglamukhi Puja",
+      "pageType": "service",
+      "statusCode": "repository_inventory",
+      "canonicalUrl": "/book-pandit-ji-online-for-bagualmukhi-puja",
+      "indexState": "index",
+      "existingParent": "puja-services",
+      "inboundNavigationLocation": [
+        "html_sitemap"
+      ],
+      "intendedFinalUrl": "/book-pandit-ji-online-for-bagualmukhi-puja",
+      "action": "keep",
+      "evidenceStatus": "partially_verified",
+      "notes": "Preserved migrated WordPress service slug."
+    },
+    {
+      "currentUrl": "/book-pandit-ji-for-rudrabhishek-puja-noida",
+      "pageTitleOrH1": "Rudrabhishek Puja",
+      "pageType": "service",
+      "statusCode": "repository_inventory",
+      "canonicalUrl": "/book-pandit-ji-for-rudrabhishek-puja-noida",
+      "indexState": "index",
+      "existingParent": "puja-services",
+      "inboundNavigationLocation": [
+        "html_sitemap"
+      ],
+      "intendedFinalUrl": "/book-pandit-ji-for-rudrabhishek-puja-noida",
+      "action": "keep",
+      "evidenceStatus": "partially_verified",
+      "notes": "Preserved migrated WordPress service slug."
+    },
+    {
+      "currentUrl": "/book-pandit-ji-online-for-maha-shivratri-puja",
+      "pageTitleOrH1": "Maha Shivratri Puja",
+      "pageType": "service",
+      "statusCode": "repository_inventory",
+      "canonicalUrl": "/book-pandit-ji-online-for-maha-shivratri-puja",
+      "indexState": "index",
+      "existingParent": "puja-services",
+      "inboundNavigationLocation": [
+        "html_sitemap"
+      ],
+      "intendedFinalUrl": "/book-pandit-ji-online-for-maha-shivratri-puja",
+      "action": "keep",
+      "evidenceStatus": "partially_verified",
+      "notes": "Preserved migrated WordPress service slug."
+    },
+    {
+      "currentUrl": "/book-pandit-ji-online-for-dhanteras-puja",
+      "pageTitleOrH1": "Dhanteras Puja",
+      "pageType": "service",
+      "statusCode": "repository_inventory",
+      "canonicalUrl": "/book-pandit-ji-online-for-dhanteras-puja",
+      "indexState": "index",
+      "existingParent": "puja-services",
+      "inboundNavigationLocation": [
+        "html_sitemap"
+      ],
+      "intendedFinalUrl": "/book-pandit-ji-online-for-dhanteras-puja",
+      "action": "keep",
+      "evidenceStatus": "partially_verified",
+      "notes": "Preserved migrated WordPress service slug."
+    },
+    {
+      "currentUrl": "/book-pandit-ji-online-for-mahamrityunjaya-jaap-puja",
+      "pageTitleOrH1": "Mahamrityunjaya Jaap Puja",
+      "pageType": "service",
+      "statusCode": "repository_inventory",
+      "canonicalUrl": "/book-pandit-ji-online-for-mahamrityunjaya-jaap-puja",
+      "indexState": "index",
+      "existingParent": "puja-services",
+      "inboundNavigationLocation": [
+        "html_sitemap"
+      ],
+      "intendedFinalUrl": "/book-pandit-ji-online-for-mahamrityunjaya-jaap-puja",
+      "action": "keep",
+      "evidenceStatus": "partially_verified",
+      "notes": "Preserved migrated WordPress service slug."
+    },
+    {
+      "currentUrl": [
+        "/book-pandit-ji-for-sundarkand-path",
+        "/book-pandit-ji-for-sunderkand-path",
+        "/sundarkand-path",
+        "/puja-services/sundarkand-path"
+      ],
+      "pageTitleOrH1": "Sundarkand Path",
+      "pageType": "service",
+      "statusCode": "repository_inventory",
+      "canonicalUrl": "/book-pandit-ji-for-sundar-kand-path",
+      "indexState": "index",
+      "existingParent": "puja-services",
+      "inboundNavigationLocation": [
+        "html_sitemap"
+      ],
+      "intendedFinalUrl": "/book-pandit-ji-for-sundar-kand-path",
+      "action": "redirect",
+      "evidenceStatus": "partially_verified",
+      "notes": "Preserved migrated WordPress service slug."
+    },
+    {
+      "currentUrl": "/book-pandit-ji-for-hanuman-chalisa-path",
+      "pageTitleOrH1": "Hanuman Chalisa Path",
+      "pageType": "service",
+      "statusCode": "repository_inventory",
+      "canonicalUrl": "/book-pandit-ji-for-hanuman-chalisa-path",
+      "indexState": "index",
+      "existingParent": "puja-services",
+      "inboundNavigationLocation": [
+        "html_sitemap"
+      ],
+      "intendedFinalUrl": "/book-pandit-ji-for-hanuman-chalisa-path",
+      "action": "keep",
+      "evidenceStatus": "partially_verified",
+      "notes": "Preserved migrated WordPress service slug."
+    },
+    {
+      "currentUrl": "/kaal-sarp-dosh-puja-in-ujjain",
+      "pageTitleOrH1": "Kaal Sarp Dosh Puja in Ujjain",
+      "pageType": "service",
+      "statusCode": "repository_inventory",
+      "canonicalUrl": "/kaal-sarp-dosh-puja-in-ujjain",
+      "indexState": "index",
+      "existingParent": "puja-services",
+      "inboundNavigationLocation": [
+        "html_sitemap"
+      ],
+      "intendedFinalUrl": "/kaal-sarp-dosh-puja-in-ujjain",
+      "action": "keep",
+      "evidenceStatus": "partially_verified",
+      "notes": "Preserved migrated WordPress service slug."
+    }
+  ]
+}

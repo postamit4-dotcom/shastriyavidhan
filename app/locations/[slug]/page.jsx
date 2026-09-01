@@ -5,6 +5,7 @@ import ContactForm from "@/components/ContactForm";
 import ServiceCard from "@/components/ServiceCard";
 import { contact, getLocationBySlug, locationPages, servicePages } from "@/lib/site-data";
 import { basePageMetadata, locationPageJsonLd } from "@/lib/seo";
+import { getNodeById, robotsForIndexable } from "@/lib/site-registry";
 
 function isOnlineLocation(location) {
   return location.city.toLowerCase().includes("online");
@@ -46,12 +47,15 @@ export async function generateMetadata({ params }) {
     return {};
   }
 
+  const routeNode = getNodeById(`location-${location.slug}`);
+
   return basePageMetadata({
     title: pageTitleForLocation(location),
     description: descriptionForLocation(location),
     path: location.href,
     image: "/images/diwali-puja.webp",
     imageAlt: `${location.city} Pandit Ji puja booking`,
+    robots: robotsForIndexable(routeNode?.indexable),
   });
 }
 
@@ -63,6 +67,7 @@ export default async function LocationPage({ params }) {
     notFound();
   }
 
+  const routeNode = getNodeById(`location-${location.slug}`);
   const availableServices = servicesForLocation(location);
   const jsonLd = locationPageJsonLd(location, availableServices);
   const locationLabel = isOnlineLocation(location) ? "online" : `in ${location.city}`;
@@ -113,6 +118,12 @@ export default async function LocationPage({ params }) {
                   <strong>Review:</strong> Date, muhurat, mode, and samagri are confirmed before payment.
                 </div>
                 <div>
+                  <strong>Indexing gate:</strong>{" "}
+                  {routeNode?.indexable
+                    ? "Owner verification complete."
+                    : "Hidden from sitemap and search indexing until owner verification is complete."}
+                </div>
+                <div>
                   <PhoneCall size={16} aria-hidden="true" />
                   <strong>Booking desk:</strong> {location.phone}
                 </div>
@@ -126,7 +137,7 @@ export default async function LocationPage({ params }) {
         <div className="container">
           <div className="apple-section-header">
             <span className="apple-eyebrow">Available Services</span>
-            <h2>Popular pujas {locationLabel}.</h2>
+            <h2>Puja requests {locationLabel}.</h2>
             <p>
               These pages keep the same preserved service URLs and connect each puja to
               a clearer location path for search engines and families.

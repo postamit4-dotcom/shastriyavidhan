@@ -19,7 +19,7 @@ export default function BlogArchivePage() {
         {excludedContent.publishedPosts} posts are excluded from the public booking experience
         until they are reviewed for relevance, religious accuracy, and SEO quality.
       </p>
-      <Link className="primary-button" href="/services">
+      <Link className="primary-button" href="/puja-services">
         View puja services
       </Link>
     </section>

@@ -1,9 +1,14 @@
+import { site } from "./lib/site-data.js";
+import { routeRedirects } from "./lib/site-registry.js";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   agentRules: false,
+  trailingSlash: false,
   async redirects() {
     return [
+      ...routeRedirects,
       {
         source: "/:path*",
         has: [
@@ -12,7 +17,7 @@ const nextConfig = {
             value: "shastriyavidhan.com",
           },
         ],
-        destination: "https://www.shastriyavidhan.com/:path*",
+        destination: `${site.productionUrl}/:path*`,
         permanent: true,
       },
     ];

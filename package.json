@@ -7,7 +7,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "download:assets": "node scripts/download-assets.mjs"
+    "download:assets": "node scripts/download-assets.mjs",
+    "check:spam": "node scripts/check-spam-urls.mjs",
+    "check:site": "node scripts/validate-site.mjs",
+    "route:inventory": "node scripts/write-route-inventory.mjs"
   },
   "dependencies": {
     "lucide-react": "latest",

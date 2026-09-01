@@ -2,6 +2,8 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { NextResponse } from "next/server";
 
+export const runtime = "nodejs";
+
 function clean(value) {
   return typeof value === "string" ? value.trim().slice(0, 2000) : "";
 }
@@ -37,12 +39,14 @@ export async function POST(request) {
     tradition: clean(body.tradition),
     samagri: clean(body.samagri),
     address: clean(body.address),
-    message: clean(body.message),
+    instructions: clean(body.instructions || body.message),
   };
+
+  const phoneDigits = submission.phone.replace(/\D/g, "");
 
   if (
     !submission.name ||
-    !submission.phone ||
+    phoneDigits.length < 10 ||
     !submission.service ||
     !submission.mode ||
     !submission.city ||
@@ -60,8 +64,15 @@ export async function POST(request) {
   const storageDir = path.join(process.cwd(), "storage");
   const storageFile = path.join(storageDir, "contact-submissions.jsonl");
 
-  await fs.mkdir(storageDir, { recursive: true });
-  await fs.appendFile(storageFile, `${JSON.stringify(submission)}\n`, "utf8");
+  try {
+    await fs.mkdir(storageDir, { recursive: true });
+    await fs.appendFile(storageFile, `${JSON.stringify(submission)}\n`, "utf8");
+  } catch {
+    return NextResponse.json(
+      { error: "The booking request could not be saved. Please use WhatsApp or call the booking desk." },
+      { status: 500 },
+    );
+  }
 
   return NextResponse.json({ ok: true, requestId });
 }

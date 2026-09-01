@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { 
   Check, 
   ChevronRight, 
@@ -18,7 +18,7 @@ const initialState = {
   preferredDate: "",
   preferredTime: "Morning (08:00 AM - 11:30 AM)",
   language: "Hindi & Sanskrit",
-  samagri: "Complete Samagri Package Arranged",
+  samagri: "Please confirm samagri options",
   name: "",
   phone: "",
   email: "",
@@ -35,11 +35,11 @@ const steps = [
 
 const modeOptions = [
   { id: "Home", title: "Puja at Home", desc: "Pandit Ji visits residence" },
-  { id: "Online", title: "Online Video", desc: "Live 1-on-1 HD session" },
-  { id: "Temple", title: "At Temple", desc: "Teerth coordination" },
+  { id: "Online", title: "Online Video", desc: "Video guidance if suitable" },
+  { id: "Temple", title: "At Temple", desc: "Reviewed teerth request" },
 ];
 
-const cityOptions = ["Noida", "Delhi", "Gurugram", "Ujjain", "Online / Worldwide", "Other City"];
+const cityOptions = ["Noida", "Delhi", "Ghaziabad", "Gurugram", "Ujjain", "Online / Worldwide", "Other City"];
 
 const timeSlotOptions = [
   "Morning (08:00 AM - 11:30 AM)",
@@ -57,20 +57,106 @@ const languageOptions = [
 ];
 
 const samagriOptions = [
-  "Complete Samagri Package Arranged",
+  "Please confirm samagri options",
   "Provide Samagri Checklist (I will arrange)",
   "Need Guidance on Samagri Checklist",
 ];
 
-export default function ContactForm({ prefilledService = "" }) {
-  const [formData, setFormData] = useState({
+function normalizeServiceOption(option) {
+  if (!option) return null;
+  if (typeof option === "string") return { value: option, label: option };
+  return option;
+}
+
+function uniqueServiceOptions(options) {
+  const seen = new Set();
+  return options.map(normalizeServiceOption).filter((option) => {
+    if (!option?.value || seen.has(option.value)) return false;
+    seen.add(option.value);
+    return true;
+  });
+}
+
+export default function ContactForm({
+  prefilledService = "",
+  prefilledMode = "",
+  prefilledCity = "",
+  serviceOptions = [],
+  includeDefaultServiceOptions = true,
+}) {
+  const defaultFormState = {
     ...initialState,
     service: prefilledService || initialState.service,
+    mode: prefilledMode || initialState.mode,
+    city: prefilledCity || initialState.city,
+  };
+  const defaultServiceOptions = includeDefaultServiceOptions
+    ? [
+        ...servicePages.map((s) => ({
+          value: s.title,
+          label: `${s.title} (${s.category})`,
+        })),
+        { value: "Griha Pravesh & Vastu Puja", label: "Griha Pravesh & Vastu Puja" },
+        { value: "Satyanarayan Katha & Hawan", label: "Satyanarayan Katha & Hawan" },
+        { value: "Sundarkand Path", label: "Sundarkand Path" },
+        { value: "Navgrah Shanti Hawan", label: "Navgrah Shanti Hawan" },
+        { value: "Custom Vedic Ritual", label: "Custom Vedic Ritual" },
+      ]
+    : [];
+  const serviceSelectOptions = uniqueServiceOptions([
+    prefilledService ? { value: prefilledService, label: prefilledService } : null,
+    ...serviceOptions,
+    ...defaultServiceOptions,
+  ]);
+  const [formData, setFormData] = useState({
+    ...defaultFormState,
   });
   const [currentStep, setCurrentStep] = useState(0);
   const [errors, setErrors] = useState({});
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+  const [prefillNotice, setPrefillNotice] = useState("");
+
+  useEffect(() => {
+    const handleBookingPrefill = (event) => {
+      const detail = event.detail || {};
+      const selectionLines = [
+        detail.packageName ? `Requested package: ${detail.packageName}` : "",
+        detail.formatName ? `Requested format: ${detail.formatName}` : "",
+        detail.note || "",
+      ].filter(Boolean);
+
+      setSubmitted(false);
+      setSubmitError("");
+      setErrors({});
+      setCurrentStep(0);
+      setPrefillNotice(detail.notice || "Selection added. Review the booking details below.");
+      setFormData((previous) => {
+        const existingNotes = previous.instructions
+          .split("\n")
+          .filter(
+            (line) =>
+              !line.startsWith("Requested package:") &&
+              !line.startsWith("Requested format:") &&
+              !line.startsWith("Selected scope note:"),
+          )
+          .join("\n")
+          .trim();
+
+        return {
+          ...previous,
+          service: detail.service || previous.service,
+          mode: detail.mode || previous.mode,
+          city: detail.city || previous.city,
+          instructions: [selectionLines.join("\n"), existingNotes].filter(Boolean).join("\n"),
+        };
+      });
+    };
+
+    window.addEventListener("booking-prefill", handleBookingPrefill);
+    return () => window.removeEventListener("booking-prefill", handleBookingPrefill);
+  }, []);
 
   const validateStep = (step) => {
     const errs = {};
@@ -103,29 +189,56 @@ export default function ContactForm({ prefilledService = "" }) {
 
   const handleSubmit = async (e) => {
     if (e) e.preventDefault();
+    setSubmitError("");
+
+    if (!validateStep(0)) {
+      setCurrentStep(0);
+      return;
+    }
+
+    if (!validateStep(1)) {
+      setCurrentStep(1);
+      return;
+    }
+
     if (!validateStep(2)) {
       setCurrentStep(2);
       return;
     }
 
     setSubmitting(true);
+
     try {
-      await fetch("/api/contact", {
+      const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...formData,
+          message: formData.instructions,
           submittedAt: new Date().toISOString(),
         }),
-      }).catch(() => null);
-    } catch {
-      // Graceful fallback
-    }
+      });
 
-    setTimeout(() => {
-      setSubmitting(false);
+      if (!response.ok) {
+        let message = "The request could not be submitted. Please try WhatsApp or call the booking desk.";
+
+        try {
+          const result = await response.json();
+          if (result?.error) message = result.error;
+        } catch {
+          // Keep the generic fallback message.
+        }
+
+        setSubmitError(message);
+        return;
+      }
+
       setSubmitted(true);
-    }, 500);
+    } catch {
+      setSubmitError("The request could not be submitted. Please try WhatsApp or call the booking desk.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const generateWhatsAppMessage = () => {
@@ -172,7 +285,7 @@ Please check Pandit Ji availability and share the quote.`;
           Thank you, {formData.name || "Devotee"}.
         </h3>
         <p style={{ fontSize: "1.05rem", color: "var(--text-secondary)", maxWidth: "520px", margin: "0 auto 28px" }}>
-          Your request for <strong>{formData.service}</strong> on <strong>{formData.preferredDate}</strong> has been logged. Our spiritual desk is reviewing Acharya availability and will connect with you via WhatsApp or phone.
+          Your request for <strong>{formData.service}</strong> on <strong>{formData.preferredDate}</strong> has been logged. The booking desk is reviewing Pandit Ji availability and will connect with you via WhatsApp or phone.
         </p>
 
         <div style={{ display: "flex", justifyContent: "center", gap: "12px", flexWrap: "wrap" }}>
@@ -184,7 +297,7 @@ Please check Pandit Ji availability and share the quote.`;
             style={{ padding: "12px 24px" }}
           >
             <MessageCircle size={17} />
-            Fast-Track on WhatsApp
+            Share on WhatsApp
           </a>
           <button
             type="button"
@@ -192,7 +305,8 @@ Please check Pandit Ji availability and share the quote.`;
             onClick={() => {
               setSubmitted(false);
               setCurrentStep(0);
-              setFormData(initialState);
+              setSubmitError("");
+              setFormData(defaultFormState);
             }}
           >
             Book Another Puja
@@ -204,6 +318,12 @@ Please check Pandit Ji availability and share the quote.`;
 
   return (
     <div className="apple-booking-card" id="booking-form-wrapper">
+      {prefillNotice ? (
+        <p className="form-status-info" role="status">
+          {prefillNotice}
+        </p>
+      ) : null}
+
       {/* Apple-style Segmented Step Switcher */}
       <div style={{ textAlign: "center", marginBottom: "32px" }}>
         <div className="apple-segmented-control" role="tablist" aria-label="Booking steps">
@@ -247,16 +367,11 @@ Please check Pandit Ji availability and share the quote.`;
                 value={formData.service}
                 onChange={(e) => setFormData({ ...formData, service: e.target.value })}
               >
-                {servicePages.map((s) => (
-                  <option key={s.slug} value={s.title}>
-                    {s.title} ({s.category})
+                {serviceSelectOptions.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
                   </option>
                 ))}
-                <option value="Griha Pravesh & Vastu Puja">Griha Pravesh &amp; Vastu Puja</option>
-                <option value="Satyanarayan Katha & Hawan">Satyanarayan Katha &amp; Hawan</option>
-                <option value="Sundarkand Path">Sundarkand Path</option>
-                <option value="Navgrah Shanti Hawan">Navgrah Shanti Hawan</option>
-                <option value="Custom Vedic Ritual">Custom Vedic Ritual</option>
               </select>
             </div>
 
@@ -323,9 +438,11 @@ Please check Pandit Ji availability and share the quote.`;
                   min={new Date().toISOString().split("T")[0]}
                   value={formData.preferredDate}
                   onChange={(e) => setFormData({ ...formData, preferredDate: e.target.value })}
+                  aria-invalid={errors.preferredDate ? "true" : undefined}
+                  aria-describedby={errors.preferredDate ? "apple-date-error" : undefined}
                 />
                 {errors.preferredDate && (
-                  <span style={{ fontSize: "0.8rem", color: "var(--apple-red)", marginTop: "2px" }}>
+                  <span id="apple-date-error" style={{ fontSize: "0.8rem", color: "var(--apple-red)", marginTop: "2px" }}>
                     {errors.preferredDate}
                   </span>
                 )}
@@ -391,7 +508,7 @@ Please check Pandit Ji availability and share the quote.`;
               Contact Details
             </h3>
             <p style={{ fontSize: "0.95rem", color: "var(--text-secondary)", marginBottom: "24px" }}>
-              We will share the preparation checklist and confirm Acharya schedule.
+              The booking desk will share the preparation checklist and confirm Pandit Ji availability.
             </p>
 
             <div className="apple-form-grid-2">
@@ -406,9 +523,11 @@ Please check Pandit Ji availability and share the quote.`;
                   className="apple-form-input"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  aria-invalid={errors.name ? "true" : undefined}
+                  aria-describedby={errors.name ? "apple-name-error" : undefined}
                 />
                 {errors.name && (
-                  <span style={{ fontSize: "0.8rem", color: "var(--apple-red)", marginTop: "2px" }}>
+                  <span id="apple-name-error" style={{ fontSize: "0.8rem", color: "var(--apple-red)", marginTop: "2px" }}>
                     {errors.name}
                   </span>
                 )}
@@ -425,9 +544,11 @@ Please check Pandit Ji availability and share the quote.`;
                   className="apple-form-input"
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  aria-invalid={errors.phone ? "true" : undefined}
+                  aria-describedby={errors.phone ? "apple-phone-error" : undefined}
                 />
                 {errors.phone && (
-                  <span style={{ fontSize: "0.8rem", color: "var(--apple-red)", marginTop: "2px" }}>
+                  <span id="apple-phone-error" style={{ fontSize: "0.8rem", color: "var(--apple-red)", marginTop: "2px" }}>
                     {errors.phone}
                   </span>
                 )}
@@ -436,12 +557,12 @@ Please check Pandit Ji availability and share the quote.`;
 
             <div className="apple-form-group">
               <label htmlFor="apple-address" className="apple-form-label">
-                {formData.mode === "Home" ? "Society / Address (Delhi NCR)" : "City / Country"}
+                {formData.mode === "Home" ? "Locality / Society / Address" : "City / Country"}
               </label>
               <input
                 id="apple-address"
                 type="text"
-                placeholder={formData.mode === "Home" ? "e.g. Sector 78, Noida / Vasant Kunj, New Delhi" : "e.g. London, UK"}
+                placeholder={formData.mode === "Home" ? "e.g. Indirapuram, Ghaziabad / Sector 78, Noida" : "e.g. Jaipur, India / Toronto, Canada"}
                 className="apple-form-input"
                 value={formData.address}
                 onChange={(e) => setFormData({ ...formData, address: e.target.value })}
@@ -450,12 +571,12 @@ Please check Pandit Ji availability and share the quote.`;
 
             <div className="apple-form-group">
               <label htmlFor="apple-notes" className="apple-form-label">
-                Gotra or Special Notes (Optional)
+                Notes / Occasion (Optional)
               </label>
               <textarea
                 id="apple-notes"
                 rows={2}
-                placeholder="Mention gotra or any specific puja requirements..."
+                placeholder="Mention occasion, access details, samagri needs, havan or musical request. Avoid sharing private medical, financial, or sensitive details."
                 className="apple-form-textarea"
                 value={formData.instructions}
                 onChange={(e) => setFormData({ ...formData, instructions: e.target.value })}
@@ -498,13 +619,19 @@ Please check Pandit Ji availability and share the quote.`;
             <div style={{ display: "flex", alignItems: "center", gap: "10px", padding: "12px 14px", backgroundColor: "var(--apple-blue-tint)", borderRadius: "var(--radius-inner)", marginBottom: "20px" }}>
               <ShieldCheck size={18} style={{ color: "var(--apple-blue)", flexShrink: 0 }} />
               <span style={{ fontSize: "0.85rem", color: "var(--apple-dark)" }}>
-                <strong>No immediate payment required.</strong> Our team confirms Acharya availability first.
+                <strong>No immediate payment required.</strong> The team confirms Pandit Ji availability first.
               </span>
             </div>
           </div>
         )}
 
         {/* Action Controls */}
+        {submitError ? (
+          <p className="form-status-error" role="alert">
+            {submitError}
+          </p>
+        ) : null}
+
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "24px", paddingTop: "20px", borderTop: "1px solid var(--apple-line-light)" }}>
           {currentStep > 0 ? (
             <button

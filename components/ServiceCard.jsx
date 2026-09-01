@@ -48,10 +48,10 @@ export default function ServiceCard({ service }) {
           className="apple-btn-pill apple-btn-primary"
           style={{ padding: "8px 18px" }}
         >
-          Book
+          Request Quote
         </Link>
         <Link href={`/${service.slug}`} className="apple-link apple-link-sm">
-          <span>Learn more</span>
+          <span>View details</span>
           <ChevronRight size={13} className="apple-link-chevron" aria-hidden="true" />
         </Link>
       </div>

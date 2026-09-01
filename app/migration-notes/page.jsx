@@ -68,7 +68,7 @@ export default function MigrationNotesPage() {
             lock down the old WordPress install.
           </p>
         </div>
-        <Link className="primary-button" href="/services">
+        <Link className="primary-button" href="/puja-services">
           Review services
           <ArrowRight size={18} />
         </Link>

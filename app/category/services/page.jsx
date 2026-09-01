@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
 
 export default function CategoryServicesPage() {
-  redirect("/services");
+  redirect("/puja-services");
 }

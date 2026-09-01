@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ChevronRight, MapPin, MessageCircle } from "lucide-react";
 import { contact, locationPages } from "@/lib/site-data";
 import { basePageMetadata, locationsDirectoryJsonLd } from "@/lib/seo";
+import { getNodeById } from "@/lib/site-registry";
 
 const title = "Pandit Ji Service Locations";
 const description =
@@ -37,7 +38,7 @@ export default function LocationsPage() {
           </div>
 
           <div style={{ display: "flex", justifyContent: "center", gap: "10px", flexWrap: "wrap" }}>
-            <Link href="/services" className="apple-btn-pill apple-btn-secondary">
+            <Link href="/puja-services" className="apple-btn-pill apple-btn-secondary">
               Browse Pujas
             </Link>
             <a
@@ -57,28 +58,7 @@ export default function LocationsPage() {
         <div className="container">
           <div className="apple-products-grid">
             {locationPages.map((location) => (
-              <article key={location.slug} className="apple-product-card" style={{ textAlign: "left" }}>
-                <span className="apple-product-tag">{location.badge}</span>
-                <h2 className="apple-product-title" style={{ fontSize: "1.35rem" }}>
-                  <Link href={location.href} style={{ color: "inherit" }}>
-                    {location.city}
-                  </Link>
-                </h2>
-                <p className="apple-product-desc">{location.coverage}</p>
-                <div className="apple-product-specs">
-                  <div>
-                    <strong>Status:</strong> {location.status}
-                  </div>
-                  <div>
-                    <strong>Phone:</strong> {location.phone}
-                  </div>
-                </div>
-                <Link href={location.href} className="apple-link apple-link-sm">
-                  <MapPin size={13} aria-hidden="true" />
-                  <span>View {location.city} options</span>
-                  <ChevronRight size={13} className="apple-link-chevron" aria-hidden="true" />
-                </Link>
-              </article>
+              <LocationCard key={location.slug} location={location} />
             ))}
           </div>
         </div>
@@ -86,5 +66,54 @@ export default function LocationsPage() {
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     </>
+  );
+}
+
+function LocationCard({ location }) {
+  const node = getNodeById(`location-${location.slug}`);
+  const isPublic = location.slug === "online-puja" || Boolean(node?.indexable);
+  const gateText =
+    location.slug === "online-puja"
+      ? "Online puja has a public mode page; each request is still reviewed before confirmation."
+      : isPublic
+        ? "Public city page is verified."
+        : "City page remains hidden from sitemap and navigation until owner verification.";
+
+  return (
+    <article className="apple-product-card" style={{ textAlign: "left" }}>
+      <span className="apple-product-tag">{location.badge}</span>
+      <h2 className="apple-product-title" style={{ fontSize: "1.35rem" }}>
+        {isPublic ? (
+          <Link href={location.href} style={{ color: "inherit" }}>
+            {location.city}
+          </Link>
+        ) : (
+          location.city
+        )}
+      </h2>
+      <p className="apple-product-desc">{location.coverage}</p>
+      <div className="apple-product-specs">
+        <div>
+          <strong>Status:</strong> {location.status}
+        </div>
+        <div>
+          <strong>Evidence gate:</strong>{" "}
+          {gateText}
+        </div>
+      </div>
+      {isPublic ? (
+        <Link href={location.href} className="apple-link apple-link-sm">
+          <MapPin size={13} aria-hidden="true" />
+          <span>View {location.city} options</span>
+          <ChevronRight size={13} className="apple-link-chevron" aria-hidden="true" />
+        </Link>
+      ) : (
+        <a href={contact.whatsappLink} target="_blank" rel="noopener noreferrer" className="apple-link apple-link-sm">
+          <MapPin size={13} aria-hidden="true" />
+          <span>Ask about {location.city}</span>
+          <ChevronRight size={13} className="apple-link-chevron" aria-hidden="true" />
+        </a>
+      )}
+    </article>
   );
 }
