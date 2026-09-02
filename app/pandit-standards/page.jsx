@@ -72,9 +72,15 @@ export default function PanditStandardsPage() {
                 </li>
               ))}
             </ul>
-            <div style={{ marginTop: "24px" }}>
+            <div style={{ marginTop: "24px", display: "flex", gap: "10px", flexWrap: "wrap" }}>
               <Link href="/book-puja" className="apple-btn-pill apple-btn-primary">
                 Request a Pandit Ji
+              </Link>
+              <Link
+                href="/pandit-ji/acharya-sursain-brijwasi-ghaziabad"
+                className="apple-btn-pill apple-btn-secondary"
+              >
+                View Acharya Sursain Brijwasi
               </Link>
             </div>
           </div>

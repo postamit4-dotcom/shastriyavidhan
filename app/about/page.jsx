@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Check, ChevronRight } from "lucide-react";
+import PanditJiPicture, { panditJiImage } from "@/components/PanditJiPicture";
 import { contact, site } from "@/lib/site-data";
 import { basePageMetadata } from "@/lib/seo";
 
@@ -66,6 +67,33 @@ export default function AboutPage() {
 
       <section className="section-apple">
         <div className="container">
+          <article className="about-pandit-card" aria-labelledby="about-pandit-heading">
+            <div className="about-pandit-media">
+              <PanditJiPicture
+                alt="Acharya Sursain Brijwasi of Shastriya Vidhan"
+                className="about-pandit-picture"
+                imgClassName="about-pandit-image"
+                sizes="(max-width: 760px) min(84vw, 380px), 260px"
+              />
+            </div>
+            <div>
+              <span className="apple-product-tag">Public Pandit Ji profile</span>
+              <h2 id="about-pandit-heading">Acharya Sursain Brijwasi</h2>
+              <p>
+                Shastriya Vidhan lists Acharya Sursain Brijwasi for Ghaziabad puja enquiries
+                with a request-first process, clear availability review, and no unsupported
+                promises before booking.
+              </p>
+              <div className="about-pandit-actions">
+                <Link href="/pandit-ji/acharya-sursain-brijwasi-ghaziabad" className="apple-btn-pill apple-btn-secondary">
+                  View Profile
+                  <ChevronRight size={15} aria-hidden="true" />
+                </Link>
+                <span>{panditJiImage.caption}</span>
+              </div>
+            </div>
+          </article>
+
           <div className="apple-section-header">
             <span className="apple-eyebrow">Operating facts</span>
             <h2>What the customer should know.</h2>

@@ -28,6 +28,7 @@ const groupLabels = {
   locations_hub: "Locations",
   guides_hub: "Guides",
   about: "About",
+  profile: "Pandit Ji Profiles",
   trust: "Trust",
   help: "Help",
   contact: "Contact",

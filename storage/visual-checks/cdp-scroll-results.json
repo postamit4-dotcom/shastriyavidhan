@@ -1,0 +1,248 @@
+[
+  {
+    "page": "home-pandit",
+    "viewport": "desktop",
+    "screenshotSize": 555086,
+    "data": {
+      "viewport": {
+        "width": 1366,
+        "height": 900,
+        "scrollWidth": 1366
+      },
+      "hasHorizontalOverflow": false,
+      "img": {
+        "alt": "Acharya Sursain Brijwasi of Shastriya Vidhan",
+        "loading": "lazy",
+        "decoding": "async",
+        "fetchPriority": null,
+        "width": "900",
+        "height": "1600",
+        "currentSrc": "http://localhost:3000/images/acharya-sursain-brijwasi-pandit-ji-ghaziabad-320.avif",
+        "naturalWidth": 320,
+        "naturalHeight": 569,
+        "rect": {
+          "x": 235,
+          "y": 167,
+          "width": 318,
+          "height": 565
+        }
+      },
+      "targetRect": {
+        "x": 203,
+        "y": 135,
+        "width": 960,
+        "height": 629
+      },
+      "pictureSourceTypes": [
+        "image/avif",
+        "image/webp"
+      ],
+      "brokenImages": []
+    }
+  },
+  {
+    "page": "home-pandit",
+    "viewport": "tablet",
+    "screenshotSize": 514091,
+    "data": {
+      "viewport": {
+        "width": 768,
+        "height": 1024,
+        "scrollWidth": 768
+      },
+      "hasHorizontalOverflow": false,
+      "img": {
+        "alt": "Acharya Sursain Brijwasi of Shastriya Vidhan",
+        "loading": "lazy",
+        "decoding": "async",
+        "fetchPriority": null,
+        "width": "900",
+        "height": "1600",
+        "currentSrc": "http://localhost:3000/images/acharya-sursain-brijwasi-pandit-ji-ghaziabad-320.avif",
+        "naturalWidth": 320,
+        "naturalHeight": 569,
+        "rect": {
+          "x": 57,
+          "y": 229,
+          "width": 318,
+          "height": 565
+        }
+      },
+      "targetRect": {
+        "x": 32,
+        "y": 204,
+        "width": 704,
+        "height": 615
+      },
+      "pictureSourceTypes": [
+        "image/avif",
+        "image/webp"
+      ],
+      "brokenImages": []
+    }
+  },
+  {
+    "page": "home-pandit",
+    "viewport": "mobile",
+    "screenshotSize": 1021366,
+    "data": {
+      "viewport": {
+        "width": 375,
+        "height": 812,
+        "scrollWidth": 375
+      },
+      "hasHorizontalOverflow": false,
+      "img": {
+        "alt": "Acharya Sursain Brijwasi of Shastriya Vidhan",
+        "loading": "lazy",
+        "decoding": "async",
+        "fetchPriority": null,
+        "width": "900",
+        "height": "1600",
+        "currentSrc": "http://localhost:3000/images/acharya-sursain-brijwasi-pandit-ji-ghaziabad-900.avif",
+        "naturalWidth": 322,
+        "naturalHeight": 573,
+        "rect": {
+          "x": 42,
+          "y": -12,
+          "width": 291,
+          "height": 516
+        }
+      },
+      "targetRect": {
+        "x": 20,
+        "y": -34,
+        "width": 335,
+        "height": 880
+      },
+      "pictureSourceTypes": [
+        "image/avif",
+        "image/webp"
+      ],
+      "brokenImages": []
+    }
+  },
+  {
+    "page": "about-pandit",
+    "viewport": "desktop",
+    "screenshotSize": 307324,
+    "data": {
+      "viewport": {
+        "width": 1366,
+        "height": 900,
+        "scrollWidth": 1366
+      },
+      "hasHorizontalOverflow": false,
+      "img": {
+        "alt": "Acharya Sursain Brijwasi of Shastriya Vidhan",
+        "loading": "lazy",
+        "decoding": "async",
+        "fetchPriority": null,
+        "width": "900",
+        "height": "1600",
+        "currentSrc": "http://localhost:3000/images/acharya-sursain-brijwasi-pandit-ji-ghaziabad-320.avif",
+        "naturalWidth": 259,
+        "naturalHeight": 462,
+        "rect": {
+          "x": 227,
+          "y": 220,
+          "width": 258,
+          "height": 459
+        }
+      },
+      "targetRect": {
+        "x": 193,
+        "y": 186,
+        "width": 980,
+        "height": 527
+      },
+      "pictureSourceTypes": [
+        "image/avif",
+        "image/webp"
+      ],
+      "brokenImages": []
+    }
+  },
+  {
+    "page": "about-pandit",
+    "viewport": "tablet",
+    "screenshotSize": 355824,
+    "data": {
+      "viewport": {
+        "width": 768,
+        "height": 1024,
+        "scrollWidth": 768
+      },
+      "hasHorizontalOverflow": false,
+      "img": {
+        "alt": "Acharya Sursain Brijwasi of Shastriya Vidhan",
+        "loading": "lazy",
+        "decoding": "async",
+        "fetchPriority": null,
+        "width": "900",
+        "height": "1600",
+        "currentSrc": "http://localhost:3000/images/acharya-sursain-brijwasi-pandit-ji-ghaziabad-320.avif",
+        "naturalWidth": 259,
+        "naturalHeight": 462,
+        "rect": {
+          "x": 59,
+          "y": 283,
+          "width": 258,
+          "height": 459
+        }
+      },
+      "targetRect": {
+        "x": 32,
+        "y": 256,
+        "width": 704,
+        "height": 512
+      },
+      "pictureSourceTypes": [
+        "image/avif",
+        "image/webp"
+      ],
+      "brokenImages": []
+    }
+  },
+  {
+    "page": "about-pandit",
+    "viewport": "mobile",
+    "screenshotSize": 936575,
+    "data": {
+      "viewport": {
+        "width": 375,
+        "height": 812,
+        "scrollWidth": 375
+      },
+      "hasHorizontalOverflow": false,
+      "img": {
+        "alt": "Acharya Sursain Brijwasi of Shastriya Vidhan",
+        "loading": "lazy",
+        "decoding": "async",
+        "fetchPriority": null,
+        "width": "900",
+        "height": "1600",
+        "currentSrc": "http://localhost:3000/images/acharya-sursain-brijwasi-pandit-ji-ghaziabad-640.avif",
+        "naturalWidth": 314,
+        "naturalHeight": 560,
+        "rect": {
+          "x": 42,
+          "y": -30,
+          "width": 291,
+          "height": 516
+        }
+      },
+      "targetRect": {
+        "x": 20,
+        "y": -52,
+        "width": 335,
+        "height": 916
+      },
+      "pictureSourceTypes": [
+        "image/avif",
+        "image/webp"
+      ],
+      "brokenImages": []
+    }
+  }
+]

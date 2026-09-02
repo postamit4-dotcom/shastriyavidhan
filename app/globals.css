@@ -3239,6 +3239,155 @@ img {
   }
 }
 
+.pandit-feature-card,
+.about-pandit-card {
+  display: grid;
+  align-items: center;
+  gap: clamp(22px, 4vw, 38px);
+  border: 1px solid var(--apple-line-light);
+  border-radius: var(--radius-card);
+  background: rgba(15, 23, 42, 0.72);
+  box-shadow: var(--shadow-apple-card);
+  text-align: left;
+}
+
+.pandit-feature-card {
+  grid-template-columns: minmax(220px, 320px) minmax(0, 1fr);
+  max-width: 960px;
+  margin: 0 auto 28px;
+  padding: clamp(20px, 3vw, 30px);
+}
+
+.about-pandit-card {
+  grid-template-columns: minmax(220px, 260px) minmax(0, 1fr);
+  max-width: 980px;
+  margin: 0 auto 52px;
+  padding: clamp(20px, 3.2vw, 32px);
+}
+
+.pandit-feature-media,
+.about-pandit-media {
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid var(--apple-line-light);
+  border-radius: var(--radius-bento);
+  background: var(--apple-gray-bg);
+}
+
+.pandit-feature-picture,
+.about-pandit-picture,
+.profile-hero-picture,
+.contact-pandit-picture {
+  display: block;
+  width: 100%;
+}
+
+.pandit-feature-image,
+.about-pandit-image {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 9 / 16;
+  object-fit: cover;
+  object-position: center center;
+}
+
+.pandit-feature-copy {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+}
+
+.pandit-feature-copy h3,
+.about-pandit-card h2 {
+  color: var(--text-primary);
+  font-size: clamp(1.55rem, 2.6vw, 2.1rem);
+  margin: 0;
+}
+
+.pandit-feature-copy p,
+.about-pandit-card p {
+  max-width: 620px;
+  color: var(--text-secondary);
+}
+
+.pandit-feature-caption,
+.about-pandit-actions span {
+  color: var(--text-tertiary);
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+
+.about-pandit-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px 16px;
+  margin-top: 18px;
+}
+
+.profile-hero-visual-card {
+  justify-self: center;
+  width: min(100%, 480px);
+}
+
+.profile-hero-visual-card img.profile-hero-image {
+  width: 100%;
+  height: auto;
+  max-height: min(72vh, 720px);
+  aspect-ratio: 9 / 16;
+  object-fit: cover;
+  object-position: center center;
+}
+
+.contact-pandit-avatar {
+  width: 72px;
+  height: 72px;
+  overflow: hidden;
+  border: 2px solid rgba(255, 184, 0, 0.58);
+  border-radius: 999px;
+  background: var(--apple-gray-bg);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22);
+  margin: 0 auto 12px;
+}
+
+.contact-pandit-picture {
+  height: 100%;
+}
+
+.contact-pandit-picture img.contact-pandit-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 35%;
+}
+
+@media (max-width: 760px) {
+  .pandit-feature-card,
+  .about-pandit-card {
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+
+  .pandit-feature-media,
+  .about-pandit-media {
+    width: min(78vw, 320px);
+    justify-self: center;
+  }
+
+  .pandit-feature-copy .apple-btn-pill,
+  .about-pandit-actions .apple-btn-pill {
+    width: 100%;
+  }
+
+  .about-pandit-actions {
+    align-items: stretch;
+  }
+
+  .profile-hero-visual-card img.profile-hero-image {
+    max-height: none;
+  }
+}
+
 /* Micro-interactions & Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

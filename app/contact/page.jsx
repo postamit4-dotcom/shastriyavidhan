@@ -1,12 +1,13 @@
 import Link from "next/link";
 import { ChevronRight, MapPin, MessageCircle, PhoneCall } from "lucide-react";
 import ContactForm from "@/components/ContactForm";
+import PanditJiPicture from "@/components/PanditJiPicture";
 import { contact } from "@/lib/site-data";
 import { basePageMetadata, contactPageJsonLd } from "@/lib/seo";
 
 const title = "Contact & Pandit Ji Booking Desk";
 const description =
-  "Contact Shastriya Vidhan for Pandit Ji booking assistance in Noida, Delhi, Gurugram, Ujjain, and Online Video Puja coordination.";
+  "Contact Shastriya Vidhan for Pandit Ji booking assistance in Ghaziabad, Noida, Delhi, Gurugram, Ujjain, and Online Video Puja coordination.";
 
 export const metadata = basePageMetadata({
   title,
@@ -69,10 +70,26 @@ export default function ContactPage() {
                 <MapPin size={22} />
               </div>
               <h2 style={{ fontSize: "1.1rem", fontWeight: 700, marginBottom: "4px" }}>Coverage Areas</h2>
-              <p style={{ fontSize: "0.88rem", color: "var(--muted-text)", marginBottom: "12px" }}>Noida, Delhi, Gurugram, Ujjain &amp; Global Online</p>
+              <p style={{ fontSize: "0.88rem", color: "var(--muted-text)", marginBottom: "12px" }}>Ghaziabad, Noida, Delhi, Gurugram, Ujjain &amp; Global Online</p>
               <span className="badge-pill badge-saffron" style={{ display: "inline-block" }}>
                 Request areas listed
               </span>
+            </div>
+
+            <div style={{ backgroundColor: "var(--white)", borderRadius: "var(--radius-lg)", padding: "24px", border: "1px solid var(--line-soft)", textAlign: "center" }}>
+              <div className="contact-pandit-avatar">
+                <PanditJiPicture
+                  alt="Acharya Sursain Brijwasi of Shastriya Vidhan"
+                  className="contact-pandit-picture"
+                  imgClassName="contact-pandit-image"
+                  sizes="72px"
+                />
+              </div>
+              <h2 style={{ fontSize: "1.1rem", fontWeight: 700, marginBottom: "4px" }}>Pandit Ji in Ghaziabad</h2>
+              <p style={{ fontSize: "0.88rem", color: "var(--muted-text)", marginBottom: "12px" }}>View the profile for Acharya Sursain Brijwasi before sending a puja enquiry.</p>
+              <Link href="/pandit-ji/acharya-sursain-brijwasi-ghaziabad" className="btn-pill btn-sm btn-outline" style={{ width: "100%" }}>
+                View Pandit Ji Profile
+              </Link>
             </div>
           </div>
         </div>

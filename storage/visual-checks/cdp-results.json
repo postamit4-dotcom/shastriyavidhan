@@ -1,0 +1,578 @@
+[
+  {
+    "page": "profile",
+    "viewport": "desktop",
+    "width": 1366,
+    "height": 900,
+    "url": "http://localhost:3000/pandit-ji/acharya-sursain-brijwasi-ghaziabad",
+    "selector": ".profile-hero-visual-card",
+    "img": ".profile-hero-picture img",
+    "screenshot": "D:\\Amit\\shastriya vidhan website nodejs wordpress\\storage\\visual-checks\\profile-desktop-cdp.png",
+    "screenshotSize": 583574,
+    "data": {
+      "title": "Acharya Sursain Brijwasi | Pandit Ji in Ghaziabad | Shastriya Vidhan",
+      "viewport": {
+        "width": 1366,
+        "height": 900,
+        "scrollWidth": 1366
+      },
+      "hasHorizontalOverflow": false,
+      "img": {
+        "alt": "Acharya Sursain Brijwasi, Pandit Ji in Ghaziabad",
+        "loading": "eager",
+        "decoding": "async",
+        "fetchPriority": "high",
+        "width": "900",
+        "height": "1600",
+        "currentSrc": "http://localhost:3000/images/acharya-sursain-brijwasi-pandit-ji-ghaziabad-480.avif",
+        "naturalWidth": 419,
+        "naturalHeight": 746,
+        "rect": {
+          "x": 782,
+          "y": 126,
+          "width": 458,
+          "height": 648
+        }
+      },
+      "targetRect": {
+        "x": 771,
+        "y": 115,
+        "width": 480,
+        "height": 670
+      },
+      "pictureSourceTypes": [
+        "image/avif",
+        "image/webp"
+      ],
+      "brokenImages": []
+    }
+  },
+  {
+    "page": "profile",
+    "viewport": "tablet",
+    "width": 768,
+    "height": 1024,
+    "url": "http://localhost:3000/pandit-ji/acharya-sursain-brijwasi-ghaziabad",
+    "selector": ".profile-hero-visual-card",
+    "img": ".profile-hero-picture img",
+    "screenshot": "D:\\Amit\\shastriya vidhan website nodejs wordpress\\storage\\visual-checks\\profile-tablet-cdp.png",
+    "screenshotSize": 595522,
+    "data": {
+      "title": "Acharya Sursain Brijwasi | Pandit Ji in Ghaziabad | Shastriya Vidhan",
+      "viewport": {
+        "width": 768,
+        "height": 1024,
+        "scrollWidth": 768
+      },
+      "hasHorizontalOverflow": false,
+      "img": {
+        "alt": "Acharya Sursain Brijwasi, Pandit Ji in Ghaziabad",
+        "loading": "eager",
+        "decoding": "async",
+        "fetchPriority": "high",
+        "width": "900",
+        "height": "1600",
+        "currentSrc": "http://localhost:3000/images/acharya-sursain-brijwasi-pandit-ji-ghaziabad-640.avif",
+        "naturalWidth": 519,
+        "naturalHeight": 924,
+        "rect": {
+          "x": 155,
+          "y": 152,
+          "width": 458,
+          "height": 720
+        }
+      },
+      "targetRect": {
+        "x": 144,
+        "y": 141,
+        "width": 480,
+        "height": 742
+      },
+      "pictureSourceTypes": [
+        "image/avif",
+        "image/webp"
+      ],
+      "brokenImages": []
+    }
+  },
+  {
+    "page": "profile",
+    "viewport": "mobile",
+    "width": 375,
+    "height": 812,
+    "url": "http://localhost:3000/pandit-ji/acharya-sursain-brijwasi-ghaziabad",
+    "selector": ".profile-hero-visual-card",
+    "img": ".profile-hero-picture img",
+    "screenshot": "D:\\Amit\\shastriya vidhan website nodejs wordpress\\storage\\visual-checks\\profile-mobile-cdp.png",
+    "screenshotSize": 1210429,
+    "data": {
+      "title": "Acharya Sursain Brijwasi | Pandit Ji in Ghaziabad | Shastriya Vidhan",
+      "viewport": {
+        "width": 375,
+        "height": 812,
+        "scrollWidth": 375
+      },
+      "hasHorizontalOverflow": false,
+      "img": {
+        "alt": "Acharya Sursain Brijwasi, Pandit Ji in Ghaziabad",
+        "loading": "eager",
+        "decoding": "async",
+        "fetchPriority": "high",
+        "width": "900",
+        "height": "1600",
+        "currentSrc": "http://localhost:3000/images/acharya-sursain-brijwasi-pandit-ji-ghaziabad-900.avif",
+        "naturalWidth": 330,
+        "naturalHeight": 586,
+        "rect": {
+          "x": 31,
+          "y": 84,
+          "width": 313,
+          "height": 556
+        }
+      },
+      "targetRect": {
+        "x": 20,
+        "y": 73,
+        "width": 335,
+        "height": 667
+      },
+      "pictureSourceTypes": [
+        "image/avif",
+        "image/webp"
+      ],
+      "brokenImages": []
+    }
+  },
+  {
+    "page": "home-pandit",
+    "viewport": "desktop",
+    "width": 1366,
+    "height": 900,
+    "url": "http://localhost:3000/",
+    "selector": "#home-pandit-profile-heading",
+    "img": ".pandit-feature-picture img",
+    "screenshot": "D:\\Amit\\shastriya vidhan website nodejs wordpress\\storage\\visual-checks\\home-pandit-desktop-cdp.png",
+    "screenshotSize": 101245,
+    "data": {
+      "title": "Shastriya Vidhan | Puja Made Peaceful",
+      "viewport": {
+        "width": 1366,
+        "height": 900,
+        "scrollWidth": 1366
+      },
+      "hasHorizontalOverflow": false,
+      "img": {
+        "alt": "Acharya Sursain Brijwasi of Shastriya Vidhan",
+        "loading": "lazy",
+        "decoding": "async",
+        "fetchPriority": null,
+        "width": "900",
+        "height": "1600",
+        "currentSrc": "http://localhost:3000/images/acharya-sursain-brijwasi-pandit-ji-ghaziabad-320.avif",
+        "naturalWidth": 320,
+        "naturalHeight": 569,
+        "rect": {
+          "x": 235,
+          "y": 1029,
+          "width": 318,
+          "height": 565
+        }
+      },
+      "targetRect": {
+        "x": 592,
+        "y": 1234,
+        "width": 540,
+        "height": 38
+      },
+      "pictureSourceTypes": [
+        "image/avif",
+        "image/webp"
+      ],
+      "brokenImages": []
+    }
+  },
+  {
+    "page": "home-pandit",
+    "viewport": "tablet",
+    "width": 768,
+    "height": 1024,
+    "url": "http://localhost:3000/",
+    "selector": "#home-pandit-profile-heading",
+    "img": ".pandit-feature-picture img",
+    "screenshot": "D:\\Amit\\shastriya vidhan website nodejs wordpress\\storage\\visual-checks\\home-pandit-tablet-cdp.png",
+    "screenshotSize": 92760,
+    "data": {
+      "title": "Shastriya Vidhan | Puja Made Peaceful",
+      "viewport": {
+        "width": 768,
+        "height": 1024,
+        "scrollWidth": 768
+      },
+      "hasHorizontalOverflow": false,
+      "img": {
+        "alt": "Acharya Sursain Brijwasi of Shastriya Vidhan",
+        "loading": "lazy",
+        "decoding": "async",
+        "fetchPriority": null,
+        "width": "900",
+        "height": "1600",
+        "currentSrc": "http://localhost:3000/images/acharya-sursain-brijwasi-pandit-ji-ghaziabad-320.avif",
+        "naturalWidth": 320,
+        "naturalHeight": 569,
+        "rect": {
+          "x": 57,
+          "y": 1640,
+          "width": 318,
+          "height": 565
+        }
+      },
+      "targetRect": {
+        "x": 407,
+        "y": 1824,
+        "width": 305,
+        "height": 28
+      },
+      "pictureSourceTypes": [
+        "image/avif",
+        "image/webp"
+      ],
+      "brokenImages": []
+    }
+  },
+  {
+    "page": "home-pandit",
+    "viewport": "mobile",
+    "width": 375,
+    "height": 812,
+    "url": "http://localhost:3000/",
+    "selector": "#home-pandit-profile-heading",
+    "img": ".pandit-feature-picture img",
+    "screenshot": "D:\\Amit\\shastriya vidhan website nodejs wordpress\\storage\\visual-checks\\home-pandit-mobile-cdp.png",
+    "screenshotSize": 152315,
+    "data": {
+      "title": "Shastriya Vidhan | Puja Made Peaceful",
+      "viewport": {
+        "width": 375,
+        "height": 812,
+        "scrollWidth": 375
+      },
+      "hasHorizontalOverflow": false,
+      "img": {
+        "alt": "Acharya Sursain Brijwasi of Shastriya Vidhan",
+        "loading": "lazy",
+        "decoding": "async",
+        "fetchPriority": null,
+        "width": "900",
+        "height": "1600",
+        "currentSrc": "",
+        "naturalWidth": 0,
+        "naturalHeight": 0,
+        "rect": {
+          "x": 42,
+          "y": 1960,
+          "width": 291,
+          "height": 516
+        }
+      },
+      "targetRect": {
+        "x": 41,
+        "y": 2535,
+        "width": 293,
+        "height": 56
+      },
+      "pictureSourceTypes": [
+        "image/avif",
+        "image/webp"
+      ],
+      "brokenImages": []
+    }
+  },
+  {
+    "page": "about-pandit",
+    "viewport": "desktop",
+    "width": 1366,
+    "height": 900,
+    "url": "http://localhost:3000/about",
+    "selector": "#about-pandit-heading",
+    "img": ".about-pandit-picture img",
+    "screenshot": "D:\\Amit\\shastriya vidhan website nodejs wordpress\\storage\\visual-checks\\about-pandit-desktop-cdp.png",
+    "screenshotSize": 324693,
+    "data": {
+      "title": "About Shastriya Vidhan | Shastriya Vidhan",
+      "viewport": {
+        "width": 1366,
+        "height": 900,
+        "scrollWidth": 1366
+      },
+      "hasHorizontalOverflow": false,
+      "img": {
+        "alt": "Acharya Sursain Brijwasi of Shastriya Vidhan",
+        "loading": "lazy",
+        "decoding": "async",
+        "fetchPriority": null,
+        "width": "900",
+        "height": "1600",
+        "currentSrc": "http://localhost:3000/images/acharya-sursain-brijwasi-pandit-ji-ghaziabad-320.avif",
+        "naturalWidth": 259,
+        "naturalHeight": 462,
+        "rect": {
+          "x": 227,
+          "y": 279,
+          "width": 258,
+          "height": 459
+        }
+      },
+      "targetRect": {
+        "x": 524,
+        "y": 431,
+        "width": 616,
+        "height": 38
+      },
+      "pictureSourceTypes": [
+        "image/avif",
+        "image/webp"
+      ],
+      "brokenImages": []
+    }
+  },
+  {
+    "page": "about-pandit",
+    "viewport": "tablet",
+    "width": 768,
+    "height": 1024,
+    "url": "http://localhost:3000/about",
+    "selector": "#about-pandit-heading",
+    "img": ".about-pandit-picture img",
+    "screenshot": "D:\\Amit\\shastriya vidhan website nodejs wordpress\\storage\\visual-checks\\about-pandit-tablet-cdp.png",
+    "screenshotSize": 450271,
+    "data": {
+      "title": "About Shastriya Vidhan | Shastriya Vidhan",
+      "viewport": {
+        "width": 768,
+        "height": 1024,
+        "scrollWidth": 768
+      },
+      "hasHorizontalOverflow": false,
+      "img": {
+        "alt": "Acharya Sursain Brijwasi of Shastriya Vidhan",
+        "loading": "lazy",
+        "decoding": "async",
+        "fetchPriority": null,
+        "width": "900",
+        "height": "1600",
+        "currentSrc": "http://localhost:3000/images/acharya-sursain-brijwasi-pandit-ji-ghaziabad-320.avif",
+        "naturalWidth": 259,
+        "naturalHeight": 462,
+        "rect": {
+          "x": 59,
+          "y": 370,
+          "width": 258,
+          "height": 459
+        }
+      },
+      "targetRect": {
+        "x": 348,
+        "y": 498,
+        "width": 362,
+        "height": 28
+      },
+      "pictureSourceTypes": [
+        "image/avif",
+        "image/webp"
+      ],
+      "brokenImages": []
+    }
+  },
+  {
+    "page": "about-pandit",
+    "viewport": "mobile",
+    "width": 375,
+    "height": 812,
+    "url": "http://localhost:3000/about",
+    "selector": "#about-pandit-heading",
+    "img": ".about-pandit-picture img",
+    "screenshot": "D:\\Amit\\shastriya vidhan website nodejs wordpress\\storage\\visual-checks\\about-pandit-mobile-cdp.png",
+    "screenshotSize": 691634,
+    "data": {
+      "title": "About Shastriya Vidhan | Shastriya Vidhan",
+      "viewport": {
+        "width": 375,
+        "height": 812,
+        "scrollWidth": 375
+      },
+      "hasHorizontalOverflow": false,
+      "img": {
+        "alt": "Acharya Sursain Brijwasi of Shastriya Vidhan",
+        "loading": "lazy",
+        "decoding": "async",
+        "fetchPriority": null,
+        "width": "900",
+        "height": "1600",
+        "currentSrc": "http://localhost:3000/images/acharya-sursain-brijwasi-pandit-ji-ghaziabad-640.avif",
+        "naturalWidth": 314,
+        "naturalHeight": 560,
+        "rect": {
+          "x": 42,
+          "y": -186,
+          "width": 291,
+          "height": 516
+        }
+      },
+      "targetRect": {
+        "x": 41,
+        "y": 379,
+        "width": 293,
+        "height": 56
+      },
+      "pictureSourceTypes": [
+        "image/avif",
+        "image/webp"
+      ],
+      "brokenImages": []
+    }
+  },
+  {
+    "page": "contact",
+    "viewport": "desktop",
+    "width": 1366,
+    "height": 900,
+    "url": "http://localhost:3000/contact",
+    "selector": ".contact-pandit-avatar",
+    "img": ".contact-pandit-picture img",
+    "screenshot": "D:\\Amit\\shastriya vidhan website nodejs wordpress\\storage\\visual-checks\\contact-desktop-cdp.png",
+    "screenshotSize": 92082,
+    "data": {
+      "title": "Contact & Pandit Ji Booking Desk | Shastriya Vidhan",
+      "viewport": {
+        "width": 1366,
+        "height": 900,
+        "scrollWidth": 1366
+      },
+      "hasHorizontalOverflow": false,
+      "img": {
+        "alt": "Acharya Sursain Brijwasi of Shastriya Vidhan",
+        "loading": "lazy",
+        "decoding": "async",
+        "fetchPriority": null,
+        "width": "900",
+        "height": "1600",
+        "currentSrc": "http://localhost:3000/images/acharya-sursain-brijwasi-pandit-ji-ghaziabad-320.avif",
+        "naturalWidth": 72,
+        "naturalHeight": 128,
+        "rect": {
+          "x": 1083,
+          "y": 287,
+          "width": 68,
+          "height": 68
+        }
+      },
+      "targetRect": {
+        "x": 1081,
+        "y": 285,
+        "width": 72,
+        "height": 72
+      },
+      "pictureSourceTypes": [
+        "image/avif",
+        "image/webp"
+      ],
+      "brokenImages": []
+    }
+  },
+  {
+    "page": "contact",
+    "viewport": "tablet",
+    "width": 768,
+    "height": 1024,
+    "url": "http://localhost:3000/contact",
+    "selector": ".contact-pandit-avatar",
+    "img": ".contact-pandit-picture img",
+    "screenshot": "D:\\Amit\\shastriya vidhan website nodejs wordpress\\storage\\visual-checks\\contact-tablet-cdp.png",
+    "screenshotSize": 84967,
+    "data": {
+      "title": "Contact & Pandit Ji Booking Desk | Shastriya Vidhan",
+      "viewport": {
+        "width": 768,
+        "height": 1024,
+        "scrollWidth": 768
+      },
+      "hasHorizontalOverflow": false,
+      "img": {
+        "alt": "Acharya Sursain Brijwasi of Shastriya Vidhan",
+        "loading": "lazy",
+        "decoding": "async",
+        "fetchPriority": null,
+        "width": "900",
+        "height": "1600",
+        "currentSrc": "http://localhost:3000/images/acharya-sursain-brijwasi-pandit-ji-ghaziabad-320.avif",
+        "naturalWidth": 72,
+        "naturalHeight": 128,
+        "rect": {
+          "x": 531,
+          "y": 478,
+          "width": 68,
+          "height": 68
+        }
+      },
+      "targetRect": {
+        "x": 529,
+        "y": 476,
+        "width": 72,
+        "height": 72
+      },
+      "pictureSourceTypes": [
+        "image/avif",
+        "image/webp"
+      ],
+      "brokenImages": []
+    }
+  },
+  {
+    "page": "contact",
+    "viewport": "mobile",
+    "width": 375,
+    "height": 812,
+    "url": "http://localhost:3000/contact",
+    "selector": ".contact-pandit-avatar",
+    "img": ".contact-pandit-picture img",
+    "screenshot": "D:\\Amit\\shastriya vidhan website nodejs wordpress\\storage\\visual-checks\\contact-mobile-cdp.png",
+    "screenshotSize": 157434,
+    "data": {
+      "title": "Contact & Pandit Ji Booking Desk | Shastriya Vidhan",
+      "viewport": {
+        "width": 375,
+        "height": 812,
+        "scrollWidth": 375
+      },
+      "hasHorizontalOverflow": false,
+      "img": {
+        "alt": "Acharya Sursain Brijwasi of Shastriya Vidhan",
+        "loading": "lazy",
+        "decoding": "async",
+        "fetchPriority": null,
+        "width": "900",
+        "height": "1600",
+        "currentSrc": "http://localhost:3000/images/acharya-sursain-brijwasi-pandit-ji-ghaziabad-320.avif",
+        "naturalWidth": 72,
+        "naturalHeight": 128,
+        "rect": {
+          "x": 154,
+          "y": 372,
+          "width": 68,
+          "height": 68
+        }
+      },
+      "targetRect": {
+        "x": 152,
+        "y": 370,
+        "width": 72,
+        "height": 72
+      },
+      "pictureSourceTypes": [
+        "image/avif",
+        "image/webp"
+      ],
+      "brokenImages": []
+    }
+  }
+]

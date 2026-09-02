@@ -12,6 +12,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import ContactForm from "@/components/ContactForm";
+import PanditJiPicture, { panditJiImage } from "@/components/PanditJiPicture";
 import PujaFinder from "@/components/PujaFinder";
 import {
   bookingSteps,
@@ -294,9 +295,33 @@ export default function HomePageClient() {
             <span className="apple-eyebrow">Pandit Standards</span>
             <h2 id="pandits-apple-heading">A clearer standard before a booking is accepted.</h2>
             <p>
-              The public site now describes the assignment process instead of publishing individual credentials without documentation.
+              The public site describes the assignment process and links to named public profiles only where owner-approved details are available.
             </p>
           </div>
+
+          <article className="pandit-feature-card" aria-labelledby="home-pandit-profile-heading">
+            <div className="pandit-feature-media">
+              <PanditJiPicture
+                alt="Acharya Sursain Brijwasi of Shastriya Vidhan"
+                className="pandit-feature-picture"
+                imgClassName="pandit-feature-image"
+                sizes="(max-width: 760px) min(86vw, 420px), 320px"
+              />
+            </div>
+            <div className="pandit-feature-copy">
+              <span className="apple-product-tag">Named public profile</span>
+              <h3 id="home-pandit-profile-heading">Acharya Sursain Brijwasi</h3>
+              <p>
+                View Pandit Ji&apos;s Ghaziabad enquiry profile before sharing your puja date,
+                location, samagri needs, and preferred ceremony details.
+              </p>
+              <Link href="/pandit-ji/acharya-sursain-brijwasi-ghaziabad" className="apple-btn-pill apple-btn-secondary">
+                View Profile
+                <ChevronRight size={15} aria-hidden="true" />
+              </Link>
+              <span className="pandit-feature-caption">{panditJiImage.caption}</span>
+            </div>
+          </article>
 
           <div className="apple-profiles-grid">
             {panditStandards.map((standard) => (

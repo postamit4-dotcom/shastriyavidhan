@@ -1,9 +1,9 @@
 {
   "site": "Shastriya Vidhan",
   "canonicalHost": "https://www.shastriyavidhan.com",
-  "generatedAt": "2026-08-30T12:04:49.793Z",
+  "generatedAt": "2026-09-02T10:19:22.885Z",
   "source": "repository_inventory_without_live_status_checks",
-  "routeCount": 51,
+  "routeCount": 52,
   "routes": [
     {
       "currentUrl": "/",
@@ -131,6 +131,22 @@
       "action": "keep",
       "evidenceStatus": "partially_verified",
       "notes": ""
+    },
+    {
+      "currentUrl": "/pandit-ji/acharya-sursain-brijwasi-ghaziabad",
+      "pageTitleOrH1": "Acharya Sursain Brijwasi",
+      "pageType": "profile",
+      "statusCode": "repository_inventory",
+      "canonicalUrl": "/pandit-ji/acharya-sursain-brijwasi-ghaziabad",
+      "indexState": "index",
+      "existingParent": "pandit-standards",
+      "inboundNavigationLocation": [
+        "html_sitemap"
+      ],
+      "intendedFinalUrl": "/pandit-ji/acharya-sursain-brijwasi-ghaziabad",
+      "action": "keep",
+      "evidenceStatus": "partially_verified",
+      "notes": "Named Pandit Ji profile with owner-provided public contact details and photo; personal credentials remain intentionally limited to verified facts."
     },
     {
       "currentUrl": [
