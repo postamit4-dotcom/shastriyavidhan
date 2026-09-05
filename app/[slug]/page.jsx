@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Fragment } from "react";
 import {
   CalendarDays,
   Check,
@@ -384,6 +385,8 @@ function ModePage({ page }) {
         </div>
       </section>
 
+      <RelatedPanditProfileSection profile={page.relatedPanditProfile} />
+
       <section className="section-apple" style={{ backgroundColor: "var(--apple-gray-bg)" }}>
         <div className="container">
           <div className="apple-section-header">
@@ -418,6 +421,112 @@ const defaultBookingAssurances = [
     body: "Coordinate home, online, or temple puja with guidance.",
   },
 ];
+
+function ServiceActionLink({ href, children, className, ...props }) {
+  if (!href) return null;
+
+  if (href.startsWith("/")) {
+    return (
+      <Link href={href} className={className} {...props}>
+        {children}
+      </Link>
+    );
+  }
+
+  return (
+    <a href={href} className={className} {...props}>
+      {children}
+    </a>
+  );
+}
+
+function ServiceSectionList({ items }) {
+  if (!items?.length) return null;
+
+  return (
+    <ul className="service-detail-list service-section-list">
+      {items.map((item) => {
+        const label = typeof item === "string" ? item : item.label;
+        return (
+          <li key={label}>
+            <Check size={16} aria-hidden="true" />
+            <span>{label}</span>
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
+
+function ServiceSectionCards({ cards }) {
+  if (!cards?.length) return null;
+
+  return (
+    <div className="service-section-card-grid">
+      {cards.map((card) => (
+        <div className="service-section-card" key={card.title}>
+          <h3>
+            {card.href ? (
+              <ServiceActionLink href={card.href}>{card.title}</ServiceActionLink>
+            ) : (
+              card.title
+            )}
+          </h3>
+          <p>{card.body}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function ServiceSectionSteps({ steps }) {
+  if (!steps?.length) return null;
+
+  return (
+    <ol className="booking-guide-list service-section-steps">
+      {steps.map((step, index) => (
+        <li key={step}>
+          <article>
+            <span>{index + 1}</span>
+            <p>{step}</p>
+          </article>
+        </li>
+      ))}
+    </ol>
+  );
+}
+
+function ServiceSectionLinks({ links }) {
+  if (!links?.length) return null;
+
+  return (
+    <div className="service-section-links">
+      {links.map((link) => (
+        <ServiceActionLink key={`${link.href}-${link.label}`} href={link.href} className="apple-link apple-link-sm">
+          {link.label}
+          <ChevronRight size={13} className="apple-link-chevron" aria-hidden="true" />
+        </ServiceActionLink>
+      ))}
+    </div>
+  );
+}
+
+function ServiceSectionCta({ cta }) {
+  if (!cta) return null;
+
+  return (
+    <div className="service-section-action">
+      <ServiceActionLink href={cta.href} className="apple-btn-pill apple-btn-primary">
+        {cta.label}
+      </ServiceActionLink>
+      {cta.secondaryHref ? (
+        <ServiceActionLink href={cta.secondaryHref} className="apple-btn-pill apple-btn-secondary">
+          {cta.secondaryLabel}
+        </ServiceActionLink>
+      ) : null}
+    </div>
+  );
+}
 
 function ServiceFormatsSection({ service }) {
   if (!service.serviceFormats?.length) return null;
@@ -620,6 +729,26 @@ function ServiceRelatedLinksSection({ service }) {
   );
 }
 
+function RelatedPanditProfileSection({ profile }) {
+  if (!profile) return null;
+
+  return (
+    <section className="section-apple service-detail-section">
+      <div className="container">
+        <article className="apple-product-card" style={{ maxWidth: "900px", margin: "0 auto", textAlign: "left" }}>
+          <span className="apple-product-tag">{profile.eyebrow}</span>
+          <h2 className="apple-product-title">{profile.heading}</h2>
+          <p className="apple-product-desc" style={{ marginBottom: 0 }}>
+            {profile.bodyBefore}
+            <Link href={profile.href}>{profile.anchorText}</Link>
+            {profile.bodyAfter}
+          </p>
+        </article>
+      </div>
+    </section>
+  );
+}
+
 export default async function ServicePage({ params }) {
   const { slug } = await params;
   const policy = getPolicyBySlug(slug);
@@ -643,23 +772,38 @@ export default async function ServicePage({ params }) {
   const assignment = serviceCategoryAssignments[service.slug];
   const primaryCategory = assignment?.primary ? getCategoryBySlug(assignment.primary) : undefined;
   const bookingAssurances = service.bookingAssurances || defaultBookingAssurances;
+  const whatsappLink = service.whatsappLink || contact.whatsappLink;
 
   return (
     <>
       <section className="section-apple service-premium-hero">
         <div className="container">
           <nav aria-label="Breadcrumb" className="service-breadcrumb">
-            <Link href="/">Home</Link>
-            <ChevronRight size={14} aria-hidden="true" />
-            <Link href="/puja-services">Puja Services</Link>
-            <ChevronRight size={14} aria-hidden="true" />
-            {primaryCategory ? (
+            {service.breadcrumbItems?.length ? (
+              service.breadcrumbItems.map((item, index) => {
+                const isLast = index === service.breadcrumbItems.length - 1;
+                return (
+                  <Fragment key={item.path || item.name}>
+                    {index > 0 ? <ChevronRight size={14} aria-hidden="true" /> : null}
+                    {isLast ? <span>{item.name}</span> : <Link href={item.path}>{item.name}</Link>}
+                  </Fragment>
+                );
+              })
+            ) : (
               <>
-                <Link href={pathForCategory(primaryCategory)}>{primaryCategory.name}</Link>
+                <Link href="/">Home</Link>
                 <ChevronRight size={14} aria-hidden="true" />
+                <Link href="/puja-services">Puja Services</Link>
+                <ChevronRight size={14} aria-hidden="true" />
+                {primaryCategory ? (
+                  <>
+                    <Link href={pathForCategory(primaryCategory)}>{primaryCategory.name}</Link>
+                    <ChevronRight size={14} aria-hidden="true" />
+                  </>
+                ) : null}
+                <span>{service.navTitle || service.title}</span>
               </>
-            ) : null}
-            <span>{service.navTitle || service.title}</span>
+            )}
           </nav>
 
           <div className="service-apple-hero-grid">
@@ -672,7 +816,7 @@ export default async function ServicePage({ params }) {
                   {service.primaryCtaLabel || "Request Quote"}
                 </a>
                 <a
-                  href={contact.whatsappLink}
+                  href={whatsappLink}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="apple-btn-pill apple-btn-secondary"
@@ -782,6 +926,11 @@ export default async function ServicePage({ params }) {
                 <span>{String(index + 1).padStart(2, "0")}</span>
                 <h2>{section.heading}</h2>
                 <p>{section.body}</p>
+                <ServiceSectionList items={section.items} />
+                <ServiceSectionCards cards={section.cards} />
+                <ServiceSectionSteps steps={section.steps} />
+                <ServiceSectionLinks links={section.links} />
+                <ServiceSectionCta cta={section.cta} />
               </article>
             ))}
           </div>
@@ -813,6 +962,7 @@ export default async function ServicePage({ params }) {
 
       <ServiceSamagriSection service={service} />
       <ServiceRelatedLinksSection service={service} />
+      <RelatedPanditProfileSection profile={service.relatedPanditProfile} />
 
       <section className="section-apple">
         <div className="container">
@@ -900,6 +1050,28 @@ export default async function ServicePage({ params }) {
                 </details>
               ))}
             </div>
+          </div>
+        </section>
+      ) : null}
+
+      {service.reviewNote ? (
+        <section className="section-apple service-detail-section">
+          <div className="container">
+            <article className="apple-product-card" style={{ maxWidth: "920px", margin: "0 auto", textAlign: "left" }}>
+              <span className="apple-product-tag">Review note</span>
+              <h2 className="apple-product-title">{service.reviewNote.heading}</h2>
+              <p className="apple-product-desc">{service.reviewNote.body}</p>
+              {service.reviewNote.items?.length ? (
+                <ul>
+                  {service.reviewNote.items.map((item) => (
+                    <li key={item}>
+                      <Check size={16} aria-hidden="true" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
+            </article>
           </div>
         </section>
       ) : null}

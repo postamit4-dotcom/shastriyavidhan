@@ -1,9 +1,9 @@
 {
   "site": "Shastriya Vidhan",
   "canonicalHost": "https://www.shastriyavidhan.com",
-  "generatedAt": "2026-09-02T10:19:22.885Z",
+  "generatedAt": "2026-09-05T08:33:00.822Z",
   "source": "repository_inventory_without_live_status_checks",
-  "routeCount": 52,
+  "routeCount": 53,
   "routes": [
     {
       "currentUrl": "/",
@@ -510,7 +510,7 @@
       "intendedFinalUrl": "/puja-services/vishnu-krishna",
       "action": "keep",
       "evidenceStatus": "partially_verified",
-      "notes": "3 linked services currently meet the category publication gate."
+      "notes": "4 linked services currently meet the category publication gate."
     },
     {
       "currentUrl": "/puja-services/devi-pujas",
@@ -555,7 +555,7 @@
       "intendedFinalUrl": "/puja-services/path-jaap-katha",
       "action": "hide",
       "evidenceStatus": "partially_verified",
-      "notes": "3 linked service(s); keep noindex until the category-quality gate passes."
+      "notes": "4 linked service(s); keep noindex until the category-quality gate passes."
     },
     {
       "currentUrl": [
@@ -815,6 +815,22 @@
         "html_sitemap"
       ],
       "intendedFinalUrl": "/book-pandit-ji-online-for-mahamrityunjaya-jaap-puja",
+      "action": "keep",
+      "evidenceStatus": "partially_verified",
+      "notes": "Preserved migrated WordPress service slug."
+    },
+    {
+      "currentUrl": "/shrimad-bhagwat-katha",
+      "pageTitleOrH1": "Shrimad Bhagwat Katha",
+      "pageType": "service",
+      "statusCode": "repository_inventory",
+      "canonicalUrl": "/shrimad-bhagwat-katha",
+      "indexState": "index",
+      "existingParent": "puja-services",
+      "inboundNavigationLocation": [
+        "html_sitemap"
+      ],
+      "intendedFinalUrl": "/shrimad-bhagwat-katha",
       "action": "keep",
       "evidenceStatus": "partially_verified",
       "notes": "Preserved migrated WordPress service slug."

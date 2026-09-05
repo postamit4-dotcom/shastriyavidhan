@@ -15,6 +15,7 @@ import ContactForm from "@/components/ContactForm";
 import PanditJiPicture, { panditJiImage } from "@/components/PanditJiPicture";
 import PujaFinder from "@/components/PujaFinder";
 import {
+  acharyaSursainProfile,
   bookingSteps,
   contact,
   homeFaqs,
@@ -315,8 +316,8 @@ export default function HomePageClient() {
                 View Pandit Ji&apos;s Ghaziabad enquiry profile before sharing your puja date,
                 location, samagri needs, and preferred ceremony details.
               </p>
-              <Link href="/pandit-ji/acharya-sursain-brijwasi-ghaziabad" className="apple-btn-pill apple-btn-secondary">
-                View Profile
+              <Link href={acharyaSursainProfile.path} className="apple-btn-pill apple-btn-secondary">
+                Ghaziabad Pandit Ji Profile
                 <ChevronRight size={15} aria-hidden="true" />
               </Link>
               <span className="pandit-feature-caption">{panditJiImage.caption}</span>

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ChevronRight, MessageCircle, PhoneCall } from "lucide-react";
 import ContactForm from "@/components/ContactForm";
-import { contact } from "@/lib/site-data";
+import { acharyaSursainProfile, contact } from "@/lib/site-data";
 import { basePageMetadata } from "@/lib/seo";
 
 export const metadata = basePageMetadata({
@@ -43,6 +43,15 @@ export default function BookPujaPage() {
 
       <section className="section-apple" id="booking-section">
         <div className="container">
+          <article className="apple-product-card" style={{ maxWidth: "900px", margin: "0 auto 28px", textAlign: "left" }}>
+            <span className="apple-product-tag">Ghaziabad puja enquiry</span>
+            <h2 className="apple-product-title">Review the local profile before submitting details.</h2>
+            <p className="apple-product-desc" style={{ marginBottom: 0 }}>
+              For a Ghaziabad puja enquiry, review{" "}
+              <Link href={acharyaSursainProfile.path}>Acharya Sursain Brijwasi&apos;s profile</Link> and share the
+              ceremony name, locality, preferred date, and samagri requirement for manual confirmation.
+            </p>
+          </article>
           <ContactForm />
         </div>
       </section>

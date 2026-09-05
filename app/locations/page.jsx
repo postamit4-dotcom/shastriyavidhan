@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ChevronRight, MapPin, MessageCircle } from "lucide-react";
-import { contact, locationPages } from "@/lib/site-data";
+import { acharyaSursainProfile, contact, locationPages } from "@/lib/site-data";
 import { basePageMetadata, locationsDirectoryJsonLd } from "@/lib/seo";
 import { getNodeById } from "@/lib/site-registry";
 
@@ -56,6 +56,15 @@ export default function LocationsPage() {
 
       <section className="section-apple">
         <div className="container">
+          <article className="apple-product-card" style={{ maxWidth: "900px", margin: "0 auto 28px", textAlign: "left" }}>
+            <span className="apple-product-tag">Ghaziabad profile</span>
+            <h2 className="apple-product-title">Named local profile for Ghaziabad enquiries.</h2>
+            <p className="apple-product-desc" style={{ marginBottom: 0 }}>
+              For local puja enquiries, review{" "}
+              <Link href={acharyaSursainProfile.path}>Acharya Sursain Brijwasi&apos;s Ghaziabad profile</Link> and
+              share your ceremony, date, locality, and samagri requirements for availability confirmation.
+            </p>
+          </article>
           <div className="apple-products-grid">
             {locationPages.map((location) => (
               <LocationCard key={location.slug} location={location} />

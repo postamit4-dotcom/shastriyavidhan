@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Check, ChevronRight } from "lucide-react";
-import { panditStandards } from "@/lib/site-data";
+import { acharyaSursainProfile, panditStandards } from "@/lib/site-data";
 import { basePageMetadata } from "@/lib/seo";
 
 export const metadata = basePageMetadata({
@@ -77,10 +77,10 @@ export default function PanditStandardsPage() {
                 Request a Pandit Ji
               </Link>
               <Link
-                href="/pandit-ji/acharya-sursain-brijwasi-ghaziabad"
+                href={acharyaSursainProfile.path}
                 className="apple-btn-pill apple-btn-secondary"
               >
-                View Acharya Sursain Brijwasi
+                Acharya Sursain Brijwasi&apos;s profile
               </Link>
             </div>
           </div>

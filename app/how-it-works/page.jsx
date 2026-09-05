@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Check, ChevronRight } from "lucide-react";
-import { bookingSteps, contact } from "@/lib/site-data";
+import { acharyaSursainProfile, bookingSteps, contact } from "@/lib/site-data";
 import { basePageMetadata } from "@/lib/seo";
 
 export const metadata = basePageMetadata({
@@ -91,6 +91,11 @@ export default function HowItWorksPage() {
                 </li>
               ))}
             </ul>
+            <p className="apple-product-desc" style={{ marginTop: "18px", marginBottom: 0 }}>
+              If the ceremony is planned in Ghaziabad, you may review{" "}
+              <Link href={acharyaSursainProfile.path}>Acharya Sursain Brijwasi&apos;s profile</Link> and then submit
+              the puja, date, location, and samagri details for manual confirmation.
+            </p>
             <div style={{ marginTop: "24px" }}>
               <Link href="/book-puja" className="apple-btn-pill apple-btn-primary">
                 Start a Booking Request

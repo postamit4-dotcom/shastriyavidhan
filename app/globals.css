@@ -1735,6 +1735,54 @@ img {
   line-height: 1.7;
 }
 
+.service-section-list {
+  margin-top: 18px;
+}
+
+.service-section-card-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 18px;
+}
+
+.service-section-card {
+  border-top: 1px solid var(--apple-line-light);
+  padding-top: 16px;
+}
+
+.service-section-card h3 {
+  color: var(--apple-dark);
+  font-size: 1.04rem;
+  line-height: 1.35;
+  margin: 0 0 8px;
+}
+
+.service-section-card h3 a {
+  color: inherit;
+}
+
+.service-section-card p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.service-section-links,
+.service-section-action {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 18px;
+  margin-top: 20px;
+}
+
+.service-section-steps {
+  list-style: none;
+  margin: 18px 0 0;
+  max-width: none;
+  padding: 0;
+}
+
 .service-detail-section {
   background: var(--apple-white);
 }
@@ -2013,6 +2061,7 @@ img {
   .service-specs-grid,
   .leela-grid,
   .service-detail-card-grid,
+  .service-section-card-grid,
   .service-samagri-grid,
   .service-inclusion-grid,
   .booking-guide-list {
@@ -2056,6 +2105,7 @@ img {
   .service-authority-grid,
   .leela-grid,
   .service-detail-card-grid,
+  .service-section-card-grid,
   .service-samagri-grid,
   .service-inclusion-grid,
   .booking-guide-list {

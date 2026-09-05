@@ -1,12 +1,12 @@
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { basePageMetadata } from "@/lib/seo";
-import { sitemapNodes } from "@/lib/site-registry";
+import { siteNodes } from "@/lib/site-registry";
 
 export const metadata = basePageMetadata({
   title: "Site Map",
   description:
-    "Browse the published Shastriya Vidhan site structure, including services, guides, trust pages, help pages, and policies.",
+    "Browse the complete Shastriya Vidhan route registry, including live, conditional, temporary, service, guide, help, location, and policy pages.",
   path: "/site-map",
 });
 
@@ -35,10 +35,26 @@ const groupLabels = {
   booking: "Booking",
   policy: "Policies",
   html_sitemap: "Site Structure",
+  internal_status: "Internal Status",
+  content_review: "Content Review",
+  location: "Location Pages",
 };
 
+function routeStatusLabel(route) {
+  if (route.publicationState === "temporary") return "Temporary";
+  if (route.publicationState === "conditional") return "Review gated";
+  if (!route.indexable) return "Noindex";
+  return "Live";
+}
+
+function routeStatusDetail(route) {
+  const status = routeStatusLabel(route);
+  const indexState = route.indexable && route.publicationState === "live" ? "indexable" : "noindex";
+  return `${status} - ${indexState}`;
+}
+
 export default function SiteMapPage() {
-  const groupedRoutes = groupRoutes(sitemapNodes());
+  const groupedRoutes = groupRoutes(siteNodes);
 
   return (
     <>
@@ -51,11 +67,11 @@ export default function SiteMapPage() {
           </nav>
 
           <div className="apple-section-header" style={{ marginBottom: "24px" }}>
-            <span className="apple-eyebrow">Published routes</span>
+            <span className="apple-eyebrow">Complete route registry</span>
             <h1>Site Map</h1>
             <p>
-              This page lists live, indexable routes from the central registry. Conditional city pages,
-              draft content, and internal migration notes are intentionally excluded.
+              This page lists every route currently registered for Shastriya Vidhan, including live pages,
+              conditional review pages, noindex support routes, temporary migration pages, and service-category pages.
             </p>
           </div>
         </div>
@@ -72,7 +88,20 @@ export default function SiteMapPage() {
                   {routes.map((route) => (
                     <li key={route.href}>
                       <span className="plus-marker">+</span>
-                      <Link href={route.href}>{route.label}</Link>
+                      <span>
+                        <Link href={route.href}>{route.label}</Link>
+                        <span
+                          style={{
+                            display: "block",
+                            marginTop: "3px",
+                            color: "var(--text-tertiary)",
+                            fontSize: "0.78rem",
+                            lineHeight: 1.35,
+                          }}
+                        >
+                          {route.href} - {routeStatusDetail(route)}
+                        </span>
+                      </span>
                     </li>
                   ))}
                 </ul>

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ChevronRight, MapPin, MessageCircle, PhoneCall } from "lucide-react";
 import ContactForm from "@/components/ContactForm";
 import PanditJiPicture from "@/components/PanditJiPicture";
-import { contact } from "@/lib/site-data";
+import { acharyaSursainProfile, contact } from "@/lib/site-data";
 import { basePageMetadata, contactPageJsonLd } from "@/lib/seo";
 
 const title = "Contact & Pandit Ji Booking Desk";
@@ -87,8 +87,12 @@ export default function ContactPage() {
               </div>
               <h2 style={{ fontSize: "1.1rem", fontWeight: 700, marginBottom: "4px" }}>Pandit Ji in Ghaziabad</h2>
               <p style={{ fontSize: "0.88rem", color: "var(--muted-text)", marginBottom: "12px" }}>View the profile for Acharya Sursain Brijwasi before sending a puja enquiry.</p>
-              <Link href="/pandit-ji/acharya-sursain-brijwasi-ghaziabad" className="btn-pill btn-sm btn-outline" style={{ width: "100%" }}>
-                View Pandit Ji Profile
+              <Link
+                href={acharyaSursainProfile.path}
+                className="btn-pill btn-sm btn-outline"
+                style={{ width: "100%", whiteSpace: "normal" }}
+              >
+                Ghaziabad Pandit Ji Profile
               </Link>
             </div>
           </div>

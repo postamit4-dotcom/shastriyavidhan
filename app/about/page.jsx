@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Check, ChevronRight } from "lucide-react";
 import PanditJiPicture, { panditJiImage } from "@/components/PanditJiPicture";
-import { contact, site } from "@/lib/site-data";
+import { acharyaSursainProfile, contact, site } from "@/lib/site-data";
 import { basePageMetadata } from "@/lib/seo";
 
 export const metadata = basePageMetadata({
@@ -85,8 +85,8 @@ export default function AboutPage() {
                 promises before booking.
               </p>
               <div className="about-pandit-actions">
-                <Link href="/pandit-ji/acharya-sursain-brijwasi-ghaziabad" className="apple-btn-pill apple-btn-secondary">
-                  View Profile
+                <Link href={acharyaSursainProfile.path} className="apple-btn-pill apple-btn-secondary">
+                  Acharya Sursain Brijwasi&apos;s profile
                   <ChevronRight size={15} aria-hidden="true" />
                 </Link>
                 <span>{panditJiImage.caption}</span>
