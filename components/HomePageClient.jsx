@@ -34,20 +34,22 @@ export default function HomePageClient() {
       <section className="apple-hero-fullbleed" aria-label="Hero Introduction">
         <div className="container apple-hero-grid">
           <div className="apple-hero-copy">
-            <div className="social-proof-badge">
+            <div className="social-proof-badge" data-motion="fade-up" style={{ "--motion-order": 0 }}>
               <ShieldCheck size={16} aria-hidden="true" />
               <span>Manual availability and quote review before payment</span>
             </div>
 
-            <span className="apple-eyebrow">Request-first puja booking</span>
-            <h1 className="apple-hero-title">
+            <span className="apple-eyebrow" data-motion="fade-up" style={{ "--motion-order": 1 }}>
+              Request-first puja booking
+            </span>
+            <h1 className="apple-hero-title" data-motion="fade-up" style={{ "--motion-order": 2 }}>
               Book <span className="text-gradient">Pandit Ji</span> for puja at home, temple or online.
             </h1>
-            <p className="apple-hero-subtitle">
+            <p className="apple-hero-subtitle" data-motion="fade-up" style={{ "--motion-order": 3 }}>
               Plan authentic Vedic pujas with clear vidhi, samagri guidance, quote confirmation, and family-friendly coordination before payment.
             </p>
 
-            <div className="apple-hero-ctas">
+            <div className="apple-hero-ctas" data-motion="fade-up" style={{ "--motion-order": 4 }}>
               <a href="#book-pandit-ji" className="apple-btn-pill apple-btn-primary" id="hero-book-cta">
                 Book Pandit Ji
                 <ChevronRight size={17} aria-hidden="true" />
@@ -59,34 +61,34 @@ export default function HomePageClient() {
             </div>
 
             <div className="trust-badge-grid" aria-label="Booking highlights">
-              <div className="badge-item">
+              <div className="badge-item" data-motion="fade-up">
                 <Check size={16} aria-hidden="true" />
                 <span>Manual availability check</span>
               </div>
-              <div className="badge-item">
+              <div className="badge-item" data-motion="fade-up">
                 <Check size={16} aria-hidden="true" />
                 <span>Home, temple and online puja</span>
               </div>
-              <div className="badge-item">
+              <div className="badge-item" data-motion="fade-up">
                 <Check size={16} aria-hidden="true" />
                 <span>Samagri checklist before booking</span>
               </div>
-              <div className="badge-item">
+              <div className="badge-item" data-motion="fade-up">
                 <Check size={16} aria-hidden="true" />
                 <span>No payment before quote clarity</span>
               </div>
-              <div className="badge-item">
+              <div className="badge-item" data-motion="fade-up">
                 <Check size={16} aria-hidden="true" />
                 <span>Hindi, Sanskrit and English support</span>
               </div>
-              <div className="badge-item">
+              <div className="badge-item" data-motion="fade-up">
                 <Check size={16} aria-hidden="true" />
                 <span>NRI video-call friendly</span>
               </div>
             </div>
           </div>
 
-          <div className="apple-hero-stage">
+          <div className="apple-hero-stage" data-motion="image" style={{ "--motion-order": 5 }}>
             <div className="image-border-gradient">
               <img
                 src="/images/diwali-puja.webp"
@@ -423,24 +425,31 @@ export default function HomePageClient() {
             {homeFaqs.map((faq, idx) => {
               const isOpen = openFaq === idx;
               return (
-                <div key={idx} className={`apple-accordion-row ${isOpen ? "open" : ""}`}>
+                <div key={faq.question} className={`apple-accordion-row ${isOpen ? "open" : ""}`}>
                   <button
                     type="button"
                     className="apple-accordion-toggle"
+                    id={`home-faq-toggle-${idx}`}
                     onClick={() => setOpenFaq(isOpen ? -1 : idx)}
                     aria-expanded={isOpen}
                     aria-controls={`home-faq-panel-${idx}`}
                   >
                     <span>{faq.question}</span>
                     <span className="apple-accordion-chevron">
-                      <ChevronDown size={18} />
+                      <ChevronDown size={18} aria-hidden="true" />
                     </span>
                   </button>
-                  {isOpen && (
-                    <div className="apple-accordion-content" id={`home-faq-panel-${idx}`}>
+                  <div
+                    className={`apple-accordion-content ${isOpen ? "open" : ""}`}
+                    id={`home-faq-panel-${idx}`}
+                    role="region"
+                    aria-labelledby={`home-faq-toggle-${idx}`}
+                    aria-hidden={!isOpen}
+                  >
+                    <div>
                       <p>{faq.answer}</p>
                     </div>
-                  )}
+                  </div>
                 </div>
               );
             })}

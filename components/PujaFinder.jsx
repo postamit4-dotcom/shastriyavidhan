@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { ChevronRight, Clock, MapPin, Search } from "lucide-react";
+import { ChevronRight, Search, X } from "lucide-react";
 import { servicePages } from "@/lib/site-data";
 
 export default function PujaFinder() {
@@ -18,12 +18,14 @@ export default function PujaFinder() {
   ];
 
   const filteredServices = useMemo(() => {
+    const normalizedQuery = searchQuery.trim().toLowerCase();
+
     return servicePages.filter((svc) => {
       const matchesSearch =
-        searchQuery.trim() === "" ||
-        svc.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        svc.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        svc.category.toLowerCase().includes(searchQuery.toLowerCase());
+        normalizedQuery === "" ||
+        svc.title.toLowerCase().includes(normalizedQuery) ||
+        svc.description.toLowerCase().includes(normalizedQuery) ||
+        svc.category.toLowerCase().includes(normalizedQuery);
 
       let matchesCat = true;
       if (activeCategory === "festivals") {
@@ -40,6 +42,12 @@ export default function PujaFinder() {
     });
   }, [searchQuery, activeCategory]);
 
+  const visibleServices = filteredServices.slice(0, 6);
+  const resultText =
+    filteredServices.length === 1
+      ? "1 matching puja found."
+      : `${filteredServices.length} matching pujas found.`;
+
   return (
     <section className="apple-comparison-section" id="puja-finder" aria-labelledby="finder-heading">
       <div className="container">
@@ -53,13 +61,12 @@ export default function PujaFinder() {
 
         {/* Apple iOS Segmented Control */}
         <div style={{ textAlign: "center" }}>
-          <div className="apple-segmented-control" role="tablist" aria-label="Puja Categories">
+          <div className="apple-segmented-control" role="group" aria-label="Puja categories">
             {categories.map((cat) => (
               <button
                 key={cat.id}
                 type="button"
-                role="tab"
-                aria-selected={activeCategory === cat.id}
+                aria-pressed={activeCategory === cat.id}
                 className={`apple-segment-btn ${activeCategory === cat.id ? "active" : ""}`}
                 onClick={() => setActiveCategory(cat.id)}
               >
@@ -70,42 +77,37 @@ export default function PujaFinder() {
         </div>
 
         {/* Minimal Search Field */}
-        <div style={{ maxWidth: "480px", margin: "0 auto 40px", position: "relative" }}>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              backgroundColor: "var(--apple-white)",
-              borderRadius: "var(--radius-pill)",
-              padding: "8px 16px",
-              border: "1px solid var(--apple-line)",
-            }}
-          >
-            <Search size={18} style={{ color: "var(--text-tertiary)", marginRight: "10px" }} />
+        <div className="puja-search-wrap">
+          <div className="puja-search-field">
+            <Search size={18} aria-hidden="true" />
             <input
               type="text"
               placeholder="Search by deity, occasion, or ritual..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              style={{ flex: 1, fontSize: "0.95rem", color: "var(--apple-dark)" }}
               aria-label="Search pujas"
+              aria-describedby="puja-filter-status"
             />
             {searchQuery && (
               <button
                 type="button"
                 onClick={() => setSearchQuery("")}
-                style={{ fontSize: "0.8rem", color: "var(--text-secondary)", fontWeight: 500 }}
+                className="puja-search-clear"
+                aria-label="Clear puja search"
               >
-                Clear
+                <X size={16} aria-hidden="true" />
               </button>
             )}
           </div>
+          <p className="puja-filter-status" id="puja-filter-status" role="status" aria-live="polite">
+            {resultText}
+          </p>
         </div>
 
         {/* Apple Product Cards Grid */}
         <div className="apple-products-grid">
-          {filteredServices.slice(0, 6).map((service) => (
-            <article key={service.slug} className="apple-product-card">
+          {visibleServices.map((service, index) => (
+            <article key={service.slug} className="apple-product-card" data-motion="scale-in" style={{ "--motion-order": index }}>
               <div className="apple-product-media">
                 <img
                   src={service.image.local}
@@ -145,6 +147,16 @@ export default function PujaFinder() {
             </article>
           ))}
         </div>
+
+        {visibleServices.length === 0 ? (
+          <div className="puja-empty-state">
+            <strong>No exact match found.</strong>
+            <span>Try a broader word, or send the ritual name for manual guidance.</span>
+            <a href="#book-pandit-ji" className="apple-btn-pill apple-btn-primary">
+              Request Custom Puja
+            </a>
+          </div>
+        ) : null}
 
         <div style={{ textAlign: "center", marginTop: "44px" }}>
           <Link href="/puja-services" className="apple-link" style={{ fontSize: "1.1rem", fontWeight: 500 }}>

@@ -112,7 +112,9 @@ export default function ContactForm({
     ...defaultFormState,
   });
   const [currentStep, setCurrentStep] = useState(0);
+  const [stepDirection, setStepDirection] = useState("forward");
   const [errors, setErrors] = useState({});
+  const [pendingInvalidFocus, setPendingInvalidFocus] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState("");
@@ -130,6 +132,7 @@ export default function ContactForm({
       setSubmitted(false);
       setSubmitError("");
       setErrors({});
+      setStepDirection("back");
       setCurrentStep(0);
       setPrefillNotice(detail.notice || "Selection added. Review the booking details below.");
       setFormData((previous) => {
@@ -158,7 +161,51 @@ export default function ContactForm({
     return () => window.removeEventListener("booking-prefill", handleBookingPrefill);
   }, []);
 
-  const validateStep = (step) => {
+  useEffect(() => {
+    if (!pendingInvalidFocus) return;
+
+    const timer = window.setTimeout(() => {
+      const firstInvalid = document.querySelector('#booking-form-wrapper [aria-invalid="true"]');
+
+      if (firstInvalid instanceof HTMLElement) {
+        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        firstInvalid.focus({ preventScroll: true });
+
+        window.requestAnimationFrame(() => {
+          const headerHeight = document.querySelector(".apple-nav-shell")?.getBoundingClientRect().height || 0;
+          const targetTop = Math.max(0, firstInvalid.getBoundingClientRect().top + window.scrollY - headerHeight - 28);
+          window.scrollTo({
+            top: targetTop,
+            behavior: prefersReducedMotion ? "auto" : "smooth",
+          });
+        });
+      }
+
+      setPendingInvalidFocus(false);
+    }, 60);
+
+    return () => window.clearTimeout(timer);
+  }, [pendingInvalidFocus, currentStep, errors]);
+
+  const updateField = (field, value) => {
+    setFormData((previous) => ({ ...previous, [field]: value }));
+
+    if (errors[field]) {
+      setErrors((previous) => {
+        const nextErrors = { ...previous };
+        delete nextErrors[field];
+        return nextErrors;
+      });
+    }
+  };
+
+  const goToStep = (step) => {
+    const nextStep = Math.max(0, Math.min(step, steps.length - 1));
+    setStepDirection(nextStep < currentStep ? "back" : "forward");
+    setCurrentStep(nextStep);
+  };
+
+  const validateStep = (step, focusOnError = false) => {
     const errs = {};
     if (step === 0) {
       if (!formData.service) errs.service = "Please select a puja.";
@@ -174,35 +221,38 @@ export default function ContactForm({
       }
     }
     setErrors(errs);
-    return Object.keys(errs).length === 0;
+    const hasErrors = Object.keys(errs).length > 0;
+    if (focusOnError && hasErrors) setPendingInvalidFocus(true);
+    return !hasErrors;
   };
 
   const handleNext = () => {
-    if (validateStep(currentStep)) {
-      setCurrentStep((prev) => Math.min(prev + 1, steps.length - 1));
+    if (validateStep(currentStep, true)) {
+      goToStep(currentStep + 1);
     }
   };
 
   const handleBack = () => {
-    setCurrentStep((prev) => Math.max(prev - 1, 0));
+    goToStep(currentStep - 1);
   };
 
   const handleSubmit = async (e) => {
     if (e) e.preventDefault();
+    if (submitting) return;
     setSubmitError("");
 
-    if (!validateStep(0)) {
-      setCurrentStep(0);
+    if (!validateStep(0, true)) {
+      goToStep(0);
       return;
     }
 
-    if (!validateStep(1)) {
-      setCurrentStep(1);
+    if (!validateStep(1, true)) {
+      goToStep(1);
       return;
     }
 
-    if (!validateStep(2)) {
-      setCurrentStep(2);
+    if (!validateStep(2, true)) {
+      goToStep(2);
       return;
     }
 
@@ -276,7 +326,7 @@ Please check Pandit Ji availability and share the quote.`;
             margin: "0 auto 20px",
           }}
         >
-          <Check size={32} />
+          <Check size={32} aria-hidden="true" />
         </div>
         <span className="apple-eyebrow" style={{ color: "var(--apple-green)" }}>
           Request Received
@@ -304,6 +354,7 @@ Please check Pandit Ji availability and share the quote.`;
             className="apple-btn-pill apple-btn-secondary"
             onClick={() => {
               setSubmitted(false);
+              setStepDirection("back");
               setCurrentStep(0);
               setSubmitError("");
               setFormData(defaultFormState);
@@ -326,17 +377,21 @@ Please check Pandit Ji availability and share the quote.`;
 
       {/* Apple-style Segmented Step Switcher */}
       <div style={{ textAlign: "center", marginBottom: "32px" }}>
-        <div className="apple-segmented-control" role="tablist" aria-label="Booking steps">
+        <div className="apple-segmented-control" role="group" aria-label="Booking steps">
           {steps.map((s) => (
             <button
               key={s.id}
               type="button"
-              role="tab"
-              aria-selected={currentStep === s.id}
-              className={`apple-segment-btn ${currentStep === s.id ? "active" : ""}`}
+              aria-current={currentStep === s.id ? "step" : undefined}
+              aria-disabled={s.id > currentStep + 1 ? "true" : undefined}
+              disabled={s.id > currentStep + 1}
+              className={`apple-segment-btn ${currentStep === s.id ? "active" : ""} ${s.id < currentStep ? "complete" : ""}`}
               onClick={() => {
-                if (s.id < currentStep || validateStep(currentStep)) {
-                  setCurrentStep(s.id);
+                if (s.id === currentStep) return;
+                if (s.id < currentStep) {
+                  goToStep(s.id);
+                } else if (validateStep(currentStep, true)) {
+                  goToStep(Math.min(s.id, currentStep + 1));
                 }
               }}
             >
@@ -344,9 +399,13 @@ Please check Pandit Ji availability and share the quote.`;
             </button>
           ))}
         </div>
+        <div className="form-step-progress" aria-hidden="true">
+          <span style={{ width: `${((currentStep + 1) / steps.length) * 100}%` }} />
+        </div>
       </div>
 
       <form onSubmit={(e) => e.preventDefault()} aria-label="Puja Booking Form">
+        <div className={`form-step-panel ${stepDirection === "back" ? "back" : "forward"}`} key={currentStep}>
         {/* STEP 0: Service & Mode */}
         {currentStep === 0 && (
           <div>
@@ -365,7 +424,9 @@ Please check Pandit Ji availability and share the quote.`;
                 id="apple-service-select"
                 className="apple-form-select"
                 value={formData.service}
-                onChange={(e) => setFormData({ ...formData, service: e.target.value })}
+                onChange={(e) => updateField("service", e.target.value)}
+                aria-invalid={errors.service ? "true" : undefined}
+                aria-describedby={errors.service ? "apple-service-error" : undefined}
               >
                 {serviceSelectOptions.map((option) => (
                   <option key={option.value} value={option.value}>
@@ -373,26 +434,26 @@ Please check Pandit Ji availability and share the quote.`;
                   </option>
                 ))}
               </select>
+              {errors.service ? (
+                <span id="apple-service-error" style={{ fontSize: "0.8rem", color: "var(--apple-red)", marginTop: "2px" }}>
+                  {errors.service}
+                </span>
+              ) : null}
             </div>
 
             <div className="apple-form-group">
-              <label className="apple-form-label">Booking Mode</label>
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))", gap: "10px" }}>
+              <span className="apple-form-label" id="booking-mode-label">Booking Mode</span>
+              <div className="booking-mode-grid" role="group" aria-labelledby="booking-mode-label">
                 {modeOptions.map((opt) => (
                   <button
                     key={opt.id}
                     type="button"
-                    style={{
-                      padding: "12px",
-                      borderRadius: "var(--radius-inner)",
-                      border: formData.mode === opt.id ? "1.5px solid var(--apple-blue)" : "1px solid var(--apple-line-light)",
-                      backgroundColor: formData.mode === opt.id ? "var(--apple-blue-tint)" : "var(--apple-gray-bg)",
-                      textAlign: "center",
-                    }}
-                    onClick={() => setFormData({ ...formData, mode: opt.id })}
+                    className="booking-mode-option"
+                    aria-pressed={formData.mode === opt.id}
+                    onClick={() => updateField("mode", opt.id)}
                   >
-                    <div style={{ fontWeight: 600, fontSize: "0.92rem", color: "var(--apple-dark)" }}>{opt.title}</div>
-                    <div style={{ fontSize: "0.75rem", color: "var(--text-secondary)", marginTop: "2px" }}>{opt.desc}</div>
+                    <strong>{opt.title}</strong>
+                    <span>{opt.desc}</span>
                   </button>
                 ))}
               </div>
@@ -406,12 +467,19 @@ Please check Pandit Ji availability and share the quote.`;
                 id="apple-city-select"
                 className="apple-form-select"
                 value={formData.city}
-                onChange={(e) => setFormData({ ...formData, city: e.target.value })}
+                onChange={(e) => updateField("city", e.target.value)}
+                aria-invalid={errors.city ? "true" : undefined}
+                aria-describedby={errors.city ? "apple-city-error" : undefined}
               >
                 {cityOptions.map((c) => (
                   <option key={c} value={c}>{c}</option>
                 ))}
               </select>
+              {errors.city ? (
+                <span id="apple-city-error" style={{ fontSize: "0.8rem", color: "var(--apple-red)", marginTop: "2px" }}>
+                  {errors.city}
+                </span>
+              ) : null}
             </div>
           </div>
         )}
@@ -437,9 +505,10 @@ Please check Pandit Ji availability and share the quote.`;
                   className="apple-form-input"
                   min={new Date().toISOString().split("T")[0]}
                   value={formData.preferredDate}
-                  onChange={(e) => setFormData({ ...formData, preferredDate: e.target.value })}
+                  onChange={(e) => updateField("preferredDate", e.target.value)}
                   aria-invalid={errors.preferredDate ? "true" : undefined}
                   aria-describedby={errors.preferredDate ? "apple-date-error" : undefined}
+                  required
                 />
                 {errors.preferredDate && (
                   <span id="apple-date-error" style={{ fontSize: "0.8rem", color: "var(--apple-red)", marginTop: "2px" }}>
@@ -456,7 +525,7 @@ Please check Pandit Ji availability and share the quote.`;
                   id="apple-time"
                   className="apple-form-select"
                   value={formData.preferredTime}
-                  onChange={(e) => setFormData({ ...formData, preferredTime: e.target.value })}
+                  onChange={(e) => updateField("preferredTime", e.target.value)}
                 >
                   {timeSlotOptions.map((t) => (
                     <option key={t} value={t}>{t}</option>
@@ -474,7 +543,7 @@ Please check Pandit Ji availability and share the quote.`;
                   id="apple-language"
                   className="apple-form-select"
                   value={formData.language}
-                  onChange={(e) => setFormData({ ...formData, language: e.target.value })}
+                  onChange={(e) => updateField("language", e.target.value)}
                 >
                   {languageOptions.map((l) => (
                     <option key={l} value={l}>{l}</option>
@@ -490,7 +559,7 @@ Please check Pandit Ji availability and share the quote.`;
                   id="apple-samagri"
                   className="apple-form-select"
                   value={formData.samagri}
-                  onChange={(e) => setFormData({ ...formData, samagri: e.target.value })}
+                  onChange={(e) => updateField("samagri", e.target.value)}
                 >
                   {samagriOptions.map((s) => (
                     <option key={s} value={s}>{s}</option>
@@ -522,9 +591,10 @@ Please check Pandit Ji availability and share the quote.`;
                   placeholder="e.g. Ramesh Sharma"
                   className="apple-form-input"
                   value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  onChange={(e) => updateField("name", e.target.value)}
                   aria-invalid={errors.name ? "true" : undefined}
                   aria-describedby={errors.name ? "apple-name-error" : undefined}
+                  required
                 />
                 {errors.name && (
                   <span id="apple-name-error" style={{ fontSize: "0.8rem", color: "var(--apple-red)", marginTop: "2px" }}>
@@ -543,9 +613,10 @@ Please check Pandit Ji availability and share the quote.`;
                   placeholder="e.g. 9876543210"
                   className="apple-form-input"
                   value={formData.phone}
-                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  onChange={(e) => updateField("phone", e.target.value)}
                   aria-invalid={errors.phone ? "true" : undefined}
                   aria-describedby={errors.phone ? "apple-phone-error" : undefined}
+                  required
                 />
                 {errors.phone && (
                   <span id="apple-phone-error" style={{ fontSize: "0.8rem", color: "var(--apple-red)", marginTop: "2px" }}>
@@ -565,7 +636,7 @@ Please check Pandit Ji availability and share the quote.`;
                 placeholder={formData.mode === "Home" ? "e.g. Indirapuram, Ghaziabad / Sector 78, Noida" : "e.g. Jaipur, India / Toronto, Canada"}
                 className="apple-form-input"
                 value={formData.address}
-                onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+                onChange={(e) => updateField("address", e.target.value)}
               />
             </div>
 
@@ -579,7 +650,7 @@ Please check Pandit Ji availability and share the quote.`;
                 placeholder="Mention occasion, access details, samagri needs, havan or musical request. Avoid sharing private medical, financial, or sensitive details."
                 className="apple-form-textarea"
                 value={formData.instructions}
-                onChange={(e) => setFormData({ ...formData, instructions: e.target.value })}
+                onChange={(e) => updateField("instructions", e.target.value)}
               />
             </div>
           </div>
@@ -624,6 +695,7 @@ Please check Pandit Ji availability and share the quote.`;
             </div>
           </div>
         )}
+        </div>
 
         {/* Action Controls */}
         {submitError ? (
@@ -639,7 +711,7 @@ Please check Pandit Ji availability and share the quote.`;
               className="apple-btn-pill apple-btn-secondary"
               onClick={handleBack}
             >
-              <ChevronLeft size={16} />
+              <ChevronLeft size={16} aria-hidden="true" />
               Back
             </button>
           ) : (
@@ -650,7 +722,7 @@ Please check Pandit Ji availability and share the quote.`;
               className="apple-link apple-link-sm"
             >
               <span>Questions? WhatsApp us</span>
-              <ChevronRight size={13} className="apple-link-chevron" />
+              <ChevronRight size={13} className="apple-link-chevron" aria-hidden="true" />
             </a>
           )}
 
@@ -661,7 +733,7 @@ Please check Pandit Ji availability and share the quote.`;
               onClick={handleNext}
             >
               <span>Continue</span>
-              <ChevronRight size={16} />
+              <ChevronRight size={16} aria-hidden="true" />
             </button>
           ) : (
             <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
@@ -671,7 +743,7 @@ Please check Pandit Ji availability and share the quote.`;
                 rel="noopener noreferrer"
                 className="apple-btn-pill apple-btn-secondary"
               >
-                <MessageCircle size={16} />
+                <MessageCircle size={16} aria-hidden="true" />
                 WhatsApp Request
               </a>
               <button
@@ -682,7 +754,7 @@ Please check Pandit Ji availability and share the quote.`;
               >
                 {submitting ? (
                   <>
-                    <Loader2 size={16} className="spin" />
+                    <Loader2 size={16} className="spin" aria-hidden="true" />
                     Submitting...
                   </>
                 ) : (

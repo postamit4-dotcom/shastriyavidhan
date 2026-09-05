@@ -2,6 +2,7 @@ import "./globals.css";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import MobileStickyBar from "@/components/MobileStickyBar";
+import MotionProvider from "@/components/MotionProvider";
 import { site } from "@/lib/site-data";
 import { siteGraphJsonLd } from "@/lib/seo";
 
@@ -69,6 +70,7 @@ export default function RootLayout({ children }) {
         <main id="main-content">{children}</main>
         <SiteFooter />
         <MobileStickyBar />
+        <MotionProvider />
       </body>
     </html>
   );

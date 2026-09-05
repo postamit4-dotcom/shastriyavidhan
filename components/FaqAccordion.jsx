@@ -16,6 +16,7 @@ export default function FaqAccordion() {
             <button
               type="button"
               className="apple-accordion-toggle"
+              id={`faq-toggle-${idx}`}
               onClick={() => setOpenFaq(isOpen ? -1 : idx)}
               aria-expanded={isOpen}
               aria-controls={`faq-panel-${idx}`}
@@ -25,11 +26,17 @@ export default function FaqAccordion() {
                 <ChevronDown size={18} aria-hidden="true" />
               </span>
             </button>
-            {isOpen ? (
-              <div className="apple-accordion-content" id={`faq-panel-${idx}`}>
+            <div
+              className={`apple-accordion-content ${isOpen ? "open" : ""}`}
+              id={`faq-panel-${idx}`}
+              role="region"
+              aria-labelledby={`faq-toggle-${idx}`}
+              aria-hidden={!isOpen}
+            >
+              <div>
                 <p>{faq.answer}</p>
               </div>
-            ) : null}
+            </div>
           </div>
         );
       })}
