@@ -6,7 +6,7 @@ import { basePageMetadata } from "@/lib/seo";
 export const metadata = basePageMetadata({
   title: "Puja Guides & Samagri",
   description:
-    "Browse Shastriya Vidhan puja preparation, samagri, festival, sanskar, deity, and booking guidance with reviewer status.",
+    "Browse Shastriya Vidhan puja preparation, samagri, festival, sanskar, deity, and booking guidance for clearer puja requests.",
   path: "/guides",
 });
 
@@ -24,7 +24,7 @@ const guideSections = [
   {
     id: "festival-guides",
     title: "Festival Guides",
-    body: "Festival pages need annual date, city, tithi, and reviewer checks before they are promoted in navigation.",
+    body: "Festival guidance should be checked for the year, city, tithi, and family tradition before a booking is confirmed.",
   },
   {
     id: "booking-guidance",
@@ -48,8 +48,8 @@ export default function GuidesPage() {
             <span className="apple-eyebrow">Preparation library</span>
             <h1>Puja Guides &amp; Samagri</h1>
             <p>
-              Guides are grouped by preparation need and should carry reviewer status, last reviewed date,
-              related services, and sources where appropriate before standalone promotion.
+              Guides are grouped by preparation need so families can understand puja space,
+              samagri responsibility, timing, and booking questions before sending a request.
             </p>
           </div>
         </div>
@@ -67,7 +67,7 @@ export default function GuidesPage() {
                 <h2 style={{ fontSize: "1.08rem", fontWeight: 700, margin: "6px 0 8px", lineHeight: 1.3 }}>{guide.title}</h2>
                 <p style={{ fontSize: "0.88rem", color: "var(--text-secondary)", marginBottom: "14px", lineHeight: 1.45 }}>{guide.summary}</p>
                 <p style={{ fontSize: "0.8rem", color: "var(--text-tertiary)", marginBottom: "14px" }}>
-                  {guide.reviewer} - Last updated {guide.updated}
+                  Preparation note - Last updated {guide.updated}
                 </p>
                 <Link href="/book-puja" className="apple-link apple-link-sm">
                   <span>Request related puja</span>

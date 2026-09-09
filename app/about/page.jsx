@@ -46,6 +46,9 @@ export default function AboutPage() {
                 <Link href="/pandit-standards" className="apple-btn-pill apple-btn-secondary">
                   Pandit Standards
                 </Link>
+                <Link href="/pandit-registration" className="apple-btn-pill apple-btn-secondary">
+                  Register as a Pandit Ji
+                </Link>
               </div>
             </div>
 
@@ -122,6 +125,7 @@ export default function AboutPage() {
                 "No unsupported satisfaction rates, project counts, or indefinite sale claims.",
                 "No named testimonials or individual priest credentials without consent and documentation.",
                 "Policy pages and support routes remain visible from the footer and booking flow.",
+                "Pandit Ji can use the partner registration page to submit profile details for manual review.",
               ].map((item) => (
                 <li key={item} style={{ display: "flex", gap: "10px", alignItems: "flex-start" }}>
                   <Check size={17} aria-hidden="true" style={{ color: "var(--apple-green)", marginTop: "3px" }} />

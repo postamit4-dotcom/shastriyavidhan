@@ -14,6 +14,7 @@ import {
 import ContactForm from "@/components/ContactForm";
 import PanditJiPicture, { panditJiImage } from "@/components/PanditJiPicture";
 import PujaFinder from "@/components/PujaFinder";
+import { trackEvent } from "@/lib/analytics";
 import {
   acharyaSursainProfile,
   bookingSteps,
@@ -50,11 +51,22 @@ export default function HomePageClient() {
             </p>
 
             <div className="apple-hero-ctas" data-motion="fade-up" style={{ "--motion-order": 4 }}>
-              <a href="#book-pandit-ji" className="apple-btn-pill apple-btn-primary" id="hero-book-cta">
+              <a
+                href="#book-pandit-ji"
+                className="apple-btn-pill apple-btn-primary"
+                id="hero-book-cta"
+                onClick={() => trackEvent("booking_start", { cta_location: "home_hero", page_type: "home" })}
+              >
                 Book Pandit Ji
                 <ChevronRight size={17} aria-hidden="true" />
               </a>
-              <a href={contact.whatsappLink} target="_blank" rel="noopener noreferrer" className="apple-btn-pill apple-btn-secondary">
+              <a
+                href={contact.whatsappLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="apple-btn-pill apple-btn-secondary"
+                onClick={() => trackEvent("whatsapp_click", { cta_location: "home_hero", page_type: "home" })}
+              >
                 <MessageCircle size={17} aria-hidden="true" />
                 WhatsApp Booking Desk
               </a>
@@ -343,7 +355,7 @@ export default function HomePageClient() {
                   
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", paddingTop: "14px", borderTop: "1px solid var(--apple-line-light)" }}>
                     <span style={{ fontSize: "0.82rem", color: "var(--text-tertiary)" }}>
-                      Publication gate
+                      Review standard
                     </span>
                     <Link href="/pandit-standards" className="apple-btn-pill apple-btn-primary" style={{ padding: "6px 14px", fontSize: "0.82rem" }}>
                       Read
@@ -390,7 +402,7 @@ export default function HomePageClient() {
             <span className="apple-eyebrow">Preparation Library</span>
             <h2>Puja Vidhi &amp; Samagri Guides.</h2>
             <p>
-              Guides are organized by preparation need and marked with reviewer status before standalone publication.
+              Guides are organized by preparation need with practical notes on samagri, timing, and booking clarity.
             </p>
           </div>
 

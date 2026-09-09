@@ -33,8 +33,8 @@ export default function PujaServicesPage() {
             <span className="apple-eyebrow">Directory</span>
             <h1>All Puja Services</h1>
             <p>
-              Browse service pages by category while the full mega-menu rollout remains gated behind content quality,
-              evidence, accessibility, and broken-link checks.
+              Browse maintained service pages by occasion, deity, format, and city. Each booking request is reviewed
+              for availability, samagri responsibility, quote, and practical details before payment.
             </p>
           </div>
 
@@ -66,7 +66,7 @@ export default function PujaServicesPage() {
             <div className="container">
               <div style={{ marginBottom: "32px" }}>
                 <span className="apple-eyebrow">
-                  {category.megaMenuEligible ? "Directory ready" : "Not mega-menu gated yet"}
+                  {category.megaMenuEligible ? "Directory ready" : "More details coming"}
                 </span>
                 <h2 style={{ fontSize: "var(--font-h2)", margin: "4px 0 8px" }}>{category.name}</h2>
                 <p style={{ color: "var(--text-secondary)", fontSize: "1.05rem" }}>{category.description}</p>

@@ -67,7 +67,7 @@ export default async function PujaCategoryPage({ params }) {
           </nav>
 
           <div className="apple-section-header" style={{ marginBottom: "24px" }}>
-            <span className="apple-eyebrow">{readyForMegaMenu ? "Publication ready" : "Directory only"}</span>
+            <span className="apple-eyebrow">Service category</span>
             <h1>{category.name}</h1>
             <p>{category.description}</p>
           </div>
@@ -86,10 +86,10 @@ export default async function PujaCategoryPage({ params }) {
                 <strong>Services linked:</strong> {services.length}
               </div>
               <div>
-                <strong>Mega-menu gate:</strong>{" "}
+                <strong>Availability note:</strong>{" "}
                 {readyForMegaMenu
-                  ? "Meets the current minimum service-count gate."
-                  : "Keep out of the full mega-menu until content and evidence checks are complete."}
+                  ? "Open the service page closest to your requirement and confirm booking details before payment."
+                  : "Share the exact requirement with the booking desk so service details can be confirmed."}
               </div>
             </div>
           </div>

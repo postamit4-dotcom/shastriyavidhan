@@ -1,12 +1,13 @@
 import Link from "next/link";
 import { ChevronRight, MapPin, MessageCircle } from "lucide-react";
+import TrackedContactLink from "@/components/TrackedContactLink";
 import { acharyaSursainProfile, contact, locationPages } from "@/lib/site-data";
 import { basePageMetadata, locationsDirectoryJsonLd } from "@/lib/seo";
 import { getNodeById } from "@/lib/site-registry";
 
 const title = "Pandit Ji Service Locations";
 const description =
-  "Book Pandit Ji for home puja in Noida, Delhi, Gurugram, Ujjain temple coordination, and online video puja worldwide.";
+  "Request Pandit Ji service availability for home puja in Noida, Delhi, Gurugram, Ghaziabad, Ujjain temple coordination, and online video puja worldwide.";
 
 export const metadata = basePageMetadata({
   title,
@@ -41,15 +42,17 @@ export default function LocationsPage() {
             <Link href="/puja-services" className="apple-btn-pill apple-btn-secondary">
               Browse Pujas
             </Link>
-            <a
+            <TrackedContactLink
               href={contact.whatsappLink}
               target="_blank"
               rel="noopener noreferrer"
               className="apple-btn-pill apple-btn-primary"
+              eventName="whatsapp_click"
+              params={{ cta_location: "locations_hero", page_type: "locations" }}
             >
               <MessageCircle size={15} />
               WhatsApp Coordinator
-            </a>
+            </TrackedContactLink>
           </div>
         </div>
       </section>
@@ -62,7 +65,11 @@ export default function LocationsPage() {
             <p className="apple-product-desc" style={{ marginBottom: 0 }}>
               For local puja enquiries, review{" "}
               <Link href={acharyaSursainProfile.path}>Acharya Sursain Brijwasi&apos;s Ghaziabad profile</Link> and
-              share your ceremony, date, locality, and samagri requirements for availability confirmation.
+              the{" "}
+              <Link href="/pandit-ji/acharya-sursain-brijwasi-raj-nagar-extension-ghaziabad">
+                Raj Nagar Extension Pandit Ji page
+              </Link>{" "}
+              before sharing your ceremony, date, locality, and samagri requirements for availability confirmation.
             </p>
           </article>
           <div className="apple-products-grid">
@@ -81,12 +88,12 @@ export default function LocationsPage() {
 function LocationCard({ location }) {
   const node = getNodeById(`location-${location.slug}`);
   const isPublic = location.slug === "online-puja" || Boolean(node?.indexable);
-  const gateText =
+  const statusText =
     location.slug === "online-puja"
       ? "Online puja has a public mode page; each request is still reviewed before confirmation."
       : isPublic
-        ? "Public city page is verified."
-        : "City page remains hidden from sitemap and navigation until owner verification.";
+        ? "Detailed city page is available."
+        : "Share your exact locality with the booking desk so availability can be checked before confirmation.";
 
   return (
     <article className="apple-product-card" style={{ textAlign: "left" }}>
@@ -106,8 +113,8 @@ function LocationCard({ location }) {
           <strong>Status:</strong> {location.status}
         </div>
         <div>
-          <strong>Evidence gate:</strong>{" "}
-          {gateText}
+          <strong>Availability note:</strong>{" "}
+          {statusText}
         </div>
       </div>
       {isPublic ? (
@@ -117,11 +124,18 @@ function LocationCard({ location }) {
           <ChevronRight size={13} className="apple-link-chevron" aria-hidden="true" />
         </Link>
       ) : (
-        <a href={contact.whatsappLink} target="_blank" rel="noopener noreferrer" className="apple-link apple-link-sm">
+        <TrackedContactLink
+          href={contact.whatsappLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="apple-link apple-link-sm"
+          eventName="whatsapp_click"
+          params={{ cta_location: "location_card", page_type: "locations" }}
+        >
           <MapPin size={13} aria-hidden="true" />
           <span>Ask about {location.city}</span>
           <ChevronRight size={13} className="apple-link-chevron" aria-hidden="true" />
-        </a>
+        </TrackedContactLink>
       )}
     </article>
   );

@@ -1,9 +1,9 @@
 {
   "site": "Shastriya Vidhan",
   "canonicalHost": "https://www.shastriyavidhan.com",
-  "generatedAt": "2026-09-05T08:33:00.822Z",
+  "generatedAt": "2026-09-09T06:38:34.490Z",
   "source": "repository_inventory_without_live_status_checks",
-  "routeCount": 53,
+  "routeCount": 56,
   "routes": [
     {
       "currentUrl": "/",
@@ -133,6 +133,23 @@
       "notes": ""
     },
     {
+      "currentUrl": "/pandit-registration",
+      "pageTitleOrH1": "Pandit Registration",
+      "pageType": "partner_registration",
+      "statusCode": "repository_inventory",
+      "canonicalUrl": "/pandit-registration",
+      "indexState": "index",
+      "existingParent": "pandit-standards",
+      "inboundNavigationLocation": [
+        "footer",
+        "html_sitemap"
+      ],
+      "intendedFinalUrl": "/pandit-registration",
+      "action": "keep",
+      "evidenceStatus": "partially_verified",
+      "notes": "Public partner application page; private submissions are stored server-side and no document uploads are collected."
+    },
+    {
       "currentUrl": "/pandit-ji/acharya-sursain-brijwasi-ghaziabad",
       "pageTitleOrH1": "Acharya Sursain Brijwasi",
       "pageType": "profile",
@@ -147,6 +164,22 @@
       "action": "keep",
       "evidenceStatus": "partially_verified",
       "notes": "Named Pandit Ji profile with owner-provided public contact details and photo; personal credentials remain intentionally limited to verified facts."
+    },
+    {
+      "currentUrl": "/pandit-ji/acharya-sursain-brijwasi-raj-nagar-extension-ghaziabad",
+      "pageTitleOrH1": "Acharya Sursain Brijwasi - Raj Nagar Extension",
+      "pageType": "profile",
+      "statusCode": "repository_inventory",
+      "canonicalUrl": "/pandit-ji/acharya-sursain-brijwasi-raj-nagar-extension-ghaziabad",
+      "indexState": "index",
+      "existingParent": "acharya-sursain-brijwasi",
+      "inboundNavigationLocation": [
+        "html_sitemap"
+      ],
+      "intendedFinalUrl": "/pandit-ji/acharya-sursain-brijwasi-raj-nagar-extension-ghaziabad",
+      "action": "keep",
+      "evidenceStatus": "partially_verified",
+      "notes": "Local profile page for Raj Nagar Extension enquiries using the same verified contact details and photo evidence as the main Ghaziabad profile."
     },
     {
       "currentUrl": [
@@ -238,8 +271,8 @@
     },
     {
       "currentUrl": "/migration-notes",
-      "pageTitleOrH1": "Migration Notes",
-      "pageType": "internal_status",
+      "pageTitleOrH1": "Site Migration Notes",
+      "pageType": "site_notice",
       "statusCode": "repository_inventory",
       "canonicalUrl": "/migration-notes",
       "indexState": "noindex",
@@ -252,8 +285,8 @@
     },
     {
       "currentUrl": "/category/blog",
-      "pageTitleOrH1": "Blog Archive Under Review",
-      "pageType": "content_review",
+      "pageTitleOrH1": "Blog Archive",
+      "pageType": "archive_notice",
       "statusCode": "repository_inventory",
       "canonicalUrl": "/category/blog",
       "indexState": "noindex",
@@ -459,7 +492,7 @@
       "intendedFinalUrl": "/puja-services/featured-pujas",
       "action": "keep",
       "evidenceStatus": "partially_verified",
-      "notes": "4 linked services currently meet the category publication gate."
+      "notes": "4 linked services are available from this category page."
     },
     {
       "currentUrl": "/puja-services/festival-pujas",
@@ -476,7 +509,7 @@
       "intendedFinalUrl": "/puja-services/festival-pujas",
       "action": "keep",
       "evidenceStatus": "partially_verified",
-      "notes": "7 linked services currently meet the category publication gate."
+      "notes": "7 linked services are available from this category page."
     },
     {
       "currentUrl": "/puja-services/shiva-pujas",
@@ -493,7 +526,7 @@
       "intendedFinalUrl": "/puja-services/shiva-pujas",
       "action": "keep",
       "evidenceStatus": "partially_verified",
-      "notes": "3 linked services currently meet the category publication gate."
+      "notes": "3 linked services are available from this category page."
     },
     {
       "currentUrl": "/puja-services/vishnu-krishna",
@@ -510,7 +543,7 @@
       "intendedFinalUrl": "/puja-services/vishnu-krishna",
       "action": "keep",
       "evidenceStatus": "partially_verified",
-      "notes": "4 linked services currently meet the category publication gate."
+      "notes": "4 linked services are available from this category page."
     },
     {
       "currentUrl": "/puja-services/devi-pujas",
@@ -527,7 +560,7 @@
       "intendedFinalUrl": "/puja-services/devi-pujas",
       "action": "keep",
       "evidenceStatus": "partially_verified",
-      "notes": "4 linked services currently meet the category publication gate."
+      "notes": "4 linked services are available from this category page."
     },
     {
       "currentUrl": "/puja-services/family-sanskar",
@@ -541,7 +574,7 @@
       "intendedFinalUrl": "/puja-services/family-sanskar",
       "action": "hide",
       "evidenceStatus": "partially_verified",
-      "notes": "1 linked service(s); keep noindex until the category-quality gate passes."
+      "notes": "1 linked service(s); category availability depends on service detail readiness."
     },
     {
       "currentUrl": "/puja-services/path-jaap-katha",
@@ -555,7 +588,7 @@
       "intendedFinalUrl": "/puja-services/path-jaap-katha",
       "action": "hide",
       "evidenceStatus": "partially_verified",
-      "notes": "4 linked service(s); keep noindex until the category-quality gate passes."
+      "notes": "4 linked service(s); category availability depends on service detail readiness."
     },
     {
       "currentUrl": [
@@ -571,7 +604,7 @@
       "intendedFinalUrl": "/graha-dosh-shanti",
       "action": "hide",
       "evidenceStatus": "partially_verified",
-      "notes": "2 linked service(s); keep noindex until the category-quality gate passes."
+      "notes": "2 linked service(s); category availability depends on service detail readiness."
     },
     {
       "currentUrl": "/puja-services/hanuman-ganesh",
@@ -585,7 +618,7 @@
       "intendedFinalUrl": "/puja-services/hanuman-ganesh",
       "action": "hide",
       "evidenceStatus": "partially_verified",
-      "notes": "3 linked service(s); keep noindex until the category-quality gate passes."
+      "notes": "3 linked service(s); category availability depends on service detail readiness."
     },
     {
       "currentUrl": "/locations/noida",
@@ -625,6 +658,20 @@
       "existingParent": "locations",
       "inboundNavigationLocation": [],
       "intendedFinalUrl": "/locations/gurugram",
+      "action": "hide",
+      "evidenceStatus": "partially_verified",
+      "notes": "Location page exists for direct review but is hidden from sitemap/header/footer until service coverage is owner-verified."
+    },
+    {
+      "currentUrl": "/locations/ghaziabad",
+      "pageTitleOrH1": "Ghaziabad",
+      "pageType": "location",
+      "statusCode": "repository_inventory",
+      "canonicalUrl": "/locations/ghaziabad",
+      "indexState": "noindex",
+      "existingParent": "locations",
+      "inboundNavigationLocation": [],
+      "intendedFinalUrl": "/locations/ghaziabad",
       "action": "hide",
       "evidenceStatus": "partially_verified",
       "notes": "Location page exists for direct review but is hidden from sitemap/header/footer until service coverage is owner-verified."

@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { CalendarCheck, ChevronRight, MapPin, MessageCircle, PhoneCall } from "lucide-react";
 import ContactForm from "@/components/ContactForm";
 import ServiceCard from "@/components/ServiceCard";
+import TrackedContactLink from "@/components/TrackedContactLink";
 import { contact, getLocationBySlug, locationPages, servicePages } from "@/lib/site-data";
 import { basePageMetadata, locationPageJsonLd } from "@/lib/seo";
 import { getNodeById, robotsForIndexable } from "@/lib/site-registry";
@@ -90,18 +91,25 @@ export default async function LocationPage({ params }) {
               <h1>{pageTitleForLocation(location)}</h1>
               <p>{location.status}</p>
               <div className="service-hero-actions">
-                <a href="#booking-section" className="apple-btn-pill apple-btn-primary">
+                <TrackedContactLink
+                  href="#booking-section"
+                  className="apple-btn-pill apple-btn-primary"
+                  eventName="booking_start"
+                  params={{ city_slug: location.slug, cta_location: "location_hero", page_type: "location" }}
+                >
                   Book Pandit Ji
-                </a>
-                <a
+                </TrackedContactLink>
+                <TrackedContactLink
                   href={contact.whatsappLink}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="apple-btn-pill apple-btn-secondary"
+                  eventName="whatsapp_click"
+                  params={{ city_slug: location.slug, cta_location: "location_hero", page_type: "location" }}
                 >
                   <MessageCircle size={17} />
                   WhatsApp Assistance
-                </a>
+                </TrackedContactLink>
               </div>
             </div>
 
@@ -118,10 +126,10 @@ export default async function LocationPage({ params }) {
                   <strong>Review:</strong> Date, muhurat, mode, and samagri are confirmed before payment.
                 </div>
                 <div>
-                  <strong>Indexing gate:</strong>{" "}
+                  <strong>Availability note:</strong>{" "}
                   {routeNode?.indexable
-                    ? "Owner verification complete."
-                    : "Hidden from sitemap and search indexing until owner verification is complete."}
+                    ? "Detailed city page is available for booking requests."
+                    : "Share the exact locality so the booking desk can confirm service availability."}
                 </div>
                 <div>
                   <PhoneCall size={16} aria-hidden="true" />
@@ -139,8 +147,8 @@ export default async function LocationPage({ params }) {
             <span className="apple-eyebrow">Available Services</span>
             <h2>Puja requests {locationLabel}.</h2>
             <p>
-              These pages keep the same preserved service URLs and connect each puja to
-              a clearer location path for search engines and families.
+              Choose a relevant puja page, then share your date, locality, service mode, and
+              samagri requirement so the booking desk can review availability.
             </p>
           </div>
 
@@ -157,10 +165,17 @@ export default async function LocationPage({ params }) {
                 This location is reviewed manually. Share your puja requirement and
                 the team will confirm whether service is available.
               </p>
-              <a href={contact.whatsappLink} target="_blank" rel="noopener noreferrer" className="apple-btn-pill apple-btn-primary">
+              <TrackedContactLink
+                href={contact.whatsappLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="apple-btn-pill apple-btn-primary"
+                eventName="whatsapp_click"
+                params={{ city_slug: location.slug, cta_location: "location_empty_services", page_type: "location" }}
+              >
                 <MessageCircle size={15} />
                 Ask on WhatsApp
-              </a>
+              </TrackedContactLink>
             </div>
           )}
         </div>

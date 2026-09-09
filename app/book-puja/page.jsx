@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ChevronRight, MessageCircle, PhoneCall } from "lucide-react";
 import ContactForm from "@/components/ContactForm";
+import TrackedContactLink from "@/components/TrackedContactLink";
 import { acharyaSursainProfile, contact } from "@/lib/site-data";
 import { basePageMetadata } from "@/lib/seo";
 
@@ -29,14 +30,26 @@ export default function BookPujaPage() {
           </div>
 
           <div style={{ display: "flex", justifyContent: "center", gap: "12px", flexWrap: "wrap" }}>
-            <a href={contact.whatsappLink} target="_blank" rel="noopener noreferrer" className="apple-btn-pill apple-btn-secondary">
+            <TrackedContactLink
+              href={contact.whatsappLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="apple-btn-pill apple-btn-secondary"
+              eventName="whatsapp_click"
+              params={{ cta_location: "book_puja_hero", page_type: "booking" }}
+            >
               <MessageCircle size={17} aria-hidden="true" />
               WhatsApp Booking Desk
-            </a>
-            <a href={`tel:${contact.phone}`} className="apple-btn-pill apple-btn-secondary">
+            </TrackedContactLink>
+            <TrackedContactLink
+              href={`tel:${contact.phone}`}
+              className="apple-btn-pill apple-btn-secondary"
+              eventName="call_click"
+              params={{ cta_location: "book_puja_hero", page_type: "booking" }}
+            >
               <PhoneCall size={17} aria-hidden="true" />
               Call {contact.displayPhone}
-            </a>
+            </TrackedContactLink>
           </div>
         </div>
       </section>

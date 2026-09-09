@@ -76,6 +76,9 @@ export default function PanditStandardsPage() {
               <Link href="/book-puja" className="apple-btn-pill apple-btn-primary">
                 Request a Pandit Ji
               </Link>
+              <Link href="/pandit-registration" className="apple-btn-pill apple-btn-secondary">
+                Apply as a Pandit partner
+              </Link>
               <Link
                 href={acharyaSursainProfile.path}
                 className="apple-btn-pill apple-btn-secondary"

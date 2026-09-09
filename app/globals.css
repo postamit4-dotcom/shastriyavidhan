@@ -1745,6 +1745,120 @@ img {
   margin-top: 2px;
 }
 
+/* Ghaziabad service-area section */
+.ghaziabad-service-areas {
+  background:
+    linear-gradient(180deg, rgba(245, 185, 66, 0.04), transparent 42%),
+    var(--apple-gray-bg);
+}
+
+.ghaziabad-service-area-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  list-style: none;
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+.ghaziabad-service-area-card {
+  min-height: 84px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid var(--apple-line-light);
+  border-radius: var(--radius-inner);
+  background: var(--apple-white);
+  color: var(--text-primary);
+  padding: 16px 18px;
+  font-weight: 800;
+  line-height: 1.25;
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.ghaziabad-service-area-card:hover {
+  border-color: rgba(245, 185, 66, 0.36);
+  box-shadow: var(--shadow-apple-glow);
+  transform: translateY(-2px);
+}
+
+.ghaziabad-service-area-card svg {
+  flex: 0 0 auto;
+  color: var(--accent-blue);
+}
+
+.ghaziabad-service-area-card a {
+  color: inherit;
+  border-radius: 6px;
+  text-decoration: none;
+}
+
+.ghaziabad-service-area-card a:hover {
+  color: var(--brand-yellow);
+}
+
+.ghaziabad-service-area-card a:focus-visible {
+  outline: 2px solid var(--brand-yellow);
+  outline-offset: 4px;
+}
+
+.ghaziabad-area-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  max-width: 1040px;
+  margin: 26px auto 0;
+  border: 1px solid var(--apple-line-light);
+  border-radius: var(--radius-card);
+  background: rgba(26, 16, 18, 0.72);
+  padding: 24px;
+}
+
+.ghaziabad-area-cta h3 {
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  margin-bottom: 6px;
+}
+
+.ghaziabad-area-cta p {
+  max-width: 620px;
+  margin: 0;
+  color: var(--text-secondary);
+}
+
+@media (min-width: 720px) {
+  .ghaziabad-service-area-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1040px) {
+  .ghaziabad-service-area-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .ghaziabad-area-cta {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .ghaziabad-area-cta .service-hero-actions,
+  .ghaziabad-area-cta .apple-btn-pill {
+    width: 100%;
+  }
+}
+
+@media (max-width: 380px) {
+  .ghaziabad-service-area-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .form-status-error {
   background: rgba(255, 59, 48, 0.1);
   border: 1px solid rgba(255, 59, 48, 0.24);
@@ -1967,6 +2081,242 @@ img {
   color: var(--apple-dark);
   font-size: 1rem;
   line-height: 1.35;
+}
+
+.service-quick-answer-section {
+  background: var(--apple-white);
+}
+
+.service-quick-answer-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.86fr) minmax(320px, 1fr);
+  gap: clamp(22px, 4vw, 44px);
+  align-items: start;
+}
+
+.service-answer-card,
+.service-facts-card,
+.service-location-card,
+.service-disclaimer-card,
+.service-review-panel {
+  border-radius: var(--radius-card);
+  background: var(--apple-gray-subtle);
+  border: 1px solid var(--apple-line-light);
+  box-shadow: var(--shadow-apple-card);
+  padding: clamp(24px, 3.5vw, 40px);
+  text-align: left;
+}
+
+.service-answer-card h2,
+.service-facts-card h2,
+.service-disclaimer-card h2,
+.service-review-panel h2 {
+  color: var(--apple-dark);
+  font-size: clamp(1.55rem, 2.8vw, 2.55rem);
+  letter-spacing: 0;
+  line-height: 1.12;
+  margin: 8px 0 14px;
+}
+
+.service-answer-card p,
+.service-disclaimer-card p,
+.service-review-panel p {
+  color: var(--text-secondary);
+  font-size: 1.02rem;
+  line-height: 1.72;
+  max-width: 760px;
+}
+
+.service-answer-note {
+  border-top: 1px solid var(--apple-line-light);
+  color: var(--text-tertiary) !important;
+  font-size: 0.94rem !important;
+  margin-top: 22px;
+  padding-top: 18px;
+}
+
+.service-quick-fact-list,
+.service-review-list {
+  display: grid;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.service-quick-fact-list div,
+.service-review-list div {
+  display: grid;
+  gap: 6px;
+  border-bottom: 1px solid var(--apple-line-light);
+  padding-bottom: 12px;
+}
+
+.service-quick-fact-list div:last-child,
+.service-review-list div:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.service-quick-fact-list dt,
+.service-review-list dt {
+  align-items: center;
+  color: var(--accent-blue);
+  display: flex;
+  font-size: 0.76rem;
+  font-weight: 800;
+  gap: 7px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.service-quick-fact-list dd,
+.service-review-list dd {
+  color: var(--text-primary);
+  font-size: 0.96rem;
+  font-weight: 650;
+  line-height: 1.45;
+  margin: 0;
+}
+
+.service-page-toc-section {
+  background: var(--apple-gray-bg);
+  border-bottom: 1px solid var(--apple-line-light);
+  border-top: 1px solid var(--apple-line-light);
+  padding: 16px 0;
+}
+
+.service-page-toc {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 2px 0;
+  scrollbar-width: thin;
+}
+
+.service-page-toc a {
+  border: 1px solid var(--apple-line-light);
+  border-radius: var(--radius-pill);
+  color: var(--text-secondary);
+  flex: 0 0 auto;
+  font-size: 0.86rem;
+  font-weight: 750;
+  line-height: 1;
+  padding: 10px 14px;
+}
+
+.service-page-toc a:hover {
+  border-color: rgba(245, 185, 66, 0.42);
+  color: var(--accent-blue);
+}
+
+.service-location-mode-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  gap: 18px;
+}
+
+.service-location-card h3,
+.service-review-note h3 {
+  color: var(--text-primary);
+  font-size: 1.16rem;
+  line-height: 1.3;
+  margin: 0 0 16px;
+}
+
+.service-location-chip-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.service-location-chip-grid span {
+  border: 1px solid var(--apple-line-light);
+  border-radius: var(--radius-pill);
+  color: var(--text-primary);
+  font-size: 0.88rem;
+  font-weight: 750;
+  line-height: 1.25;
+  padding: 9px 12px;
+}
+
+.service-locality-note {
+  display: grid;
+  gap: 6px;
+  border-top: 1px solid var(--apple-line-light);
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  margin-top: 22px;
+  padding-top: 18px;
+}
+
+.service-locality-note strong {
+  color: var(--text-primary);
+}
+
+.service-mode-list {
+  display: grid;
+  gap: 14px;
+}
+
+.service-mode-list div {
+  border-bottom: 1px solid var(--apple-line-light);
+  padding-bottom: 14px;
+}
+
+.service-mode-list div:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.service-mode-list strong {
+  color: var(--accent-blue);
+  display: block;
+  font-size: 0.96rem;
+  margin-bottom: 5px;
+}
+
+.service-mode-list p {
+  color: var(--text-secondary);
+  font-size: 0.94rem;
+  line-height: 1.58;
+  margin: 0;
+}
+
+.service-disclaimer-card,
+.service-review-panel {
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.service-review-panel {
+  display: grid;
+  gap: 24px;
+}
+
+.service-review-note {
+  border-top: 1px solid var(--apple-line-light);
+  padding-top: 22px;
+}
+
+.service-review-note ul {
+  display: grid;
+  gap: 10px;
+  list-style: none;
+  margin-top: 14px;
+}
+
+.service-review-note li {
+  align-items: flex-start;
+  color: var(--text-secondary);
+  display: flex;
+  gap: 9px;
+  line-height: 1.45;
+}
+
+.service-review-note svg {
+  color: var(--apple-green);
+  flex: 0 0 auto;
+  margin-top: 3px;
 }
 
 .janmashtami-date-section {
@@ -2394,7 +2744,9 @@ img {
 @media (max-width: 900px) {
   .service-apple-hero-grid,
   .date-note-card,
-  .service-content-shell {
+  .service-content-shell,
+  .service-quick-answer-grid,
+  .service-location-mode-grid {
     grid-template-columns: 1fr;
   }
 
@@ -3121,11 +3473,13 @@ img {
 .section-apple,
 .apple-comparison-section,
 .service-premium-hero,
+.service-quick-answer-section,
 .service-longform-section,
 .janmashtami-date-section,
 .janmashtami-leela-section,
 .booking-guide-section,
-.service-faq-section {
+.service-faq-section,
+.service-disclaimer-section {
   background-color: var(--apple-black);
 }
 
@@ -3488,6 +3842,11 @@ img {
 .apple-booking-card,
 .service-toc-card,
 .service-detail-card,
+.service-answer-card,
+.service-facts-card,
+.service-location-card,
+.service-disclaimer-card,
+.service-review-panel,
 .service-table-wrap,
 .service-article-stack article,
 .date-note-card,
@@ -3805,6 +4164,894 @@ img {
   }
 }
 
+/* Pandit registration funnel */
+.pandit-registration-hero {
+  background:
+    radial-gradient(circle at 78% 18%, rgba(245, 185, 66, 0.12), transparent 34%),
+    linear-gradient(180deg, var(--apple-gray-bg), var(--apple-black));
+  padding-bottom: 64px;
+}
+
+.pandit-registration-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 420px);
+  gap: clamp(32px, 6vw, 72px);
+  align-items: center;
+}
+
+.pandit-registration-hero-copy {
+  min-width: 0;
+}
+
+.pandit-registration-hero-copy h1 {
+  max-width: 820px;
+  margin: 8px 0 18px;
+  font-size: var(--font-h1);
+}
+
+.pandit-registration-hero-copy p {
+  max-width: 720px;
+  font-size: 1.12rem;
+}
+
+.pandit-registration-microcopy {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 14px;
+  max-width: 720px;
+  margin-top: 24px;
+  list-style: none;
+}
+
+.pandit-registration-microcopy li {
+  position: relative;
+  padding-left: 18px;
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.pandit-registration-microcopy li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--accent-blue);
+}
+
+.pandit-registration-visual {
+  position: relative;
+  justify-self: center;
+  width: min(100%, 420px);
+}
+
+.pandit-registration-picture {
+  display: block;
+  overflow: hidden;
+  border: 1px solid rgba(245, 185, 66, 0.26);
+  border-radius: var(--radius-hero);
+  background: var(--apple-gray-bg);
+  box-shadow: var(--shadow-apple-card);
+}
+
+.pandit-registration-image {
+  width: 100%;
+  height: auto;
+  max-height: min(70vh, 680px);
+  aspect-ratio: 9 / 16;
+  object-fit: cover;
+  object-position: center center;
+}
+
+.registration-visual-note {
+  position: absolute;
+  right: -18px;
+  bottom: 24px;
+  display: grid;
+  gap: 4px;
+  width: min(240px, calc(100% - 24px));
+  border: 1px solid rgba(245, 185, 66, 0.28);
+  border-radius: var(--radius-inner);
+  background: rgba(18, 11, 13, 0.9);
+  padding: 14px 16px;
+  box-shadow: var(--shadow-apple-card);
+}
+
+.registration-visual-note span,
+.registration-panel .apple-product-tag {
+  color: var(--accent-blue);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.registration-visual-note strong {
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  line-height: 1.35;
+}
+
+.registration-two-column {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(260px, 0.9fr);
+  gap: 20px;
+  align-items: stretch;
+}
+
+.registration-panel,
+.registration-benefit-card,
+.registration-final-panel,
+.pandit-registration-form,
+.registration-success-card {
+  border: 1px solid var(--apple-line-light);
+  border-radius: var(--radius-card);
+  background: rgba(26, 16, 18, 0.72);
+  box-shadow: var(--shadow-apple-card);
+}
+
+.registration-panel {
+  padding: clamp(22px, 3vw, 32px);
+  text-align: left;
+}
+
+.registration-panel h2,
+.registration-panel h3 {
+  margin: 8px 0 12px;
+}
+
+.registration-note-panel,
+.registration-warning-panel {
+  display: grid;
+  align-content: center;
+  gap: 10px;
+}
+
+.registration-note-panel svg,
+.registration-warning-panel svg {
+  color: var(--accent-blue);
+}
+
+.registration-warning-panel {
+  border-color: rgba(216, 72, 46, 0.36);
+  background: rgba(216, 72, 46, 0.12);
+}
+
+.registration-muted-section {
+  background: var(--apple-gray-bg);
+}
+
+.registration-card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.registration-benefit-card {
+  min-height: 230px;
+  padding: 24px;
+  text-align: left;
+}
+
+.registration-card-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  margin-bottom: 18px;
+  border-radius: var(--radius-inner);
+  background: rgba(245, 185, 66, 0.13);
+  color: var(--accent-blue);
+}
+
+.registration-benefit-card h3 {
+  margin: 0 0 10px;
+  font-size: 1.18rem;
+}
+
+.registration-benefit-card p {
+  color: var(--text-secondary);
+  font-size: 0.96rem;
+}
+
+.registration-step-list {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 14px;
+  list-style: none;
+}
+
+.registration-step-list li {
+  display: grid;
+  align-content: start;
+  gap: 16px;
+  min-height: 230px;
+  border: 1px solid var(--apple-line-light);
+  border-radius: var(--radius-card);
+  background: rgba(26, 16, 18, 0.72);
+  padding: 22px;
+}
+
+.registration-step-list > li > span {
+  display: inline-grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--brand-red), var(--brand-yellow-hover));
+  color: #fff;
+  font-size: 0.84rem;
+  font-weight: 800;
+}
+
+.registration-step-list h3 {
+  margin-bottom: 8px;
+  font-size: 1.08rem;
+}
+
+.registration-step-list p {
+  font-size: 0.92rem;
+}
+
+.registration-form-section {
+  background:
+    linear-gradient(180deg, rgba(245, 185, 66, 0.04), transparent 36%),
+    var(--apple-black);
+}
+
+.registration-form-shell {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.7fr) minmax(0, 1.3fr);
+  gap: clamp(24px, 4vw, 42px);
+  align-items: start;
+}
+
+.registration-form-shell > div:first-child {
+  position: sticky;
+  top: calc(var(--nav-height) + 28px);
+}
+
+.pandit-registration-form {
+  display: grid;
+  gap: 24px;
+  padding: clamp(22px, 3.5vw, 36px);
+}
+
+.registration-form-header {
+  display: grid;
+  gap: 8px;
+}
+
+.registration-form-header h2 {
+  margin: 0;
+  font-size: clamp(1.55rem, 2.6vw, 2.1rem);
+}
+
+.registration-honeypot {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.registration-progress-wrap {
+  display: grid;
+  gap: 12px;
+}
+
+.registration-progress-text {
+  color: var(--text-primary);
+  font-size: 0.92rem;
+  font-weight: 800;
+}
+
+.registration-progress {
+  height: 8px;
+  overflow: hidden;
+  border: 1px solid var(--apple-line-light);
+  border-radius: 999px;
+  background: rgba(255, 248, 236, 0.08);
+}
+
+.registration-progress span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--brand-red), var(--brand-yellow));
+  transition: width var(--motion-medium) var(--motion-ease-standard);
+}
+
+.registration-step-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.registration-step-tab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 44px;
+  border: 1px solid var(--apple-line-light);
+  border-radius: var(--radius-inner);
+  background: rgba(18, 11, 13, 0.68);
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.registration-step-tab span {
+  display: inline-grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  background: rgba(255, 248, 236, 0.1);
+  color: inherit;
+  font-size: 0.72rem;
+}
+
+.registration-step-tab.active,
+.registration-step-tab.complete {
+  color: #fff;
+  border-color: rgba(245, 185, 66, 0.38);
+}
+
+.registration-step-tab.active {
+  background: var(--brand-red);
+}
+
+.registration-step-tab:disabled {
+  cursor: not-allowed;
+  opacity: 0.62;
+}
+
+.registration-error-summary,
+.form-status-error {
+  border: 1px solid rgba(216, 72, 46, 0.42);
+  border-radius: var(--radius-inner);
+  background: rgba(216, 72, 46, 0.13);
+}
+
+.registration-error-summary {
+  padding: 16px 18px;
+}
+
+.registration-error-summary h3 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+}
+
+.registration-error-summary ul {
+  display: grid;
+  gap: 6px;
+  padding-left: 18px;
+  color: var(--text-secondary);
+}
+
+.registration-error-summary a {
+  color: var(--text-primary);
+  text-decoration: underline;
+  text-decoration-color: rgba(245, 185, 66, 0.55);
+  text-underline-offset: 3px;
+}
+
+.form-status-error {
+  padding: 12px 14px;
+  color: var(--text-primary);
+  font-size: 0.93rem;
+}
+
+.registration-step-panel {
+  display: grid;
+  gap: 22px;
+}
+
+.registration-step-panel h3 {
+  margin: 0 0 16px;
+  font-size: 1.25rem;
+}
+
+.registration-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.registration-field,
+.registration-fieldset {
+  min-width: 0;
+}
+
+.registration-field,
+.registration-fieldset,
+.registration-consent-list {
+  display: grid;
+  gap: 8px;
+}
+
+.registration-field-wide {
+  grid-column: 1 / -1;
+}
+
+.registration-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.registration-label-row label,
+.registration-fieldset legend {
+  color: var(--text-primary);
+  font-size: 0.92rem;
+  font-weight: 800;
+}
+
+.registration-fieldset {
+  margin: 18px 0;
+  border: 1px solid var(--apple-line-light);
+  border-radius: var(--radius-inner);
+  padding: 16px;
+}
+
+.registration-fieldset[data-invalid="true"] {
+  border-color: rgba(216, 72, 46, 0.72);
+}
+
+.registration-fieldset legend {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 8px;
+}
+
+.required-mark,
+.optional-mark {
+  display: inline-flex;
+  align-items: center;
+  min-height: 22px;
+  border-radius: 999px;
+  padding: 3px 8px;
+  font-size: 0.68rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.required-mark {
+  background: rgba(245, 185, 66, 0.14);
+  color: var(--accent-blue);
+}
+
+.optional-mark {
+  background: rgba(255, 248, 236, 0.08);
+  color: var(--text-tertiary);
+}
+
+.registration-input,
+.registration-select,
+.registration-textarea {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid var(--apple-line-light);
+  border-radius: var(--radius-inner);
+  background: rgba(18, 11, 13, 0.72);
+  color: var(--text-primary);
+  padding: 12px 14px;
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+.registration-select {
+  color-scheme: dark;
+}
+
+.registration-textarea {
+  min-height: 116px;
+  resize: vertical;
+}
+
+.registration-input:focus,
+.registration-select:focus,
+.registration-textarea:focus {
+  border-color: var(--accent-blue);
+  background: rgba(18, 11, 13, 0.92);
+  box-shadow: 0 0 0 3px rgba(245, 185, 66, 0.16);
+}
+
+.registration-input[aria-invalid="true"],
+.registration-select[aria-invalid="true"],
+.registration-textarea[aria-invalid="true"] {
+  border-color: rgba(216, 72, 46, 0.78);
+}
+
+.registration-input:disabled {
+  color: var(--text-tertiary);
+  cursor: not-allowed;
+  opacity: 0.72;
+}
+
+.registration-help,
+.field-error {
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.registration-help {
+  color: var(--text-tertiary);
+}
+
+.field-error {
+  color: #ff9b8a;
+}
+
+.registration-choice-grid,
+.registration-checkbox-grid {
+  display: grid;
+  gap: 10px;
+}
+
+.registration-choice-grid {
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+}
+
+.registration-checkbox-grid {
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+.registration-choice,
+.registration-inline-check,
+.registration-consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  min-height: 46px;
+  border: 1px solid var(--apple-line-light);
+  border-radius: var(--radius-inner);
+  background: rgba(18, 11, 13, 0.52);
+  padding: 12px;
+  color: var(--text-secondary);
+  line-height: 1.35;
+}
+
+.registration-choice.selected {
+  border-color: rgba(245, 185, 66, 0.46);
+  background: rgba(245, 185, 66, 0.1);
+  color: var(--text-primary);
+}
+
+.registration-choice input,
+.registration-inline-check input,
+.registration-consent input {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  margin-top: 1px;
+  accent-color: var(--brand-yellow);
+}
+
+.registration-inline-check,
+.registration-consent {
+  align-items: flex-start;
+}
+
+.registration-review-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.registration-review-grid article {
+  position: relative;
+  display: grid;
+  gap: 6px;
+  min-height: 150px;
+  border: 1px solid var(--apple-line-light);
+  border-radius: var(--radius-inner);
+  background: rgba(18, 11, 13, 0.58);
+  padding: 16px;
+}
+
+.registration-review-grid button {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: inline-grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--apple-line-light);
+  border-radius: 999px;
+  color: var(--text-primary);
+}
+
+.registration-review-grid span {
+  color: var(--accent-blue);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.registration-review-grid strong {
+  color: var(--text-primary);
+  padding-right: 38px;
+  line-height: 1.35;
+}
+
+.registration-review-grid p {
+  font-size: 0.88rem;
+}
+
+.registration-consent-list {
+  gap: 12px;
+}
+
+.registration-consent a {
+  color: var(--accent-blue);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.registration-safe-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  border: 1px solid rgba(245, 185, 66, 0.22);
+  border-radius: var(--radius-inner);
+  background: rgba(245, 185, 66, 0.08);
+  padding: 14px;
+}
+
+.registration-safe-note svg {
+  flex: 0 0 auto;
+  color: var(--accent-blue);
+}
+
+.registration-safe-note p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.registration-form-actions,
+.registration-success-actions,
+.registration-final-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.registration-form-actions {
+  border-top: 1px solid var(--apple-line-light);
+  padding-top: 22px;
+}
+
+.registration-success-card {
+  padding: clamp(28px, 4vw, 48px);
+  text-align: center;
+}
+
+.registration-success-card:focus {
+  outline: none;
+}
+
+.registration-success-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  margin-bottom: 18px;
+  border-radius: 999px;
+  background: rgba(111, 176, 122, 0.16);
+  color: var(--apple-green);
+}
+
+.registration-success-card h2 {
+  margin: 6px 0 12px;
+}
+
+.registration-success-card p {
+  max-width: 640px;
+  margin: 0 auto 14px;
+}
+
+.registration-success-actions {
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.registration-check-list {
+  display: grid;
+  gap: 11px;
+  list-style: none;
+}
+
+.registration-check-list li {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+.registration-check-list svg {
+  flex: 0 0 auto;
+  color: var(--apple-green);
+  margin-top: 3px;
+}
+
+.registration-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.registration-gallery figure {
+  overflow: hidden;
+  border: 1px solid var(--apple-line-light);
+  border-radius: var(--radius-card);
+  background: rgba(26, 16, 18, 0.72);
+  box-shadow: var(--shadow-apple-card);
+}
+
+.registration-gallery img {
+  width: 100%;
+  height: 340px;
+  object-fit: cover;
+}
+
+.registration-gallery figcaption {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.45;
+  padding: 14px 16px 16px;
+}
+
+.registration-faq-list {
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.registration-final-panel {
+  max-width: 940px;
+  margin: 0 auto;
+  padding: clamp(26px, 4vw, 46px);
+  text-align: center;
+}
+
+.registration-final-panel h2 {
+  margin: 8px auto 14px;
+  max-width: 740px;
+}
+
+.registration-final-panel p {
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.registration-final-actions {
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.registration-contact-note {
+  margin-top: 18px;
+  font-size: 0.92rem;
+}
+
+.registration-contact-note a {
+  color: var(--accent-blue);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.spin {
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 1080px) {
+  .registration-step-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .pandit-registration-hero-grid,
+  .registration-two-column,
+  .registration-form-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .registration-form-shell > div:first-child {
+    position: static;
+  }
+
+  .pandit-registration-visual {
+    width: min(100%, 390px);
+  }
+
+  .registration-card-grid,
+  .registration-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 680px) {
+  .pandit-registration-microcopy,
+  .registration-card-grid,
+  .registration-step-list,
+  .registration-form-grid,
+  .registration-step-tabs,
+  .registration-review-grid,
+  .registration-gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .registration-visual-note {
+    position: static;
+    width: 100%;
+    margin-top: 12px;
+  }
+
+  .pandit-registration-image {
+    max-height: none;
+  }
+
+  .registration-gallery img {
+    height: 300px;
+  }
+
+  .registration-form-actions,
+  .registration-form-actions .apple-btn-pill,
+  .registration-final-actions,
+  .registration-final-actions .apple-btn-pill,
+  .registration-success-actions,
+  .registration-success-actions .apple-btn-pill {
+    width: 100%;
+  }
+
+  .registration-form-actions {
+    align-items: stretch;
+  }
+
+  .registration-checkbox-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 420px) {
+  .pandit-registration-hero-copy h1 {
+    font-size: clamp(2rem, 12vw, 2.8rem);
+  }
+
+  .pandit-registration-form {
+    padding: 20px 16px;
+  }
+
+  .registration-choice,
+  .registration-inline-check,
+  .registration-consent {
+    padding: 11px;
+  }
+}
+
 /* Micro-interactions & Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -3827,5 +5074,11 @@ img {
 
   .form-step-panel {
     animation: none !important;
+  }
+
+  .registration-progress span,
+  .spin {
+    animation: none !important;
+    transition: none !important;
   }
 }

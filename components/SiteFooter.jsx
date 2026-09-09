@@ -1,4 +1,5 @@
 import Link from "next/link";
+import TrackedContactLink from "@/components/TrackedContactLink";
 import { contact, site } from "@/lib/site-data";
 import { footerNavigationGroups } from "@/lib/site-registry";
 
@@ -33,10 +34,22 @@ export default function SiteFooter() {
         </div>
 
         <div className="apple-footer-contact">
-          <a href={contact.whatsappLink} target="_blank" rel="noopener noreferrer">
+          <TrackedContactLink
+            href={contact.whatsappLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            eventName="whatsapp_click"
+            params={{ cta_location: "footer", page_type: "sitewide" }}
+          >
             WhatsApp Booking Desk
-          </a>
-          <a href={`tel:${contact.phone}`}>Call {contact.displayPhone}</a>
+          </TrackedContactLink>
+          <TrackedContactLink
+            href={`tel:${contact.phone}`}
+            eventName="call_click"
+            params={{ cta_location: "footer", page_type: "sitewide" }}
+          >
+            Call {contact.displayPhone}
+          </TrackedContactLink>
         </div>
 
         <div className="apple-footer-bottom">

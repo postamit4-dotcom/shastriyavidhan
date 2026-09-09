@@ -3,8 +3,8 @@ import { AlertTriangle, ArrowRight, CheckCircle2 } from "lucide-react";
 import { excludedContent, servicePages, site } from "@/lib/site-data";
 
 export const metadata = {
-  title: "Migration Notes",
-  description: "WordPress to Node.js migration notes for Shastriya Vidhan.",
+  title: "Site Update Notes",
+  description: "Shastriya Vidhan site update notes and maintained puja service navigation.",
   robots: {
     index: false,
     follow: true,
@@ -15,11 +15,11 @@ export default function MigrationNotesPage() {
   return (
     <>
       <section className="page-hero compact">
-        <p className="eyebrow">WordPress To Node.js</p>
-        <h1>Migration notes for {site.name}</h1>
+        <p className="eyebrow">Site Update</p>
+        <h1>Service directory update for {site.name}</h1>
         <p>
-          This local Next.js build preserves the real puja booking pages and keeps unrelated
-          WordPress blog content out of the new frontend.
+          The current site focuses on maintained puja service pages, booking guidance, contact details,
+          location coverage, policies, and practical preparation resources.
         </p>
       </section>
 
@@ -29,31 +29,32 @@ export default function MigrationNotesPage() {
           <CheckCircle2 size={24} />
           <h2>Included</h2>
           <p>
-            Home, Contact, and {servicePages.length} puja service pages were converted into
-            structured Next.js routes with page-level metadata.
+            Home, Contact, and {servicePages.length} puja service pages are available with
+            structured routes and page-level metadata.
           </p>
         </article>
         <article>
           <CheckCircle2 size={24} />
-          <h2>Preserved URLs</h2>
+          <h2>Service URLs</h2>
           <p>
-            Service slugs match the WordPress pages so production deployment can use the same
-            public URLs and reduce redirect work.
+            Service pages keep stable public URLs so families can reach booking guidance,
+            samagri notes, and request forms without extra navigation.
           </p>
         </article>
         <article>
           <AlertTriangle size={24} />
-          <h2>Excluded Posts</h2>
+          <h2>Older Posts</h2>
           <p>
-            {excludedContent.publishedPosts} published posts were not migrated. {excludedContent.reason}
+            {excludedContent.publishedPosts} older posts are outside the current booking directory.
+            Maintained service pages should be used for current puja booking information.
           </p>
         </article>
         <article>
           <CheckCircle2 size={24} />
           <h2>Assets</h2>
           <p>
-            Primary service images are mapped from WordPress upload URLs and copied into
-            public/images by the asset download script.
+            Primary service images are maintained with local image paths and descriptive alt text
+            for the current public routes.
           </p>
         </article>
         </div>
@@ -61,11 +62,10 @@ export default function MigrationNotesPage() {
 
       <section className="split-section">
         <div>
-          <h2>Production switch checklist</h2>
+          <h2>Booking readiness checklist</h2>
           <p>
-            Before pointing the live domain at Node.js, configure real email delivery for the
-            contact form, verify every image, review titles and descriptions, and back up or
-            lock down the old WordPress install.
+            Before confirming a booking, the team should verify the selected service, city,
+            date, samagri responsibility, quote, and contact follow-up path.
           </p>
         </div>
         <Link className="primary-button" href="/puja-services">

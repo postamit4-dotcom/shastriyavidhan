@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ChevronDown, ChevronRight, Menu, MessageCircle, X } from "lucide-react";
+import { trackEvent } from "@/lib/analytics";
 import { contact, site } from "@/lib/site-data";
 import { headerNavigation, mobileNavigationSections, serviceMegaMenuGroups } from "@/lib/site-registry";
 
@@ -273,7 +274,11 @@ export default function SiteHeader() {
 
           <div className="apple-nav-actions">
             {primaryCta ? (
-              <Link href={primaryCta.href} className="apple-btn-pill apple-btn-primary">
+              <Link
+                href={primaryCta.href}
+                className="apple-btn-pill apple-btn-primary"
+                onClick={() => trackEvent("booking_start", { cta_location: "header", page_type: "sitewide" })}
+              >
                 {primaryCta.label}
               </Link>
             ) : null}
@@ -381,7 +386,14 @@ export default function SiteHeader() {
             </nav>
 
             <div className="mobile-drawer-actions">
-              <Link href="/book-puja" className="apple-btn-pill apple-btn-primary" onClick={closeMobileMenu}>
+              <Link
+                href="/book-puja"
+                className="apple-btn-pill apple-btn-primary"
+                onClick={() => {
+                  trackEvent("booking_start", { cta_location: "mobile_drawer", page_type: "sitewide" });
+                  closeMobileMenu();
+                }}
+              >
                 Book Puja
               </Link>
               <a
@@ -389,7 +401,10 @@ export default function SiteHeader() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="apple-btn-pill apple-btn-secondary"
-                onClick={() => setMobileMenuOpen(false)}
+                onClick={() => {
+                  trackEvent("whatsapp_click", { cta_location: "mobile_drawer", page_type: "sitewide" });
+                  setMobileMenuOpen(false);
+                }}
               >
                 <MessageCircle size={18} aria-hidden="true" />
                 WhatsApp Booking Desk

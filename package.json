@@ -8,6 +8,8 @@
     "build": "next build",
     "start": "next start",
     "download:assets": "node scripts/download-assets.mjs",
+    "check:booking-flow": "node scripts/validate-booking-flow.mjs",
+    "check:pandit-registration": "node scripts/validate-pandit-registration.mjs",
     "check:spam": "node scripts/check-spam-urls.mjs",
     "check:site": "node scripts/validate-site.mjs",
     "route:inventory": "node scripts/write-route-inventory.mjs"

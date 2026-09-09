@@ -1,5 +1,7 @@
 "use client";
 
+import { trackEvent, slugifyAnalyticsValue } from "@/lib/analytics";
+
 export default function BookingOptionButton({
   city = "",
   formatName = "",
@@ -10,6 +12,14 @@ export default function BookingOptionButton({
   service = "",
 }) {
   const handleSelect = () => {
+    trackEvent("booking_start", {
+      service_slug: slugifyAnalyticsValue(service),
+      city_slug: slugifyAnalyticsValue(city),
+      booking_mode: slugifyAnalyticsValue(mode),
+      cta_location: "service_option",
+      page_type: "service",
+    });
+
     window.dispatchEvent(
       new CustomEvent("booking-prefill", {
         detail: {

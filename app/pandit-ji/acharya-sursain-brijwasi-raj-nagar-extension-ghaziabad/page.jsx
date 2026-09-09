@@ -8,22 +8,22 @@ import {
   PhoneCall,
   ShieldCheck,
 } from "lucide-react";
-import GhaziabadServiceAreas from "@/components/GhaziabadServiceAreas";
 import PanditJiPicture, { panditJiImage } from "@/components/PanditJiPicture";
 import TrackedContactLink from "@/components/TrackedContactLink";
 import { contact } from "@/lib/site-data";
 import { absoluteUrl, basePageMetadata, breadcrumbJsonLd } from "@/lib/seo";
 
-const profilePath = "/pandit-ji/acharya-sursain-brijwasi-ghaziabad";
+const profilePath = "/pandit-ji/acharya-sursain-brijwasi-raj-nagar-extension-ghaziabad";
+const parentProfilePath = "/pandit-ji/acharya-sursain-brijwasi-ghaziabad";
 const profileUrl = absoluteUrl(profilePath);
-const profileImage = panditJiImage.schema;
-const profileOgImage = panditJiImage.og;
-const profileImageAlt = panditJiImage.alt;
-const title = "Acharya Sursain Brijwasi | Pandit Ji in Ghaziabad";
+const profileOgImage = "/images/acharya-sursain-brijwasi-pandit-ji-raj-nagar-extension-ghaziabad-og.jpg";
+const profileImage = "/images/acharya-sursain-brijwasi-pandit-ji-raj-nagar-extension-ghaziabad-640.webp";
+const profileImageAlt = "Acharya Sursain Brijwasi, Pandit Ji in Raj Nagar Extension, Ghaziabad";
+const title = "Acharya Sursain Brijwasi | Pandit Ji in Raj Nagar Extension, Ghaziabad";
 const description =
-  "Meet Acharya Sursain Brijwasi, a Brijwasi Pandit Ji in Ghaziabad. Contact Shastriya Vidhan for puja enquiries, availability and booking guidance.";
+  "Meet Acharya Sursain Brijwasi, a Brijwasi Pandit Ji serving Raj Nagar Extension, Ghaziabad. Contact Shastriya Vidhan for puja enquiries, availability and booking guidance.";
 const whatsappMessage =
-  "Namaste, I would like to enquire about booking Acharya Sursain Brijwasi for a puja in Ghaziabad. Please share availability, process and quote.";
+  "Namaste, I would like to enquire about booking Acharya Sursain Brijwasi for a puja in Raj Nagar Extension, Ghaziabad. Please share availability, process and quote.";
 const profileWhatsAppLink = `https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(whatsappMessage)}`;
 
 const baseMetadata = basePageMetadata({
@@ -38,11 +38,12 @@ const baseMetadata = basePageMetadata({
 export const metadata = {
   ...baseMetadata,
   keywords: [
-    "Pandit Ji in Ghaziabad",
+    "Pandit Ji Raj Nagar Extension Ghaziabad",
+    "Pandit Ji in Raj Nagar Extension",
     "Acharya Sursain Brijwasi",
-    "Sursain Brijwasi Pandit Ji",
-    "Brijwasi Pandit Ji Ghaziabad",
-    "Book Pandit Ji in Ghaziabad",
+    "Sursain Brijwasi Pandit Ji Raj Nagar Extension",
+    "Brijwasi Pandit Ji Raj Nagar Extension",
+    "Book Pandit Ji Raj Nagar Extension Ghaziabad",
   ],
   openGraph: {
     ...baseMetadata.openGraph,
@@ -71,7 +72,7 @@ const quickFacts = [
   ["Name", "Acharya Sursain Brijwasi"],
   ["Also known as", "Sursain Brijwasi"],
   ["Role", "Brijwasi Pandit Ji"],
-  ["Service enquiry area", "Ghaziabad"],
+  ["Service enquiry area", "Raj Nagar Extension, Ghaziabad"],
   ["Contact", contact.displayPhone],
   ["Booking status", "Subject to availability confirmation"],
 ];
@@ -79,7 +80,7 @@ const quickFacts = [
 const bookingSteps = [
   "Contact through WhatsApp or phone.",
   "Share the puja or ceremony name.",
-  "Share the Ghaziabad locality and complete service location.",
+  "Share the Raj Nagar Extension society, block, or complete service location.",
   "Share the preferred date and time.",
   "Mention whether samagri support is required.",
   "Wait for availability, scope, duration, and quote confirmation.",
@@ -90,13 +91,20 @@ const bookingChecklist = [
   "Puja or ceremony name",
   "Preferred date",
   "Preferred time",
-  "Ghaziabad locality",
+  "Raj Nagar Extension society, block, or locality",
   "Number of participating family members, if relevant",
   "Home, temple, or online preference",
   "Language or family tradition preference, if applicable",
   "Samagri requirement",
-  "Any special Sankalp details",
-  "Accessibility or timing constraints",
+  "Any special sankalp details",
+  "Accessibility, parking, or timing constraints",
+];
+
+const serviceAreaNotes = [
+  "Raj Nagar Extension society, tower, block, or complete service location",
+  "RNE sectors and nearby localities such as Krishna Vihar, Morta, Sehani Khurd, and Meerut Road by request",
+  "Parking, lift, gate pass, entry timing, seating, sound, and venue rules where relevant",
+  "Home, temple, society hall, office, or online preference, subject to suitability and availability",
 ];
 
 const transparencyItems = [
@@ -111,24 +119,24 @@ const faqs = [
   {
     question: "Who is Acharya Sursain Brijwasi?",
     answer:
-      "Acharya Sursain Brijwasi is a Brijwasi Pandit Ji available for Ghaziabad puja enquiries through Shastriya Vidhan, subject to date, locality, ritual scope, and booking confirmation.",
+      "Acharya Sursain Brijwasi is listed here as a Brijwasi Pandit Ji for Raj Nagar Extension, Ghaziabad puja enquiries. The page uses only the confirmed public details currently available.",
   },
   {
-    question: "How can I contact Pandit Ji in Ghaziabad?",
-    answer: `You can call ${contact.displayPhone} or send a WhatsApp enquiry to share your puja requirement and preferred date.`,
+    question: "How can I contact Pandit Ji in Raj Nagar Extension?",
+    answer: `You can call ${contact.displayPhone} or send a WhatsApp enquiry to share your puja requirement, society or block, and preferred date.`,
   },
   {
-    question: "How do I request a puja booking?",
+    question: "How do I request a puja booking in Raj Nagar Extension?",
     answer:
-      "Share the puja name, Ghaziabad locality, preferred date, time, samagri needs, and any family tradition preference. The team reviews the request before confirmation.",
+      "Share the puja name, Raj Nagar Extension society or block, preferred date, time, samagri needs, and any family tradition preference. The team reviews the request before confirmation.",
   },
   {
-    question: "Which Ghaziabad areas are covered?",
+    question: "Which Raj Nagar Extension areas are covered?",
     answer:
-      "This page is for Ghaziabad enquiries. Exact locality coverage is confirmed after you share the complete service location.",
+      "This page is for Raj Nagar Extension enquiries, including nearby stretches such as RNE sectors, Krishna Vihar, Morta, Sehani Khurd, and Meerut Road. Exact coverage is confirmed after you share the complete service location.",
   },
   {
-    question: "Which pujas can I request?",
+    question: "Which pujas can I request in Raj Nagar Extension?",
     answer:
       "You can share the ceremony you need and also browse the Shastriya Vidhan puja service pages. Suitability and Pandit Ji availability are confirmed after enquiry.",
   },
@@ -145,7 +153,7 @@ const faqs = [
   {
     question: "What details should I send on WhatsApp?",
     answer:
-      "Send the puja name, preferred date and time, Ghaziabad locality, service mode, family participation details, and whether samagri guidance is needed.",
+      "Send the puja name, preferred date and time, Raj Nagar Extension society or block, service mode, family participation details, and whether samagri guidance is needed.",
   },
   {
     question: "Can I request a specific date and time?",
@@ -181,7 +189,7 @@ function profileJsonLd() {
           width: panditJiImage.width,
           height: panditJiImage.height,
           encodingFormat: "image/webp",
-          caption: panditJiImage.caption,
+          caption: profileImageAlt,
         },
         breadcrumb: {
           "@id": `${profileUrl}#breadcrumb`,
@@ -199,11 +207,16 @@ function profileJsonLd() {
         telephone: contact.phone,
         url: profileUrl,
         image: absoluteUrl(profileImage),
+        areaServed: {
+          "@type": "Place",
+          name: "Raj Nagar Extension, Ghaziabad, Uttar Pradesh",
+        },
       },
       breadcrumbJsonLd(
         [
           { name: "Home", path: "/" },
-          { name: "Acharya Sursain Brijwasi", path: profilePath },
+          { name: "Pandit Ji in Ghaziabad", path: parentProfilePath },
+          { name: "Pandit Ji in Raj Nagar Extension", path: profilePath },
         ],
         profilePath,
       ),
@@ -219,10 +232,10 @@ function ContactActions({ compact = false }) {
         target="_blank"
         rel="noopener noreferrer"
         className="apple-btn-pill apple-btn-primary"
-        id={compact ? "profile-final-whatsapp-cta" : "profile-hero-whatsapp-cta"}
+        id={compact ? "rne-profile-final-whatsapp-cta" : "rne-profile-hero-whatsapp-cta"}
         aria-label={`WhatsApp Acharya Sursain Brijwasi enquiry at ${contact.displayPhone}`}
         eventName="whatsapp_click"
-        params={{ cta_location: compact ? "profile_final" : "profile_hero", page_type: "profile" }}
+        params={{ cta_location: compact ? "rne_profile_final" : "rne_profile_hero", page_type: "profile" }}
       >
         <MessageCircle size={17} aria-hidden="true" />
         {compact ? `WhatsApp ${contact.displayPhone}` : "WhatsApp Pandit Ji"}
@@ -230,10 +243,10 @@ function ContactActions({ compact = false }) {
       <TrackedContactLink
         href={`tel:${contact.phone}`}
         className="apple-btn-pill apple-btn-secondary"
-        id={compact ? "profile-final-call-cta" : "profile-hero-call-cta"}
+        id={compact ? "rne-profile-final-call-cta" : "rne-profile-hero-call-cta"}
         aria-label={`Call Acharya Sursain Brijwasi at ${contact.displayPhone}`}
         eventName="call_click"
-        params={{ cta_location: compact ? "profile_final" : "profile_hero", page_type: "profile" }}
+        params={{ cta_location: compact ? "rne_profile_final" : "rne_profile_hero", page_type: "profile" }}
       >
         <PhoneCall size={17} aria-hidden="true" />
         {compact ? "Call Pandit Ji" : `Call ${contact.displayPhone}`}
@@ -242,7 +255,7 @@ function ContactActions({ compact = false }) {
   );
 }
 
-export default function AcharyaSursainBrijwasiPage() {
+export default function AcharyaSursainBrijwasiRajNagarExtensionPage() {
   const jsonLd = profileJsonLd();
 
   return (
@@ -252,17 +265,19 @@ export default function AcharyaSursainBrijwasiPage() {
           <nav aria-label="Breadcrumb" className="service-breadcrumb">
             <Link href="/">Home</Link>
             <ChevronRight size={14} aria-hidden="true" />
-            <span>Acharya Sursain Brijwasi</span>
+            <Link href={parentProfilePath}>Pandit Ji in Ghaziabad</Link>
+            <ChevronRight size={14} aria-hidden="true" />
+            <span>Pandit Ji in Raj Nagar Extension</span>
           </nav>
 
           <div className="service-apple-hero-grid">
             <div>
-              <span className="apple-eyebrow">Pandit Ji in Ghaziabad</span>
-              <h1>Acharya Sursain Brijwasi &ndash; Pandit Ji in Ghaziabad</h1>
+              <span className="apple-eyebrow">Pandit Ji in Raj Nagar Extension, Ghaziabad</span>
+              <h1>Acharya Sursain Brijwasi - Pandit Ji in Raj Nagar Extension, Ghaziabad</h1>
               <p>
-                Contact Acharya Sursain Brijwasi for puja enquiries in Ghaziabad. Share your
-                required puja, preferred date and location to confirm availability, ritual scope,
-                samagri guidance and quote before booking.
+                Contact Acharya Sursain Brijwasi for puja enquiries in Raj Nagar Extension,
+                Ghaziabad. Share your required puja, preferred date and society or block location
+                to confirm availability, ritual scope, samagri guidance and quote before booking.
               </p>
               <ContactActions />
               <p className="service-hero-note">Availability and booking details are confirmed manually before payment.</p>
@@ -279,8 +294,8 @@ export default function AcharyaSursainBrijwasiPage() {
                 </div>
                 <div>
                   <MapPin size={16} aria-hidden="true" />
-                  <span>Ghaziabad enquiry</span>
-                  <strong>Locality coverage is confirmed during coordination.</strong>
+                  <span>Raj Nagar Extension enquiry</span>
+                  <strong>Society and block coverage is confirmed during coordination.</strong>
                 </div>
               </div>
             </div>
@@ -318,7 +333,7 @@ export default function AcharyaSursainBrijwasiPage() {
           <div>
             <MapPin size={18} aria-hidden="true" />
             <span>Area</span>
-            <strong>Ghaziabad, Uttar Pradesh</strong>
+            <strong>Raj Nagar Extension, Ghaziabad</strong>
           </div>
           <div>
             <PhoneCall size={18} aria-hidden="true" />
@@ -355,8 +370,7 @@ export default function AcharyaSursainBrijwasiPage() {
               <a href="#about-acharya">About Acharya</a>
               <a href="#puja-enquiry">Puja enquiry support</a>
               <a href="#booking-steps">How to request</a>
-              <a href="#ghaziabad-service">Ghaziabad service info</a>
-              <a href="#ghaziabad-service-areas">Areas served</a>
+              <a href="#rne-service">Raj Nagar Extension service info</a>
               <a href="#booking-clarity">Booking transparency</a>
               <a href="#profile-faqs">FAQs</a>
             </nav>
@@ -367,40 +381,63 @@ export default function AcharyaSursainBrijwasiPage() {
               <span>01</span>
               <h2>About Acharya Sursain Brijwasi</h2>
               <p>
-                Acharya Sursain Brijwasi is available for Ghaziabad puja enquiries through
-                Shastriya Vidhan. Families can share the ceremony name, preferred date,
-                locality, language preference, and samagri needs so the booking desk can
-                confirm availability, ritual scope, duration, and quote before payment.
+                Acharya Sursain Brijwasi is presented on this page for people looking for a
+                Brijwasi Pandit Ji in Raj Nagar Extension, Ghaziabad. Visitors can contact
+                Shastriya Vidhan to submit a puja request and receive manual confirmation of
+                availability, ritual requirements, samagri expectations, and booking details.
+                The page avoids adding unverified biography, credentials, pricing, or outcome claims.
               </p>
             </article>
 
             <article id="puja-enquiry">
               <span>02</span>
-              <h2>Puja enquiry support in Ghaziabad</h2>
+              <h2>Puja enquiry support in Raj Nagar Extension</h2>
               <p>
                 Share the puja or ceremony you need. The team will review the request and confirm
-                whether Acharya Sursain Brijwasi is available and suitable for the required ritual.
-                You can also browse the <Link href="/puja-services">Puja Services</Link> directory,
-                review <Link href="/how-it-works">how booking works</Link>, and read the{" "}
+                whether Acharya Sursain Brijwasi is available and suitable for the required ritual
+                at your Raj Nagar Extension address. You can also browse the{" "}
+                <Link href="/puja-services">Puja Services</Link> directory, review{" "}
+                <Link href="/how-it-works">how booking works</Link>, and read the{" "}
                 <Link href="/pandit-standards">Pandit Ji standards</Link> before sending details.
               </p>
             </article>
 
-            <article id="ghaziabad-service">
+            <article id="rne-service">
               <span>03</span>
-              <h2>Ghaziabad service information</h2>
+              <h2>Raj Nagar Extension service information</h2>
               <p>
-                This profile serves Ghaziabad puja enquiries. Exact locality coverage is confirmed
-                after the customer shares the address or venue details. Travel, samagri, timing,
-                ritual scope, and family participation may affect the final quote, so customers
-                should wait for confirmation before making payment.
+                This profile serves puja enquiries from Raj Nagar Extension, Ghaziabad. Exact
+                society, tower, or block coverage is confirmed after the customer shares the
+                address or venue details. Travel, samagri, timing, ritual scope, and family
+                participation may affect the final quote, so customers should wait for confirmation
+                before making payment.
               </p>
             </article>
           </div>
         </div>
       </section>
 
-      <GhaziabadServiceAreas whatsappHref={profileWhatsAppLink} />
+      <section className="section-apple service-detail-section">
+        <div className="container">
+          <div className="apple-section-header">
+            <span className="apple-eyebrow">Raj Nagar Extension service info</span>
+            <h2>Share exact society or block details.</h2>
+            <p>
+              These details help the booking desk review route feasibility, arrival timing,
+              samagri responsibility, and venue needs before confirming the puja.
+            </p>
+          </div>
+          <div className="service-samagri-grid">
+            {serviceAreaNotes.map((item) => (
+              <article className="service-detail-card" key={item}>
+                <Check size={18} aria-hidden="true" />
+                <h3>{item}</h3>
+                <p>Coverage and practical requirements are confirmed during coordination.</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <section className="section-apple" id="booking-steps">
         <div className="container">
@@ -408,8 +445,8 @@ export default function AcharyaSursainBrijwasiPage() {
             <span className="apple-eyebrow">How to request a booking</span>
             <h2>Send a clear puja enquiry first.</h2>
             <p>
-              A request does not confirm a booking. It starts the review of date, locality,
-              ritual scope, samagri, duration, and quote.
+              A request does not confirm a booking. It starts the review of date, society or
+              block, ritual scope, samagri, duration, and quote.
             </p>
           </div>
           <ol className="booking-guide-list" style={{ listStyle: "none" }}>
@@ -435,10 +472,10 @@ export default function AcharyaSursainBrijwasiPage() {
           </div>
           <div className="service-samagri-grid">
             {bookingChecklist.map((item) => (
-              <div className="service-detail-card" key={item}>
+              <article className="service-detail-card" key={item}>
                 <h3>{item}</h3>
                 <p>Share this detail only as needed for coordination and ritual planning.</p>
-              </div>
+              </article>
             ))}
           </div>
         </div>
@@ -449,9 +486,7 @@ export default function AcharyaSursainBrijwasiPage() {
           <div className="apple-section-header">
             <span className="apple-eyebrow">Booking transparency</span>
             <h2>Confirm the essentials before payment.</h2>
-            <p>
-              The page is designed for careful enquiries, not instant or exaggerated promises.
-            </p>
+            <p>The page is designed for careful enquiries, not instant or exaggerated promises.</p>
           </div>
           <div className="service-inclusion-grid">
             {transparencyItems.map((item) => (
@@ -468,7 +503,7 @@ export default function AcharyaSursainBrijwasiPage() {
         <div className="container">
           <div className="apple-section-header">
             <span className="apple-eyebrow">FAQ</span>
-            <h2>Questions about Pandit Ji in Ghaziabad.</h2>
+            <h2>Questions about Pandit Ji in Raj Nagar Extension, Ghaziabad.</h2>
           </div>
           <div className="apple-accordion-list">
             {faqs.map((faq) => (
@@ -484,17 +519,22 @@ export default function AcharyaSursainBrijwasiPage() {
       <section className="section-apple" id="booking-section">
         <div className="container">
           <div className="apple-product-card" style={{ maxWidth: "920px", margin: "0 auto", textAlign: "left" }}>
-            <span className="apple-product-tag">Ghaziabad puja enquiry</span>
-            <h2 className="apple-product-title">Request Pandit Ji for Puja in Ghaziabad</h2>
+            <span className="apple-product-tag">Raj Nagar Extension puja enquiry</span>
+            <h2 className="apple-product-title">Request Pandit Ji for Puja in Raj Nagar Extension, Ghaziabad</h2>
             <p className="apple-product-desc">
-              Send your puja name, preferred date and Ghaziabad locality. The team will review
+              Send your puja name, preferred date and Raj Nagar Extension society or block. The team will review
               availability and share the next steps, preparation guidance and quote.
             </p>
             <ContactActions compact />
             <p className="service-hero-note">
               You can also use the <Link href="/book-puja">booking request form</Link> or contact the{" "}
-              <Link href="/contact">Shastriya Vidhan booking desk</Link>. Qualified Pandit Ji can{" "}
-              <Link href="/pandit-registration">apply as a Pandit partner</Link> for manual review.
+              <Link href="/contact">Shastriya Vidhan booking desk</Link>.
+            </p>
+            <p className="service-hero-note">
+              Service availability is subject to Pandit Ji schedule, date review, travel feasibility,
+              ritual scope, and samagri confirmation. Puja services are devotional practices.
+              Shastriya Vidhan does not promise medical, legal, financial, relationship, or guaranteed
+              material outcomes.
             </p>
           </div>
         </div>

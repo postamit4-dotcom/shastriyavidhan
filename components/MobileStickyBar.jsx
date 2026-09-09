@@ -3,9 +3,13 @@
 import { useEffect, useMemo, useState } from "react";
 import { usePathname } from "next/navigation";
 import { ClipboardList, MessageCircle, PhoneCall } from "lucide-react";
+import { trackEvent } from "@/lib/analytics";
 import { contact, servicePages } from "@/lib/site-data";
 
-const panditProfilePath = "/pandit-ji/acharya-sursain-brijwasi-ghaziabad";
+const panditProfilePaths = new Set([
+  "/pandit-ji/acharya-sursain-brijwasi-ghaziabad",
+  "/pandit-ji/acharya-sursain-brijwasi-raj-nagar-extension-ghaziabad",
+]);
 
 export default function MobileStickyBar() {
   const pathname = usePathname();
@@ -15,7 +19,7 @@ export default function MobileStickyBar() {
     () => servicePages.some((service) => pathname === `/${service.slug}`),
     [pathname],
   );
-  const isPanditProfilePage = pathname === panditProfilePath;
+  const isPanditProfilePage = panditProfilePaths.has(pathname);
   const shouldShowBar = isServicePage || isPanditProfilePage;
 
   useEffect(() => {
@@ -65,6 +69,12 @@ export default function MobileStickyBar() {
         className="apple-mobile-bar-btn apple-btn-primary"
         id="apple-mobile-book-btn"
         aria-label={primaryAction.ariaLabel}
+        onClick={() =>
+          trackEvent(isPanditProfilePage ? "call_click" : "booking_start", {
+            cta_location: "mobile_sticky",
+            page_type: isPanditProfilePage ? "profile" : "service",
+          })
+        }
       >
         <PrimaryIcon size={15} aria-hidden="true" />
         <span>{primaryAction.label}</span>
@@ -77,6 +87,12 @@ export default function MobileStickyBar() {
         className="apple-mobile-bar-btn apple-btn-secondary"
         id="apple-mobile-whatsapp-btn"
         aria-label="Chat on WhatsApp"
+        onClick={() =>
+          trackEvent("whatsapp_click", {
+            cta_location: "mobile_sticky",
+            page_type: isPanditProfilePage ? "profile" : "service",
+          })
+        }
       >
         <MessageCircle size={15} aria-hidden="true" />
         <span>WhatsApp Us</span>

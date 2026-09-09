@@ -14,6 +14,7 @@ import {
 import BookingOptionButton from "@/components/BookingOptionButton";
 import ContactForm from "@/components/ContactForm";
 import ServiceCard from "@/components/ServiceCard";
+import TrackedContactLink from "@/components/TrackedContactLink";
 import {
   contact,
   getCategoryBySlug,
@@ -422,6 +423,413 @@ const defaultBookingAssurances = [
   },
 ];
 
+const ghaziabadVerifiedAreas = [
+  "Indirapuram",
+  "Vaishali",
+  "Vasundhara",
+  "Raj Nagar",
+  "Raj Nagar Extension",
+  "Crossings Republik",
+  "Kaushambi",
+  "Sahibabad",
+  "Vijay Nagar",
+  "Wave City",
+];
+
+const priceFactorRows = [
+  ["City and travel", "Distance, timing, parking, lift access, and local transport can affect the final quote."],
+  ["Date and timing", "Festival days, muhurat windows, early morning requests, or late-night rituals may change availability."],
+  ["Pandit count", "Some formats can be handled by one Pandit Ji; extended path, jaap, or community rituals may need more."],
+  ["Duration", "Longer vidhi, path count, havan, katha, or family participation naturally changes the service scope."],
+  ["Samagri", "Family-arranged items, complete samagri support, or specialist havan material are confirmed separately."],
+  ["Venue", "Home, shop, office, temple, society hall, or online mode each has different preparation needs."],
+  ["Add-ons", "Havan, bhajan, temple coordination, extra Pandit Ji, prasad, or travel beyond the core area are reviewed first."],
+];
+
+function joinValues(values, fallback = "Confirmed during booking") {
+  return values?.length ? values.join(", ") : fallback;
+}
+
+function formatUpdatedDate(value) {
+  if (!value) return "Confirmed during content review";
+
+  const [year, month, day] = value.split("-").map(Number);
+  if (!year || !month || !day) return value;
+
+  return new Intl.DateTimeFormat("en-IN", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+    timeZone: "Asia/Kolkata",
+  }).format(new Date(Date.UTC(year, month - 1, day)));
+}
+
+function getQuickAnswer(service) {
+  return (
+    service.quickAnswer ||
+    service.intro ||
+    service.sections?.find((section) => /^what is|^about/i.test(section.heading))?.body ||
+    service.description
+  );
+}
+
+function getSuitableFor(service) {
+  if (service.suitableFor?.length) return service.suitableFor.join(", ");
+  if (service.highlights?.length) return service.highlights.join(", ");
+  return "Families and devotees requesting a confirmed puja, path, jaap, katha, or sanskar service";
+}
+
+function getPanditCount(service) {
+  const counts = Array.from(new Set(service.packageOptions?.map((option) => option.panditCount).filter(Boolean)));
+  if (counts.length === 1) return counts[0];
+  if (counts.length > 1) return "Depends on the selected format";
+  return "Confirmed by ritual scope";
+}
+
+function getHavanStatus(service) {
+  const included = joinValues(service.included, "").toLowerCase();
+  const optional = joinValues(service.optional, "").toLowerCase();
+  const combined = [service.description, service.samagri, service.duration, included, optional].join(" ").toLowerCase();
+
+  if (optional.match(/\bhav[ao]n\b/)) return "Optional; confirmed by format and venue safety";
+  if (included.match(/\bhav[ao]n\b/)) return "Included only when listed in the selected format";
+  if (combined.match(/\bhav[ao]n\b/)) return "Confirmed by ritual scope";
+  return "Not assumed; confirmed during booking";
+}
+
+function getBookingNotice(service) {
+  const text = [service.category, service.title, service.description, service.duration].join(" ").toLowerCase();
+  if (service.dateNote || text.includes("festival")) {
+    return "Book early for festival or muhurat slots; exact availability is reviewed before payment.";
+  }
+  if (text.includes("temple") || text.includes("ujjain")) {
+    return "Share date, travel plan, temple preference, and participant details in advance.";
+  }
+  return "Share your preferred date, city, locality, mode, language, and samagri needs for review.";
+}
+
+function buildQuickFacts(service) {
+  return [
+    { label: "Service", value: service.title },
+    { label: "Suitable for", value: getSuitableFor(service) },
+    { label: "Modes", value: joinValues(service.modes), icon: CalendarDays },
+    { label: "Duration", value: service.duration, icon: Clock },
+    { label: "Pandit count", value: getPanditCount(service) },
+    { label: "Languages", value: joinValues(service.languages), icon: Languages },
+    { label: "Havan", value: getHavanStatus(service) },
+    { label: "Samagri", value: service.samagri },
+    { label: "Locations", value: joinValues(service.locations), icon: MapPin },
+    { label: "Price", value: service.priceLabel },
+    { label: "Booking notice", value: getBookingNotice(service) },
+  ];
+}
+
+function modeDescription(mode) {
+  const lower = mode.toLowerCase();
+
+  if (lower.includes("online")) {
+    return "Video participation, device setup, time zone, family-arranged samagri, and ritual suitability are checked before confirmation.";
+  }
+  if (lower.includes("temple")) {
+    return "Temple rules, reporting time, local fees, photography limits, and what the booking covers are reviewed before the visit.";
+  }
+  if (lower.includes("shop") || lower.includes("office") || lower.includes("workplace")) {
+    return "Business-space setup, timing, access, staff participation, samagri, and any account-book or gaddi worship are clarified first.";
+  }
+  if (lower.includes("community") || lower.includes("venue") || lower.includes("society")) {
+    return "Venue permission, seating, sound, fire safety, prasad, timing, and arrival coordination are reviewed before confirmation.";
+  }
+
+  return "Pandit Ji travel, puja space, samagri responsibility, havan safety, parking, lift access, and family participation are confirmed first.";
+}
+
+function relatedServicesForService(service) {
+  const assignment = serviceCategoryAssignments[service.slug];
+  const primarySlug = assignment?.primary;
+
+  return servicePages
+    .filter((item) => {
+      if (item.slug === service.slug) return false;
+      if (primarySlug && serviceCategoryAssignments[item.slug]?.primary === primarySlug) return true;
+      return item.category === service.category;
+    })
+    .slice(0, 6);
+}
+
+function buildServiceTocItems(service, { hasFaqs, relatedServices }) {
+  return [
+    { href: "#about", label: "What is it?" },
+    { href: "#quick-facts", label: "Quick facts" },
+    service.dateNote ? { href: "#when-to-perform", label: "When to perform" } : null,
+    service.serviceFormats?.length ? { href: "#formats", label: "Formats" } : null,
+    service.packageOptions?.length ? { href: "#packages", label: "Packages" } : null,
+    service.comparison?.rows?.length ? { href: "#comparison", label: "Comparison" } : null,
+    service.sections?.length ? { href: "#service-details", label: "Puja details" } : null,
+    service.leelas?.length ? { href: "#devotional-context", label: "Devotional context" } : null,
+    service.samagriGroups?.length ? { href: "#samagri", label: "Samagri" } : null,
+    { href: "#inclusions", label: "Inclusions" },
+    { href: "#pricing", label: "Pricing" },
+    { href: "#locations", label: "Locations" },
+    service.relatedPanditProfile ? { href: "#pandit-authority", label: "Pandit Ji" } : null,
+    service.bookingGuide?.length ? { href: "#booking-process", label: "Booking process" } : null,
+    { href: "#religious-disclaimer", label: "Disclaimer" },
+    hasFaqs ? { href: "#faqs", label: "FAQs" } : null,
+    relatedServices.length ? { href: "#related-services", label: "Related services" } : null,
+    service.relatedLinks?.length ? { href: "#related-guides", label: "Guides" } : null,
+    { href: "#practical-review", label: "Practical review" },
+    { href: "#booking-section", label: "Request quote" },
+  ].filter(Boolean);
+}
+
+function ServiceQuickAnswerSection({ service }) {
+  const facts = buildQuickFacts(service);
+
+  return (
+    <section className="section-apple service-quick-answer-section" id="about">
+      <div className="container service-quick-answer-grid">
+        <article className="service-answer-card">
+          <span className="apple-eyebrow">Quick Answer</span>
+          <h2>What Is {service.title}?</h2>
+          <p>{getQuickAnswer(service)}</p>
+          <p className="service-answer-note">
+            The final vidhi, duration, samagri responsibility, Pandit Ji assignment, location feasibility, and quote
+            are confirmed after your request is reviewed.
+          </p>
+        </article>
+
+        <article className="service-facts-card" id="quick-facts" aria-labelledby={`${service.slug}-quick-facts`}>
+          <span className="apple-eyebrow">Quick Facts</span>
+          <h2 id={`${service.slug}-quick-facts`}>Before You Request</h2>
+          <dl className="service-quick-fact-list">
+            {facts.map((fact) => {
+              const Icon = fact.icon;
+              return (
+                <div key={fact.label}>
+                  <dt>
+                    {Icon ? <Icon size={15} aria-hidden="true" /> : null}
+                    {fact.label}
+                  </dt>
+                  <dd>{fact.value}</dd>
+                </div>
+              );
+            })}
+          </dl>
+        </article>
+      </div>
+    </section>
+  );
+}
+
+function ServicePageToc({ items }) {
+  if (!items.length) return null;
+
+  return (
+    <section className="service-page-toc-section" aria-label="Service page contents">
+      <div className="container">
+        <nav className="service-page-toc">
+          {items.map((item) => (
+            <a key={item.href} href={item.href}>
+              {item.label}
+            </a>
+          ))}
+        </nav>
+      </div>
+    </section>
+  );
+}
+
+function ServicePricingSection({ service }) {
+  return (
+    <section className="section-apple service-detail-section service-pricing-section" id="pricing">
+      <div className="container">
+        <div className="apple-section-header">
+          <span className="apple-eyebrow">Quote Clarity</span>
+          <h2>{service.title} Price and Cost Factors</h2>
+          <p>
+            {service.priceLabel === "Request exact quote" || service.priceLabel === "Request written quote"
+              ? "The final price is shared only after location, date, Pandit count, ritual duration, samagri, havan, travel, and requested additions are reviewed."
+              : `${service.priceLabel} is shown as the current public pricing note. Final inclusions, exclusions, travel, samagri, and timing should still be confirmed before payment.`}
+          </p>
+        </div>
+
+        <div className="service-table-wrap">
+          <table className="service-comparison-table">
+            <thead>
+              <tr>
+                <th scope="col">Factor</th>
+                <th scope="col">Why it affects the quote</th>
+              </tr>
+            </thead>
+            <tbody>
+              {priceFactorRows.map(([factor, reason]) => (
+                <tr key={factor}>
+                  <th scope="row">{factor}</th>
+                  <td>{reason}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ServiceLocationsModesSection({ service }) {
+  const hasGhaziabad = service.locations.some((location) => /ghaziabad/i.test(location));
+
+  return (
+    <section className="section-apple service-detail-section service-location-mode-section" id="locations">
+      <div className="container">
+        <div className="apple-section-header">
+          <span className="apple-eyebrow">Locations and Modes</span>
+          <h2>Where Is {service.title} Available?</h2>
+          <p>
+            Use the listed locations as request areas, not automatic confirmation. Travel, society access, parking,
+            temple rules, online suitability, language preference, and local support are reviewed before payment.
+          </p>
+        </div>
+
+        <div className="service-location-mode-grid">
+          <article className="service-location-card">
+            <h3>Verified request areas</h3>
+            <div className="service-location-chip-grid" aria-label="Service locations">
+              {service.locations.map((location) => (
+                <span key={location}>{location}</span>
+              ))}
+            </div>
+            {hasGhaziabad ? (
+              <div className="service-locality-note">
+                <strong>Ghaziabad localities:</strong>
+                <span>{ghaziabadVerifiedAreas.join(", ")}.</span>
+              </div>
+            ) : null}
+          </article>
+
+          <article className="service-location-card">
+            <h3>Home, temple, venue or online options</h3>
+            <div className="service-mode-list">
+              {service.modes.map((mode) => (
+                <div key={mode}>
+                  <strong>{mode}</strong>
+                  <p>{modeDescription(mode)}</p>
+                </div>
+              ))}
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ServiceDisclaimerSection({ service }) {
+  const isGrahaDoshPage = service.grahaDoshHub || /graha|dosh|shanti|kaal sarp/i.test(service.category);
+
+  return (
+    <section className="section-apple service-disclaimer-section" id="religious-disclaimer">
+      <div className="container">
+        <article className="service-disclaimer-card">
+          <span className="apple-eyebrow">Religious and Outcome Clarity</span>
+          <h2>{service.title} Is a Devotional Service</h2>
+          <p>
+            {service.title} is a religious and devotional practice performed according to the confirmed tradition and
+            ritual scope. Shastriya Vidhan does not guarantee medical, financial, legal, relationship, career,
+            astrological, supernatural, or other material outcomes. A Puja is not a substitute for professional
+            medical, legal, financial, or psychological support.
+          </p>
+          {isGrahaDoshPage ? (
+            <p>
+              Life circumstances or symptoms do not prove the presence of a Graha Dosh. Kundli-related conclusions
+              should be discussed with a suitably qualified expert before choosing a remedial ritual.
+            </p>
+          ) : null}
+        </article>
+      </div>
+    </section>
+  );
+}
+
+function ServiceReviewStatusSection({ service }) {
+  return (
+    <section className="section-apple service-detail-section" id="practical-review">
+      <div className="container">
+        <article className="service-review-panel">
+          <div>
+            <span className="apple-eyebrow">Before booking</span>
+            <h2>Practical details to confirm</h2>
+            <p>
+              Ritual sequence, samagri, location coverage, duration, and quote can vary by family tradition,
+              city, venue, and selected format. Confirm the final details before payment.
+            </p>
+          </div>
+
+          <dl className="service-review-list">
+            <div>
+              <dt>Preparation owner</dt>
+              <dd>Booking desk and assigned Pandit Ji</dd>
+            </div>
+            <div>
+              <dt>Ritual confirmation</dt>
+              <dd>Final vidhi and samagri are confirmed during booking coordination</dd>
+            </div>
+            <div>
+              <dt>Details to confirm</dt>
+              <dd>Vidhi, terminology, samagri, inclusions, exclusions, and practical booking clarity.</dd>
+            </div>
+            <div>
+              <dt>Page updated</dt>
+              <dd>{formatUpdatedDate(service.updated)}</dd>
+            </div>
+          </dl>
+
+          {service.reviewNote ? (
+            <div className="service-review-note">
+              <h3>{service.reviewNote.heading}</h3>
+              <p>{service.reviewNote.body}</p>
+              {service.reviewNote.items?.length ? (
+                <ul>
+                  {service.reviewNote.items.map((item) => (
+                    <li key={item}>
+                      <Check size={16} aria-hidden="true" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
+            </div>
+          ) : null}
+        </article>
+      </div>
+    </section>
+  );
+}
+
+function ServiceRelatedServicesSection({ service, services }) {
+  if (!services.length) return null;
+
+  return (
+    <section className="section-apple service-detail-section" id="related-services">
+      <div className="container">
+        <div className="apple-section-header">
+          <span className="apple-eyebrow">Related Puja Services</span>
+          <h2>Compare nearby services before booking.</h2>
+          <p>
+            These links stay close to the same category or religious context so users can choose the right ritual
+            instead of jumping through unrelated popular pages.
+          </p>
+        </div>
+
+        <div className="apple-products-grid">
+          {services.map((relatedService) => (
+            <ServiceCard key={relatedService.slug} service={relatedService} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function ServiceActionLink({ href, children, className, ...props }) {
   if (!href) return null;
 
@@ -532,7 +940,7 @@ function ServiceFormatsSection({ service }) {
   if (!service.serviceFormats?.length) return null;
 
   return (
-    <section className="section-apple service-detail-section">
+    <section className="section-apple service-detail-section" id="formats">
       <div className="container">
         <div className="apple-section-header">
           <span className="apple-eyebrow">{service.serviceFormatsEyebrow || "Formats"}</span>
@@ -576,7 +984,7 @@ function ServicePackageSection({ service }) {
   if (!service.packageOptions?.length) return null;
 
   return (
-    <section className="section-apple service-detail-section">
+    <section className="section-apple service-detail-section" id="packages">
       <div className="container">
         <div className="apple-section-header">
           <span className="apple-eyebrow">{service.packageOptionsEyebrow || "Options"}</span>
@@ -638,7 +1046,7 @@ function ServiceComparisonSection({ service }) {
   if (!service.comparison?.rows?.length) return null;
 
   return (
-    <section className="section-apple service-detail-section">
+    <section className="section-apple service-detail-section" id="comparison">
       <div className="container">
         <div className="apple-section-header">
           <span className="apple-eyebrow">{service.comparison.eyebrow || "Comparison"}</span>
@@ -678,7 +1086,7 @@ function ServiceSamagriSection({ service }) {
   if (!service.samagriGroups?.length) return null;
 
   return (
-    <section className="section-apple service-detail-section">
+    <section className="section-apple service-detail-section" id="samagri">
       <div className="container">
         <div className="apple-section-header">
           <span className="apple-eyebrow">{service.samagriGroupsEyebrow || "Preparation"}</span>
@@ -710,11 +1118,11 @@ function ServiceRelatedLinksSection({ service }) {
   if (!service.relatedLinks?.length) return null;
 
   return (
-    <section className="section-apple service-detail-section">
+    <section className="section-apple service-detail-section" id="related-guides">
       <div className="container">
         <div className="apple-section-header">
           <span className="apple-eyebrow">Related guidance</span>
-          <h2>Useful links before booking.</h2>
+          <h2>Preparation Guides for {service.title}.</h2>
         </div>
 
         <div className="service-related-link-row">
@@ -733,7 +1141,7 @@ function RelatedPanditProfileSection({ profile }) {
   if (!profile) return null;
 
   return (
-    <section className="section-apple service-detail-section">
+    <section className="section-apple service-detail-section" id="pandit-authority">
       <div className="container">
         <article className="apple-product-card" style={{ maxWidth: "900px", margin: "0 auto", textAlign: "left" }}>
           <span className="apple-product-tag">{profile.eyebrow}</span>
@@ -773,6 +1181,8 @@ export default async function ServicePage({ params }) {
   const primaryCategory = assignment?.primary ? getCategoryBySlug(assignment.primary) : undefined;
   const bookingAssurances = service.bookingAssurances || defaultBookingAssurances;
   const whatsappLink = service.whatsappLink || contact.whatsappLink;
+  const relatedServices = relatedServicesForService(service);
+  const tocItems = buildServiceTocItems(service, { hasFaqs, relatedServices });
 
   return (
     <>
@@ -812,23 +1222,35 @@ export default async function ServicePage({ params }) {
               <h1>{pageH1}</h1>
               <p>{service.description}</p>
               <div className="service-hero-actions">
-                <a href="#booking-section" className="apple-btn-pill apple-btn-primary">
+                <TrackedContactLink
+                  href="#booking-section"
+                  className="apple-btn-pill apple-btn-primary"
+                  eventName="booking_start"
+                  params={{ service_slug: service.slug, cta_location: "service_hero", page_type: "service" }}
+                >
                   {service.primaryCtaLabel || "Request Quote"}
-                </a>
-                <a
+                </TrackedContactLink>
+                <TrackedContactLink
                   href={whatsappLink}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="apple-btn-pill apple-btn-secondary"
+                  eventName="whatsapp_click"
+                  params={{ service_slug: service.slug, cta_location: "service_hero", page_type: "service" }}
                 >
                   <MessageCircle size={17} aria-hidden="true" />
                   {service.whatsappCtaLabel || "WhatsApp Assistance"}
-                </a>
+                </TrackedContactLink>
                 {service.callCtaLabel ? (
-                  <a href={`tel:${contact.phone}`} className="apple-btn-pill apple-btn-secondary">
+                  <TrackedContactLink
+                    href={`tel:${contact.phone}`}
+                    className="apple-btn-pill apple-btn-secondary"
+                    eventName="call_click"
+                    params={{ service_slug: service.slug, cta_location: "service_hero", page_type: "service" }}
+                  >
                     <PhoneCall size={17} aria-hidden="true" />
                     {service.callCtaLabel}
-                  </a>
+                  </TrackedContactLink>
                 ) : null}
               </div>
               <p className="service-hero-note">
@@ -857,33 +1279,11 @@ export default async function ServicePage({ params }) {
         </div>
       </section>
 
-      <section className="service-specs-bar">
-        <div className="container service-specs-grid">
-          <div>
-            <Clock size={18} aria-hidden="true" />
-            <span>Duration</span>
-            <strong>{service.duration}</strong>
-          </div>
-          <div>
-            <MapPin size={18} aria-hidden="true" />
-            <span>Locations</span>
-            <strong>{service.locations.join(", ")}</strong>
-          </div>
-          <div>
-            <Languages size={18} aria-hidden="true" />
-            <span>Languages</span>
-            <strong>{service.languages.join(", ")}</strong>
-          </div>
-          <div>
-            <CalendarDays size={18} aria-hidden="true" />
-            <span>Format</span>
-            <strong>{service.modes.join(" • ")}</strong>
-          </div>
-        </div>
-      </section>
+      <ServiceQuickAnswerSection service={service} />
+      <ServicePageToc items={tocItems} />
 
       {service.dateNote ? (
-        <section className="section-apple janmashtami-date-section">
+        <section className="section-apple janmashtami-date-section" id="when-to-perform">
           <div className="container">
             <div className="date-note-card">
               <div>
@@ -905,20 +1305,18 @@ export default async function ServicePage({ params }) {
       <ServicePackageSection service={service} />
       <ServiceComparisonSection service={service} />
 
-      <section className="section-apple service-longform-section">
+      <section className="section-apple service-longform-section" id="service-details">
         <div className="container service-content-shell">
-          {service.tableOfContents?.length ? (
-            <aside className="service-toc-card" aria-label="Page contents">
-              <span className="apple-eyebrow">On this page</span>
-              <nav>
-                {service.tableOfContents.map((item, index) => (
-                  <a key={item} href={`#section-${index + 1}`}>
-                    {item}
-                  </a>
-                ))}
-              </nav>
-            </aside>
-          ) : null}
+          <aside className="service-toc-card" aria-label="Service page contents">
+            <span className="apple-eyebrow">On this page</span>
+            <nav>
+              {tocItems.map((item) => (
+                <a key={item.href} href={item.href}>
+                  {item.label}
+                </a>
+              ))}
+            </nav>
+          </aside>
 
           <div className="service-article-stack">
             {service.sections.map((section, index) => (
@@ -938,7 +1336,7 @@ export default async function ServicePage({ params }) {
       </section>
 
       {service.leelas?.length ? (
-        <section className="section-apple janmashtami-leela-section">
+        <section className="section-apple janmashtami-leela-section" id="devotional-context">
           <div className="container">
             <div className="apple-section-header">
               <span className="apple-eyebrow">Krishna Leelas</span>
@@ -961,10 +1359,8 @@ export default async function ServicePage({ params }) {
       ) : null}
 
       <ServiceSamagriSection service={service} />
-      <ServiceRelatedLinksSection service={service} />
-      <RelatedPanditProfileSection profile={service.relatedPanditProfile} />
 
-      <section className="section-apple">
+      <section className="section-apple" id="inclusions">
         <div className="container">
           <div className="apple-section-header">
             <span className="apple-eyebrow">Clarity</span>
@@ -1012,8 +1408,12 @@ export default async function ServicePage({ params }) {
         </div>
       </section>
 
+      <ServicePricingSection service={service} />
+      <ServiceLocationsModesSection service={service} />
+      <RelatedPanditProfileSection profile={service.relatedPanditProfile} />
+
       {service.bookingGuide?.length ? (
-        <section className="section-apple booking-guide-section">
+        <section className="section-apple booking-guide-section" id="booking-process">
           <div className="container">
             <div className="apple-section-header">
               <span className="apple-eyebrow">How to Book</span>
@@ -1035,8 +1435,10 @@ export default async function ServicePage({ params }) {
         </section>
       ) : null}
 
+      <ServiceDisclaimerSection service={service} />
+
       {hasFaqs ? (
-        <section className="section-apple service-faq-section">
+        <section className="section-apple service-faq-section" id="faqs">
           <div className="container">
             <div className="apple-section-header">
               <span className="apple-eyebrow">FAQ</span>
@@ -1054,27 +1456,9 @@ export default async function ServicePage({ params }) {
         </section>
       ) : null}
 
-      {service.reviewNote ? (
-        <section className="section-apple service-detail-section">
-          <div className="container">
-            <article className="apple-product-card" style={{ maxWidth: "920px", margin: "0 auto", textAlign: "left" }}>
-              <span className="apple-product-tag">Review note</span>
-              <h2 className="apple-product-title">{service.reviewNote.heading}</h2>
-              <p className="apple-product-desc">{service.reviewNote.body}</p>
-              {service.reviewNote.items?.length ? (
-                <ul>
-                  {service.reviewNote.items.map((item) => (
-                    <li key={item}>
-                      <Check size={16} aria-hidden="true" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              ) : null}
-            </article>
-          </div>
-        </section>
-      ) : null}
+      <ServiceRelatedServicesSection service={service} services={relatedServices} />
+      <ServiceRelatedLinksSection service={service} />
+      <ServiceReviewStatusSection service={service} />
 
       <section className="section-apple" id="booking-section" style={{ backgroundColor: "var(--apple-gray-bg)" }}>
         <div className="container">

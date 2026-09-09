@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { ChevronRight, MapPin, MessageCircle, PhoneCall } from "lucide-react";
+import { ChevronRight, MapPin, MessageCircle, PhoneCall, UserPlus } from "lucide-react";
 import ContactForm from "@/components/ContactForm";
 import PanditJiPicture from "@/components/PanditJiPicture";
+import TrackedContactLink from "@/components/TrackedContactLink";
 import { acharyaSursainProfile, contact } from "@/lib/site-data";
 import { basePageMetadata, contactPageJsonLd } from "@/lib/seo";
 
@@ -47,9 +48,15 @@ export default function ContactPage() {
               </div>
               <h2 style={{ fontSize: "1.1rem", fontWeight: 700, marginBottom: "4px" }}>Call Booking Desk</h2>
               <p style={{ fontSize: "0.88rem", color: "var(--muted-text)", marginBottom: "12px" }}>Response window is confirmed by the booking desk</p>
-              <a href={`tel:${contact.phone}`} className="btn-pill btn-sm btn-outline" style={{ width: "100%" }}>
+              <TrackedContactLink
+                href={`tel:${contact.phone}`}
+                className="btn-pill btn-sm btn-outline"
+                eventName="call_click"
+                params={{ cta_location: "contact_card", page_type: "contact" }}
+                style={{ width: "100%" }}
+              >
                 {contact.displayPhone}
-              </a>
+              </TrackedContactLink>
             </div>
 
             {/* WhatsApp */}
@@ -59,9 +66,17 @@ export default function ContactPage() {
               </div>
               <h2 style={{ fontSize: "1.1rem", fontWeight: 700, marginBottom: "4px" }}>WhatsApp Assistance</h2>
               <p style={{ fontSize: "0.88rem", color: "var(--muted-text)", marginBottom: "12px" }}>Manual response and samagri guidance</p>
-              <a href={contact.whatsappLink} target="_blank" rel="noopener noreferrer" className="btn-pill btn-sm btn-whatsapp" style={{ width: "100%" }}>
+              <TrackedContactLink
+                href={contact.whatsappLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-pill btn-sm btn-whatsapp"
+                eventName="whatsapp_click"
+                params={{ cta_location: "contact_card", page_type: "contact" }}
+                style={{ width: "100%" }}
+              >
                 Chat on WhatsApp
-              </a>
+              </TrackedContactLink>
             </div>
 
             {/* Service Hubs */}
@@ -74,6 +89,21 @@ export default function ContactPage() {
               <span className="badge-pill badge-saffron" style={{ display: "inline-block" }}>
                 Request areas listed
               </span>
+            </div>
+
+            <div style={{ backgroundColor: "var(--white)", borderRadius: "var(--radius-lg)", padding: "24px", border: "1px solid var(--line-soft)", textAlign: "center" }}>
+              <div style={{ width: "48px", height: "48px", borderRadius: "var(--radius-md)", backgroundColor: "var(--saffron-surface)", color: "var(--saffron-dark)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 12px" }}>
+                <UserPlus size={22} />
+              </div>
+              <h2 style={{ fontSize: "1.1rem", fontWeight: 700, marginBottom: "4px" }}>Pandit Ji Registration</h2>
+              <p style={{ fontSize: "0.88rem", color: "var(--muted-text)", marginBottom: "12px" }}>Apply to join the Shastriya Vidhan network through the dedicated review form.</p>
+              <Link
+                href="/pandit-registration"
+                className="btn-pill btn-sm btn-outline"
+                style={{ width: "100%", whiteSpace: "normal" }}
+              >
+                Register as a Pandit Ji
+              </Link>
             </div>
 
             <div style={{ backgroundColor: "var(--white)", borderRadius: "var(--radius-lg)", padding: "24px", border: "1px solid var(--line-soft)", textAlign: "center" }}>

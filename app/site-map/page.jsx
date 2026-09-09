@@ -6,7 +6,7 @@ import { siteNodes } from "@/lib/site-registry";
 export const metadata = basePageMetadata({
   title: "Site Map",
   description:
-    "Browse the complete Shastriya Vidhan route registry, including live, conditional, temporary, service, guide, help, location, and policy pages.",
+    "Browse Shastriya Vidhan pages for puja services, guides, locations, help, booking, policies, and public site notices.",
   path: "/site-map",
 });
 
@@ -30,27 +30,26 @@ const groupLabels = {
   about: "About",
   profile: "Pandit Ji Profiles",
   trust: "Trust",
+  partner_registration: "Pandit Registration",
   help: "Help",
   contact: "Contact",
   booking: "Booking",
   policy: "Policies",
   html_sitemap: "Site Structure",
-  internal_status: "Internal Status",
-  content_review: "Content Review",
+  site_notice: "Site Notices",
+  archive_notice: "Archives",
   location: "Location Pages",
 };
 
 function routeStatusLabel(route) {
-  if (route.publicationState === "temporary") return "Temporary";
-  if (route.publicationState === "conditional") return "Review gated";
-  if (!route.indexable) return "Noindex";
-  return "Live";
+  if (route.publicationState === "temporary") return "Available as a site notice";
+  if (route.publicationState === "conditional") return "Availability details pending";
+  if (!route.indexable) return "Support page";
+  return "Available";
 }
 
 function routeStatusDetail(route) {
-  const status = routeStatusLabel(route);
-  const indexState = route.indexable && route.publicationState === "live" ? "indexable" : "noindex";
-  return `${status} - ${indexState}`;
+  return routeStatusLabel(route);
 }
 
 export default function SiteMapPage() {
@@ -70,8 +69,8 @@ export default function SiteMapPage() {
             <span className="apple-eyebrow">Complete route registry</span>
             <h1>Site Map</h1>
             <p>
-              This page lists every route currently registered for Shastriya Vidhan, including live pages,
-              conditional review pages, noindex support routes, temporary migration pages, and service-category pages.
+              This page lists the registered Shastriya Vidhan routes so visitors can find puja services, guides,
+              locations, booking help, policies, and public site notices from one place.
             </p>
           </div>
         </div>

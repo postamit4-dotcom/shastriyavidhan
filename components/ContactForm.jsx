@@ -9,6 +9,7 @@ import {
   MessageCircle, 
   ShieldCheck 
 } from "lucide-react";
+import { trackEvent, slugifyAnalyticsValue } from "@/lib/analytics";
 import { contact, servicePages } from "@/lib/site-data";
 
 const initialState = {
@@ -24,6 +25,7 @@ const initialState = {
   email: "",
   address: "",
   instructions: "",
+  website: "",
 };
 
 const steps = [
@@ -61,6 +63,21 @@ const samagriOptions = [
   "Provide Samagri Checklist (I will arrange)",
   "Need Guidance on Samagri Checklist",
 ];
+
+const fieldStepMap = {
+  service: 0,
+  mode: 0,
+  city: 0,
+  preferredDate: 1,
+  preferredTime: 1,
+  language: 1,
+  samagri: 1,
+  name: 2,
+  phone: 2,
+  email: 2,
+  address: 2,
+  instructions: 2,
+};
 
 function normalizeServiceOption(option) {
   if (!option) return null;
@@ -119,6 +136,14 @@ export default function ContactForm({
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState("");
   const [prefillNotice, setPrefillNotice] = useState("");
+  const [hasStarted, setHasStarted] = useState(false);
+
+  const safeAnalyticsParams = () => ({
+    service_slug: slugifyAnalyticsValue(formData.service),
+    city_slug: slugifyAnalyticsValue(formData.city),
+    booking_mode: slugifyAnalyticsValue(formData.mode),
+    page_type: "booking_form",
+  });
 
   useEffect(() => {
     const handleBookingPrefill = (event) => {
@@ -189,6 +214,13 @@ export default function ContactForm({
 
   const updateField = (field, value) => {
     setFormData((previous) => ({ ...previous, [field]: value }));
+    if (!hasStarted && field !== "website") {
+      setHasStarted(true);
+      trackEvent("booking_start", {
+        cta_location: "form_interaction",
+        page_type: "booking_form",
+      });
+    }
 
     if (errors[field]) {
       setErrors((previous) => {
@@ -216,8 +248,8 @@ export default function ContactForm({
     } else if (step === 2) {
       if (!formData.name.trim()) errs.name = "Please enter your name.";
       const phoneDigits = formData.phone.replace(/\D/g, "");
-      if (!phoneDigits || phoneDigits.length < 10) {
-        errs.phone = "Please enter a valid 10-digit mobile number.";
+      if (!phoneDigits || phoneDigits.length < 10 || phoneDigits.length > 15) {
+        errs.phone = "Please enter a valid phone number.";
       }
     }
     setErrors(errs);
@@ -228,7 +260,16 @@ export default function ContactForm({
 
   const handleNext = () => {
     if (validateStep(currentStep, true)) {
+      trackEvent("booking_step_complete", {
+        ...safeAnalyticsParams(),
+        step_number: currentStep + 1,
+      });
       goToStep(currentStep + 1);
+    } else {
+      trackEvent("booking_form_error", {
+        ...safeAnalyticsParams(),
+        step_number: currentStep + 1,
+      });
     }
   };
 
@@ -243,16 +284,19 @@ export default function ContactForm({
 
     if (!validateStep(0, true)) {
       goToStep(0);
+      trackEvent("booking_form_error", { ...safeAnalyticsParams(), step_number: 1 });
       return;
     }
 
     if (!validateStep(1, true)) {
       goToStep(1);
+      trackEvent("booking_form_error", { ...safeAnalyticsParams(), step_number: 2 });
       return;
     }
 
     if (!validateStep(2, true)) {
       goToStep(2);
+      trackEvent("booking_form_error", { ...safeAnalyticsParams(), step_number: 3 });
       return;
     }
 
@@ -265,6 +309,8 @@ export default function ContactForm({
         body: JSON.stringify({
           ...formData,
           message: formData.instructions,
+          sourcePage: window.location.pathname,
+          ctaLocation: "booking_form",
           submittedAt: new Date().toISOString(),
         }),
       });
@@ -275,17 +321,35 @@ export default function ContactForm({
         try {
           const result = await response.json();
           if (result?.error) message = result.error;
+          if (result?.fieldErrors && typeof result.fieldErrors === "object") {
+            setErrors(result.fieldErrors);
+            const firstField = Object.keys(result.fieldErrors).find((field) => fieldStepMap[field] !== undefined);
+            if (firstField) goToStep(fieldStepMap[firstField]);
+            setPendingInvalidFocus(true);
+          }
         } catch {
           // Keep the generic fallback message.
         }
 
         setSubmitError(message);
+        trackEvent("booking_form_error", {
+          ...safeAnalyticsParams(),
+          reason: response.status ? `status_${response.status}` : "request_failed",
+        });
         return;
       }
 
       setSubmitted(true);
+      trackEvent("generate_lead", {
+        ...safeAnalyticsParams(),
+        lead_source: "booking_form",
+      });
     } catch {
       setSubmitError("The request could not be submitted. Please try WhatsApp or call the booking desk.");
+      trackEvent("booking_form_error", {
+        ...safeAnalyticsParams(),
+        reason: "network",
+      });
     } finally {
       setSubmitting(false);
     }
@@ -405,6 +469,19 @@ Please check Pandit Ji availability and share the quote.`;
       </div>
 
       <form onSubmit={(e) => e.preventDefault()} aria-label="Puja Booking Form">
+        <div className="registration-honeypot" aria-hidden="true">
+          <label htmlFor="apple-website">Website</label>
+          <input
+            id="apple-website"
+            name="website"
+            type="text"
+            autoComplete="off"
+            tabIndex={-1}
+            value={formData.website}
+            onChange={(e) => updateField("website", e.target.value)}
+          />
+        </div>
+
         <div className={`form-step-panel ${stepDirection === "back" ? "back" : "forward"}`} key={currentStep}>
         {/* STEP 0: Service & Mode */}
         {currentStep === 0 && (
@@ -720,6 +797,7 @@ Please check Pandit Ji availability and share the quote.`;
               target="_blank"
               rel="noopener noreferrer"
               className="apple-link apple-link-sm"
+              onClick={() => trackEvent("whatsapp_click", { cta_location: "booking_form_help", page_type: "booking_form" })}
             >
               <span>Questions? WhatsApp us</span>
               <ChevronRight size={13} className="apple-link-chevron" aria-hidden="true" />
@@ -742,6 +820,7 @@ Please check Pandit Ji availability and share the quote.`;
                 target="_blank"
                 rel="noopener noreferrer"
                 className="apple-btn-pill apple-btn-secondary"
+                onClick={() => trackEvent("whatsapp_click", { ...safeAnalyticsParams(), cta_location: "booking_review" })}
               >
                 <MessageCircle size={16} aria-hidden="true" />
                 WhatsApp Request

@@ -20,7 +20,6 @@ import ContactForm from "@/components/ContactForm";
 import {
   contact,
   getGrahaDoshShantiServices,
-  grahaDoshShantiCatalogueIssues,
   grahaDoshShantiHub,
   isGrahaDoshShantiHubIndexable,
   locationPages,
@@ -109,7 +108,7 @@ const serviceFieldList = [
   "available modes and locations",
   "inclusions, exclusions, quote process, and booking steps",
   "preparation instructions",
-  "reviewer, last-reviewed details, disclaimers, and policies",
+  "source clarity, practical disclaimers, and applicable policies",
 ];
 
 const bookingChecklist = [
@@ -331,43 +330,43 @@ function ComparisonTable({ services }) {
 }
 
 function ReviewStatus() {
-  const issues = grahaDoshShantiCatalogueIssues();
-  const missingReview = issues.filter((issue) => issue.startsWith("Missing"));
-
   return (
-    <section className="section-apple gds-review-section" aria-labelledby="review-heading">
+    <section className="section-apple gds-review-section" aria-labelledby="guidance-heading">
       <div className="container">
         <div className="gds-review-panel">
-          <span className="apple-eyebrow">Review status</span>
-          <h2 id="review-heading">Catalogue review signal</h2>
+          <span className="apple-eyebrow">Careful guidance</span>
+          <h2 id="guidance-heading">Choose remedial pujas with human review.</h2>
           <div className="gds-review-grid">
             <div>
-              <span>Catalogue owner</span>
-              <strong>{grahaDoshShantiHub.review.catalogueOwner || "Not recorded yet"}</strong>
+              <span>Ritual fit</span>
+              <strong>Confirmed before booking</strong>
             </div>
             <div>
-              <span>Religious reviewer</span>
-              <strong>{grahaDoshShantiHub.review.religiousReviewer || "Not recorded yet"}</strong>
+              <span>Kundli context</span>
+              <strong>Discuss with a qualified expert</strong>
             </div>
             <div>
-              <span>Last reviewed</span>
-              <strong>{grahaDoshShantiHub.review.reviewedAt || "Not recorded yet"}</strong>
+              <span>Booking status</span>
+              <strong>Manual availability review</strong>
             </div>
           </div>
           <p>
-            This route is previewable for content and implementation review. It remains noindex until a human catalogue
-            owner, named religious reviewer, and real last-reviewed date are added to the repository.
+            Graha and Dosh Shanti requests should be handled carefully. Share the exact term you were given,
+            the desired city or temple preference, and your timing needs so the booking desk can explain which
+            services may be suitable without making fear-based or guaranteed outcome claims.
           </p>
-          {missingReview.length > 0 ? (
-            <ul>
-              {missingReview.map((issue) => (
-                <li key={issue}>
-                  <ShieldCheck size={16} aria-hidden="true" />
-                  <span>{issue}</span>
-                </li>
-              ))}
-            </ul>
-          ) : null}
+          <ul>
+            {[
+              "Do not treat symptoms or life events as proof of a dosh.",
+              "Confirm vidhi, samagri, location, duration, and quote before payment.",
+              "Use the booking desk for human explanation when the correct service is unclear.",
+            ].map((item) => (
+              <li key={item}>
+                <ShieldCheck size={16} aria-hidden="true" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>
