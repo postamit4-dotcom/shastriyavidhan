@@ -1,12 +1,12 @@
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { basePageMetadata } from "@/lib/seo";
-import { siteNodes } from "@/lib/site-registry";
+import { sitemapNodes } from "@/lib/site-registry";
 
 export const metadata = basePageMetadata({
   title: "Site Map",
   description:
-    "Browse Shastriya Vidhan pages for puja services, guides, locations, help, booking, policies, and public site notices.",
+    "Browse published Shastriya Vidhan pages for puja services, guides, locations, booking help, policies, and trust information.",
   path: "/site-map",
 });
 
@@ -36,24 +36,12 @@ const groupLabels = {
   booking: "Booking",
   policy: "Policies",
   html_sitemap: "Site Structure",
-  site_notice: "Site Notices",
-  archive_notice: "Archives",
   location: "Location Pages",
 };
 
-function routeStatusLabel(route) {
-  if (route.publicationState === "temporary") return "Available as a site notice";
-  if (route.publicationState === "conditional") return "Availability details pending";
-  if (!route.indexable) return "Support page";
-  return "Available";
-}
-
-function routeStatusDetail(route) {
-  return routeStatusLabel(route);
-}
-
 export default function SiteMapPage() {
-  const groupedRoutes = groupRoutes(siteNodes);
+  const publishedRoutes = sitemapNodes();
+  const groupedRoutes = groupRoutes(publishedRoutes);
 
   return (
     <>
@@ -66,11 +54,11 @@ export default function SiteMapPage() {
           </nav>
 
           <div className="apple-section-header" style={{ marginBottom: "24px" }}>
-            <span className="apple-eyebrow">Complete route registry</span>
+            <span className="apple-eyebrow">Published pages</span>
             <h1>Site Map</h1>
             <p>
-              This page lists the registered Shastriya Vidhan routes so visitors can find puja services, guides,
-              locations, booking help, policies, and public site notices from one place.
+              This directory links to published Shastriya Vidhan pages that are intended for public discovery.
+              Technical review notes, redirects, and temporary archive pages stay out of public navigation.
             </p>
           </div>
         </div>
@@ -89,16 +77,8 @@ export default function SiteMapPage() {
                       <span className="plus-marker">+</span>
                       <span>
                         <Link href={route.href}>{route.label}</Link>
-                        <span
-                          style={{
-                            display: "block",
-                            marginTop: "3px",
-                            color: "var(--text-tertiary)",
-                            fontSize: "0.78rem",
-                            lineHeight: 1.35,
-                          }}
-                        >
-                          {route.href} - {routeStatusDetail(route)}
+                        <span style={{ display: "block", marginTop: "3px", color: "var(--text-tertiary)", fontSize: "0.78rem", lineHeight: 1.35 }}>
+                          {route.href}
                         </span>
                       </span>
                     </li>

@@ -11,6 +11,23 @@ const panditProfilePaths = new Set([
   "/pandit-ji/acharya-sursain-brijwasi-raj-nagar-extension-ghaziabad",
 ]);
 
+const profileWhatsAppLinks = {
+  "/pandit-ji/acharya-sursain-brijwasi-raj-nagar-extension-ghaziabad": `https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(
+    `Namaste, I need a Pandit Ji in Raj Nagar Extension, Ghaziabad.
+
+Puja:
+Preferred date:
+Preferred time:
+Society/locality:
+Samagri assistance needed:
+
+Please confirm Acharya Sursain Brijwasi's availability and the quote.`,
+  )}`,
+  "/pandit-ji/acharya-sursain-brijwasi-ghaziabad": `https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(
+    "Namaste, I would like to enquire about booking Acharya Sursain Brijwasi for a puja in Ghaziabad. Please share availability, process and quote.",
+  )}`,
+};
+
 export default function MobileStickyBar() {
   const pathname = usePathname();
   const [isSuppressed, setIsSuppressed] = useState(false);
@@ -61,6 +78,7 @@ export default function MobileStickyBar() {
         Icon: ClipboardList,
       };
   const PrimaryIcon = primaryAction.Icon;
+  const whatsappHref = profileWhatsAppLinks[pathname] || contact.whatsappLink;
 
   return (
     <aside className="apple-mobile-bar" aria-label="Mobile quick actions">
@@ -81,7 +99,7 @@ export default function MobileStickyBar() {
       </a>
 
       <a
-        href={contact.whatsappLink}
+        href={whatsappHref}
         target="_blank"
         rel="noopener noreferrer"
         className="apple-mobile-bar-btn apple-btn-secondary"

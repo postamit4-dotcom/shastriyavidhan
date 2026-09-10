@@ -8,6 +8,7 @@
     "build": "next build",
     "start": "next start",
     "download:assets": "node scripts/download-assets.mjs",
+    "audit:indexability": "node scripts/audit-indexability.mjs",
     "check:booking-flow": "node scripts/validate-booking-flow.mjs",
     "check:pandit-registration": "node scripts/validate-pandit-registration.mjs",
     "check:spam": "node scripts/check-spam-urls.mjs",

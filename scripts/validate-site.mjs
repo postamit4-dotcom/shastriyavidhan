@@ -1,3 +1,4 @@
+import fs from "node:fs";
 import {
   footerNavigationGroups,
   headerNavigation,
@@ -257,6 +258,7 @@ function verifyUrlAuthority() {
 
 function verifySitemap() {
   const sitemapHrefs = sitemapNodes().map((item) => item.href);
+  const sitemapHrefSet = new Set(sitemapHrefs);
   assertUnique(
     sitemapHrefs.map((href) => ({ href })),
     "href",
@@ -268,6 +270,53 @@ function verifySitemap() {
       fail(`Sitemap includes non-indexable route: ${node.id}`);
     }
   }
+
+  for (const href of [
+    "/",
+    "/puja-services",
+    "/locations/ghaziabad",
+    "/pandit-ji/acharya-sursain-brijwasi-ghaziabad",
+    "/pandit-ji/acharya-sursain-brijwasi-raj-nagar-extension-ghaziabad",
+  ]) {
+    if (!sitemapHrefSet.has(href)) {
+      fail(`Priority published URL missing from sitemap: ${href}`);
+    }
+  }
+
+  for (const href of [
+    "/locations/noida",
+    "/locations/delhi",
+    "/locations/gurugram",
+    "/locations/ujjain",
+    "/puja-services/family-sanskar",
+    "/puja-services/path-jaap-katha",
+    "/puja-services/hanuman-ganesh",
+    "/graha-dosh-shanti",
+    "/migration-notes",
+    "/category/blog",
+  ]) {
+    if (sitemapHrefSet.has(href)) {
+      fail(`Intentionally excluded URL leaked into sitemap: ${href}`);
+    }
+  }
+
+  const htmlSitemapSource = fs.readFileSync("app/site-map/page.jsx", "utf8");
+  if (htmlSitemapSource.includes("siteNodes")) {
+    fail("HTML sitemap should use published sitemap nodes instead of the full technical route registry.");
+  }
+}
+
+function verifyRobotsPolicy() {
+  const robotsSource = fs.readFileSync("app/robots.js", "utf8");
+  if (!robotsSource.includes('disallow: ["/api/"]')) {
+    fail("robots.txt should only disallow private API routes from the public production build.");
+  }
+
+  for (const publicNoindexPath of ["/migration-notes", "/category/blog", "/policies/"]) {
+    if (robotsSource.includes(publicNoindexPath)) {
+      fail(`robots.txt should not block crawl access to public noindex/redirect route: ${publicNoindexPath}`);
+    }
+  }
 }
 
 verifyRegistry();
@@ -275,6 +324,7 @@ verifyServiceData();
 verifyGrahaDoshShantiCatalogue();
 verifyJsonLd();
 verifySitemap();
+verifyRobotsPolicy();
 verifyUrlAuthority();
 
 if (failures.length > 0) {

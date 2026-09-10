@@ -1,7 +1,7 @@
 {
   "site": "Shastriya Vidhan",
   "canonicalHost": "https://www.shastriyavidhan.com",
-  "generatedAt": "2026-09-09T06:38:34.490Z",
+  "generatedAt": "2026-09-10T11:58:13.100Z",
   "source": "repository_inventory_without_live_status_checks",
   "routeCount": 56,
   "routes": [
@@ -168,7 +168,7 @@
     {
       "currentUrl": "/pandit-ji/acharya-sursain-brijwasi-raj-nagar-extension-ghaziabad",
       "pageTitleOrH1": "Acharya Sursain Brijwasi - Raj Nagar Extension",
-      "pageType": "profile",
+      "pageType": "local_booking",
       "statusCode": "repository_inventory",
       "canonicalUrl": "/pandit-ji/acharya-sursain-brijwasi-raj-nagar-extension-ghaziabad",
       "indexState": "index",
@@ -179,7 +179,7 @@
       "intendedFinalUrl": "/pandit-ji/acharya-sursain-brijwasi-raj-nagar-extension-ghaziabad",
       "action": "keep",
       "evidenceStatus": "partially_verified",
-      "notes": "Local profile page for Raj Nagar Extension enquiries using the same verified contact details and photo evidence as the main Ghaziabad profile."
+      "notes": "Local booking page for Raj Nagar Extension enquiries with service, quote, society access, and evidence-handling guidance."
     },
     {
       "currentUrl": [
@@ -632,7 +632,7 @@
       "intendedFinalUrl": "/locations/noida",
       "action": "hide",
       "evidenceStatus": "partially_verified",
-      "notes": "Location page exists for direct review but is hidden from sitemap/header/footer until service coverage is owner-verified."
+      "notes": "Location page exists for direct review but stays out of the XML sitemap until service coverage is owner-verified."
     },
     {
       "currentUrl": "/locations/delhi",
@@ -646,7 +646,7 @@
       "intendedFinalUrl": "/locations/delhi",
       "action": "hide",
       "evidenceStatus": "partially_verified",
-      "notes": "Location page exists for direct review but is hidden from sitemap/header/footer until service coverage is owner-verified."
+      "notes": "Location page exists for direct review but stays out of the XML sitemap until service coverage is owner-verified."
     },
     {
       "currentUrl": "/locations/gurugram",
@@ -660,7 +660,7 @@
       "intendedFinalUrl": "/locations/gurugram",
       "action": "hide",
       "evidenceStatus": "partially_verified",
-      "notes": "Location page exists for direct review but is hidden from sitemap/header/footer until service coverage is owner-verified."
+      "notes": "Location page exists for direct review but stays out of the XML sitemap until service coverage is owner-verified."
     },
     {
       "currentUrl": "/locations/ghaziabad",
@@ -668,13 +668,15 @@
       "pageType": "location",
       "statusCode": "repository_inventory",
       "canonicalUrl": "/locations/ghaziabad",
-      "indexState": "noindex",
+      "indexState": "index",
       "existingParent": "locations",
-      "inboundNavigationLocation": [],
+      "inboundNavigationLocation": [
+        "html_sitemap"
+      ],
       "intendedFinalUrl": "/locations/ghaziabad",
-      "action": "hide",
+      "action": "keep",
       "evidenceStatus": "partially_verified",
-      "notes": "Location page exists for direct review but is hidden from sitemap/header/footer until service coverage is owner-verified."
+      "notes": "Ghaziabad location page is published because it has verified local profile linkage, service request copy, and cautious availability language."
     },
     {
       "currentUrl": "/locations/ujjain",
@@ -688,7 +690,7 @@
       "intendedFinalUrl": "/locations/ujjain",
       "action": "hide",
       "evidenceStatus": "partially_verified",
-      "notes": "Location page exists for direct review but is hidden from sitemap/header/footer until service coverage is owner-verified."
+      "notes": "Location page exists for direct review but stays out of the XML sitemap until service coverage is owner-verified."
     },
     {
       "currentUrl": "/book-pandit-ji-online-for-diwali-puja",

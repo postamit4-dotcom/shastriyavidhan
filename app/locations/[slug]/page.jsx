@@ -4,7 +4,7 @@ import { CalendarCheck, ChevronRight, MapPin, MessageCircle, PhoneCall } from "l
 import ContactForm from "@/components/ContactForm";
 import ServiceCard from "@/components/ServiceCard";
 import TrackedContactLink from "@/components/TrackedContactLink";
-import { contact, getLocationBySlug, locationPages, servicePages } from "@/lib/site-data";
+import { acharyaSursainProfile, contact, getLocationBySlug, locationPages, servicePages } from "@/lib/site-data";
 import { basePageMetadata, locationPageJsonLd } from "@/lib/seo";
 import { getNodeById, robotsForIndexable } from "@/lib/site-registry";
 
@@ -140,6 +140,26 @@ export default async function LocationPage({ params }) {
           </div>
         </div>
       </section>
+
+      {location.slug === "ghaziabad" ? (
+        <section className="section-apple">
+          <div className="container">
+            <article className="apple-product-card" style={{ maxWidth: "940px", margin: "0 auto", textAlign: "left" }}>
+              <span className="apple-product-tag">Ghaziabad Pandit Ji profile</span>
+              <h2 className="apple-product-title">Local profile linked to Ghaziabad enquiries.</h2>
+              <p className="apple-product-desc">
+                Families can review{" "}
+                <Link href={acharyaSursainProfile.path}>Acharya Sursain Brijwasi&apos;s Ghaziabad Pandit Ji profile</Link>{" "}
+                and the{" "}
+                <Link href="/pandit-ji/acharya-sursain-brijwasi-raj-nagar-extension-ghaziabad">
+                  Raj Nagar Extension Pandit Ji page
+                </Link>{" "}
+                before sharing their puja, date, locality, samagri needs, and booking questions.
+              </p>
+            </article>
+          </div>
+        </section>
+      ) : null}
 
       <section className="section-apple">
         <div className="container">

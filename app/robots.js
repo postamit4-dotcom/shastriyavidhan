@@ -7,7 +7,7 @@ export default function robots() {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/api/", "/migration-notes", "/category/blog", "/policies/"],
+        disallow: ["/api/"],
       },
     ],
     sitemap: absoluteUrl("/sitemap.xml"),
