@@ -15,6 +15,7 @@ import ContactForm from "@/components/ContactForm";
 import PanditJiPicture, { panditJiImage } from "@/components/PanditJiPicture";
 import PujaFinder from "@/components/PujaFinder";
 import { trackEvent } from "@/lib/analytics";
+import { getNodeById } from "@/lib/site-registry";
 import {
   acharyaSursainProfile,
   bookingSteps,
@@ -380,17 +381,51 @@ export default function HomePageClient() {
           </div>
 
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "16px" }}>
-            {locationPages.map((loc) => (
-              <div key={loc.city} className="apple-product-card" style={{ padding: "24px", textAlign: "left" }}>
-                <span className="apple-product-tag">{loc.badge}</span>
-                <h3 style={{ fontSize: "1.2rem", fontWeight: 700, margin: "4px 0" }}>{loc.city}</h3>
-                <p style={{ fontSize: "0.88rem", color: "var(--text-secondary)", marginBottom: "16px" }}>{loc.coverage}</p>
-                <Link href={loc.href} className="apple-link apple-link-sm" style={{ fontWeight: 500 }}>
-                  <span>View {loc.city} options</span>
-                  <ChevronRight size={13} className="apple-link-chevron" />
-                </Link>
-              </div>
-            ))}
+            {locationPages.map((loc) => {
+              const node = getNodeById(`location-${loc.slug}`);
+              const isPublic = loc.slug === "online-puja" || Boolean(node?.indexable);
+              const publicLinkText = loc.slug === "noida" ? "View Pandit Ji in Noida" : `View ${loc.city} options`;
+
+              return (
+                <div key={loc.city} className="apple-product-card" style={{ padding: "24px", textAlign: "left" }}>
+                  <span className="apple-product-tag">{loc.badge}</span>
+                  <h3 style={{ fontSize: "1.2rem", fontWeight: 700, margin: "4px 0" }}>
+                    {isPublic ? (
+                      <Link href={loc.href} style={{ color: "inherit" }}>
+                        {loc.city}
+                      </Link>
+                    ) : (
+                      loc.city
+                    )}
+                  </h3>
+                  <p style={{ fontSize: "0.88rem", color: "var(--text-secondary)", marginBottom: "16px" }}>{loc.coverage}</p>
+                  {isPublic ? (
+                    <Link href={loc.href} className="apple-link apple-link-sm" style={{ fontWeight: 500 }}>
+                      <span>{publicLinkText}</span>
+                      <ChevronRight size={13} className="apple-link-chevron" aria-hidden="true" />
+                    </Link>
+                  ) : (
+                    <a
+                      href={contact.whatsappLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="apple-link apple-link-sm"
+                      style={{ fontWeight: 500 }}
+                      onClick={() =>
+                        trackEvent("whatsapp_click", {
+                          city_slug: loc.slug,
+                          cta_location: "home_location_card",
+                          page_type: "home",
+                        })
+                      }
+                    >
+                      <span>Check {loc.city} availability</span>
+                      <ChevronRight size={13} className="apple-link-chevron" aria-hidden="true" />
+                    </a>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>

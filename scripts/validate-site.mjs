@@ -274,6 +274,7 @@ function verifySitemap() {
   for (const href of [
     "/",
     "/puja-services",
+    "/locations/noida",
     "/locations/ghaziabad",
     "/pandit-ji/acharya-sursain-brijwasi-ghaziabad",
     "/pandit-ji/acharya-sursain-brijwasi-raj-nagar-extension-ghaziabad",
@@ -284,7 +285,6 @@ function verifySitemap() {
   }
 
   for (const href of [
-    "/locations/noida",
     "/locations/delhi",
     "/locations/gurugram",
     "/locations/ujjain",
@@ -306,6 +306,119 @@ function verifySitemap() {
   }
 }
 
+function verifyNoidaLocalSeo() {
+  const noidaNode = siteNodes.find((node) => node.href === "/locations/noida");
+  if (!noidaNode) {
+    fail("Noida location node is missing from the route registry.");
+    return;
+  }
+
+  if (noidaNode.publicationState !== "live" || !noidaNode.indexable || !noidaNode.showInHtmlSitemap) {
+    fail("Noida location page should be live, indexable, and visible in the HTML sitemap.");
+  }
+
+  for (const href of ["/locations/delhi", "/locations/gurugram", "/locations/ujjain"]) {
+    const node = siteNodes.find((item) => item.href === href);
+    if (node?.indexable || node?.showInHtmlSitemap) {
+      fail(`Review-gated location should remain out of sitemap/indexing: ${href}`);
+    }
+  }
+
+  const noida = locationPages.find((location) => location.slug === "noida");
+  if (!noida) {
+    fail("Noida location data is missing.");
+    return;
+  }
+
+  if (noida.seoTitle !== "Pandit Ji in Noida | Book Puja at Home | Shastriya Vidhan") {
+    fail("Noida SEO title does not match the approved local landing-page title.");
+  }
+
+  if (noida.pageH1 !== "Pandit Ji in Noida for Puja at Home") {
+    fail("Noida H1 does not match the approved local landing-page H1.");
+  }
+
+  if (!noida.metaDescription?.includes("sector and date")) {
+    fail("Noida meta description should ask for puja, sector and date before confirmation.");
+  }
+
+  if (/Sectors 1 to 168/i.test(noida.coverage)) {
+    fail("Noida coverage should not use unsupported continuous sector-range claims.");
+  }
+
+  if (!noida.popularServiceSlugs?.length || noida.popularServiceSlugs.length < 5) {
+    fail("Noida page should have a curated set of mapped service cards.");
+  }
+
+  const noidaServiceSlugs = noida.popularServiceSlugs || [];
+  for (const slug of noidaServiceSlugs) {
+    const service = servicePages.find((item) => item.slug === slug);
+    if (!service) {
+      fail(`Noida featured service does not exist: ${slug}`);
+    } else if (!service.locations.some((location) => location.toLowerCase() === "noida")) {
+      fail(`Noida featured service is not mapped to Noida: ${slug}`);
+    }
+  }
+
+  if (!noida.faqs?.length || noida.faqs.length < 10) {
+    fail("Noida page should include a substantive FAQ set.");
+  }
+
+  const locationPageSource = fs.readFileSync("app/locations/[slug]/page.jsx", "utf8");
+  if (!locationPageSource.includes("buildNoidaWhatsAppMessage")) {
+    fail("Noida location page should use the configured Noida WhatsApp message.");
+  }
+
+  const contactFormSource = fs.readFileSync("components/ContactForm.jsx", "utf8");
+  if (!contactFormSource.includes("Sector / Society / Locality")) {
+    fail("Booking form should request sector, society, or locality for local visit modes.");
+  }
+
+  for (const sourcePath of ["components/ServiceCard.jsx", "components/PujaFinder.jsx"]) {
+    const source = fs.readFileSync(sourcePath, "utf8");
+    if (/duration\.split/i.test(source)) {
+      fail(`${sourcePath} should not truncate duration copy by splitting on commas.`);
+    }
+  }
+}
+
+function verifyLlmsTxt() {
+  const llmsPath = "public/llms.txt";
+  if (!fs.existsSync(llmsPath)) {
+    fail("/llms.txt should be implemented as public/llms.txt.");
+    return;
+  }
+
+  const content = fs.readFileSync(llmsPath, "utf8");
+  const requiredSnippets = [
+    "# Shastriya Vidhan",
+    "https://www.shastriyavidhan.com/",
+    "https://www.shastriyavidhan.com/locations/noida",
+    "https://www.shastriyavidhan.com/puja-services",
+    "https://www.shastriyavidhan.com/book-puja",
+    "https://www.shastriyavidhan.com/contact",
+    "https://www.shastriyavidhan.com/pricing-and-inclusions",
+    "https://www.shastriyavidhan.com/cancellation-refund-policy",
+  ];
+
+  for (const snippet of requiredSnippets) {
+    if (!content.includes(snippet)) {
+      fail(`llms.txt missing required public reference: ${snippet}`);
+    }
+  }
+
+  const unsupportedClaims = [/google ranking factor/i, /guarantees? ai citations?/i, /best pandit ji in noida/i, /no\.?\s*1/i];
+  for (const pattern of unsupportedClaims) {
+    if (pattern.test(content)) {
+      fail(`llms.txt contains unsupported promotional claim: ${pattern}`);
+    }
+  }
+
+  if (/api[_ -]?key|password|secret|token/i.test(content)) {
+    fail("llms.txt should not contain secrets or credential-like text.");
+  }
+}
+
 function verifyRobotsPolicy() {
   const robotsSource = fs.readFileSync("app/robots.js", "utf8");
   if (!robotsSource.includes('disallow: ["/api/"]')) {
@@ -324,6 +437,8 @@ verifyServiceData();
 verifyGrahaDoshShantiCatalogue();
 verifyJsonLd();
 verifySitemap();
+verifyNoidaLocalSeo();
+verifyLlmsTxt();
 verifyRobotsPolicy();
 verifyUrlAuthority();
 

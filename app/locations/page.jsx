@@ -60,6 +60,21 @@ export default function LocationsPage() {
       <section className="section-apple">
         <div className="container">
           <article className="apple-product-card" style={{ maxWidth: "900px", margin: "0 auto 28px", textAlign: "left" }}>
+            <span className="apple-product-tag">Noida booking page</span>
+            <h2 className="apple-product-title">Pandit Ji in Noida for puja at home.</h2>
+            <p className="apple-product-desc">
+              Families can open the dedicated{" "}
+              <Link href="/locations/noida">Pandit Ji in Noida</Link> page to share their puja, date,
+              sector or society, samagri needs, and booking questions before availability and quote confirmation.
+            </p>
+            <Link href="/locations/noida" className="apple-link apple-link-sm">
+              <MapPin size={13} aria-hidden="true" />
+              <span>Book a puja in Noida</span>
+              <ChevronRight size={13} className="apple-link-chevron" aria-hidden="true" />
+            </Link>
+          </article>
+
+          <article className="apple-product-card" style={{ maxWidth: "900px", margin: "0 auto 28px", textAlign: "left" }}>
             <span className="apple-product-tag">Ghaziabad profile</span>
             <h2 className="apple-product-title">Named local profile for Ghaziabad enquiries.</h2>
             <p className="apple-product-desc" style={{ marginBottom: 0 }}>

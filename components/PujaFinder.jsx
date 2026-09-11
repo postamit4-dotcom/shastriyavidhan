@@ -127,7 +127,10 @@ export default function PujaFinder() {
                   <strong>Modes:</strong> {service.modes.join(", ")}
                 </div>
                 <div>
-                  <strong>Duration:</strong> {service.duration.split(",")[0]}
+                  <strong>Duration:</strong> {service.cardDuration || service.duration}
+                </div>
+                <div>
+                  <strong>Samagri:</strong> {service.cardSamagri || service.samagri}
                 </div>
                 <div>
                   <strong>Locations:</strong> {service.locations.slice(0, 3).join(", ")}

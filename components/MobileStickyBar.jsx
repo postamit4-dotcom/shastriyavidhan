@@ -4,14 +4,16 @@ import { useEffect, useMemo, useState } from "react";
 import { usePathname } from "next/navigation";
 import { ClipboardList, MessageCircle, PhoneCall } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
-import { contact, servicePages } from "@/lib/site-data";
+import { contact, noidaPanditJiWhatsAppLink, servicePages } from "@/lib/site-data";
 
 const panditProfilePaths = new Set([
   "/pandit-ji/acharya-sursain-brijwasi-ghaziabad",
   "/pandit-ji/acharya-sursain-brijwasi-raj-nagar-extension-ghaziabad",
 ]);
 
-const profileWhatsAppLinks = {
+const locationPagePaths = new Set(["/locations/noida"]);
+
+const pathWhatsAppLinks = {
   "/pandit-ji/acharya-sursain-brijwasi-raj-nagar-extension-ghaziabad": `https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(
     `Namaste, I need a Pandit Ji in Raj Nagar Extension, Ghaziabad.
 
@@ -26,6 +28,7 @@ Please confirm Acharya Sursain Brijwasi's availability and the quote.`,
   "/pandit-ji/acharya-sursain-brijwasi-ghaziabad": `https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(
     "Namaste, I would like to enquire about booking Acharya Sursain Brijwasi for a puja in Ghaziabad. Please share availability, process and quote.",
   )}`,
+  "/locations/noida": noidaPanditJiWhatsAppLink,
 };
 
 export default function MobileStickyBar() {
@@ -37,7 +40,9 @@ export default function MobileStickyBar() {
     [pathname],
   );
   const isPanditProfilePage = panditProfilePaths.has(pathname);
-  const shouldShowBar = isServicePage || isPanditProfilePage;
+  const isLocationPage = locationPagePaths.has(pathname);
+  const shouldShowBar = isServicePage || isPanditProfilePage || isLocationPage;
+  const pageType = isPanditProfilePage ? "profile" : isLocationPage ? "location" : "service";
 
   useEffect(() => {
     if (!shouldShowBar) return undefined;
@@ -78,7 +83,7 @@ export default function MobileStickyBar() {
         Icon: ClipboardList,
       };
   const PrimaryIcon = primaryAction.Icon;
-  const whatsappHref = profileWhatsAppLinks[pathname] || contact.whatsappLink;
+  const whatsappHref = pathWhatsAppLinks[pathname] || contact.whatsappLink;
 
   return (
     <aside className="apple-mobile-bar" aria-label="Mobile quick actions">
@@ -90,7 +95,8 @@ export default function MobileStickyBar() {
         onClick={() =>
           trackEvent(isPanditProfilePage ? "call_click" : "booking_start", {
             cta_location: "mobile_sticky",
-            page_type: isPanditProfilePage ? "profile" : "service",
+            page_type: pageType,
+            service_city: isLocationPage ? "Noida" : undefined,
           })
         }
       >
@@ -108,7 +114,8 @@ export default function MobileStickyBar() {
         onClick={() =>
           trackEvent("whatsapp_click", {
             cta_location: "mobile_sticky",
-            page_type: isPanditProfilePage ? "profile" : "service",
+            page_type: pageType,
+            service_city: isLocationPage ? "Noida" : undefined,
           })
         }
       >

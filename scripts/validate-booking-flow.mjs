@@ -125,6 +125,17 @@ const noida = locationPages.find((location) => location.slug === "noida");
 const ghaziabad = locationPages.find((location) => location.slug === "ghaziabad");
 assert.ok(noida, "Noida location page should be configured");
 assert.ok(ghaziabad, "Ghaziabad location page should be configured");
+assert.equal(getNodeByHref("/locations/noida")?.indexable, true, "Noida should be indexable after local SEO completion");
+assert.ok(
+  sitemapNodes().some((item) => item.href === "/locations/noida"),
+  "Noida should be included in sitemap after publication",
+);
+assert.equal(noida.pageH1, "Pandit Ji in Noida for Puja at Home", "Noida should use the approved H1");
+assert.equal(
+  /Sectors 1 to 168/i.test(noida.coverage),
+  false,
+  "Noida coverage should avoid unsupported continuous sector-range claims",
+);
 assert.ok(ghaziabad.coverage.toLowerCase().includes("indirapuram"), "Ghaziabad coverage should name key areas");
 
 const rudrabhishek = getServiceBySlug("book-pandit-ji-for-rudrabhishek-puja-noida");
@@ -137,8 +148,19 @@ assert.ok(rudrabhishek.faqs?.length >= 5, "Rudrabhishek should have FAQs");
 
 const contactFormSource = await fs.readFile("components/ContactForm.jsx", "utf8");
 assert.ok(contactFormSource.includes('name="website"'), "contact form should include honeypot field");
+assert.ok(contactFormSource.includes('id: "Shop/Office"'), "booking form should support shop and office puja requests");
+assert.ok(contactFormSource.includes("Sector / Society / Locality"), "booking form should ask for sector or locality");
 assert.ok(contactFormSource.includes('trackEvent("generate_lead"'), "successful booking should track generate_lead");
 assert.equal(/trackEvent\([^)]*(phone|email|name)/i.test(contactFormSource), false, "analytics should not send PII field names");
+
+const serviceCardSource = await fs.readFile("components/ServiceCard.jsx", "utf8");
+assert.equal(/duration\.split/i.test(serviceCardSource), false, "service cards should not truncate duration strings");
+
+const pujaFinderSource = await fs.readFile("components/PujaFinder.jsx", "utf8");
+assert.equal(/duration\.split/i.test(pujaFinderSource), false, "puja finder cards should not truncate duration strings");
+
+const llmsSource = await fs.readFile("public/llms.txt", "utf8");
+assert.ok(llmsSource.includes("https://www.shastriyavidhan.com/locations/noida"), "llms.txt should include Noida after publication");
 
 const rajNagarProfileSource = await fs.readFile(
   "app/pandit-ji/acharya-sursain-brijwasi-raj-nagar-extension-ghaziabad/page.jsx",

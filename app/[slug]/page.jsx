@@ -388,6 +388,24 @@ function ModePage({ page }) {
 
       <RelatedPanditProfileSection profile={page.relatedPanditProfile} />
 
+      {page.relatedLinks?.length ? (
+        <section className="section-apple service-detail-section" id="mode-related-links">
+          <div className="container">
+            <div className="apple-section-header">
+              <span className="apple-eyebrow">Related booking pages</span>
+              <h2>Useful next steps for {page.title.toLowerCase()}.</h2>
+            </div>
+            <div className="service-related-link-row">
+              {page.relatedLinks.map((link) => (
+                <Link key={link.href} href={link.href} className="apple-btn-pill apple-btn-secondary">
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
+
       <section className="section-apple" style={{ backgroundColor: "var(--apple-gray-bg)" }}>
         <div className="container">
           <div className="apple-section-header">

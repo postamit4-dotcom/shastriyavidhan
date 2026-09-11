@@ -9,15 +9,17 @@ export default function BookingOptionButton({
   mode = "",
   note = "",
   packageName = "",
+  pageType = "service",
   service = "",
+  ctaLocation = "service_option",
 }) {
   const handleSelect = () => {
     trackEvent("booking_start", {
       service_slug: slugifyAnalyticsValue(service),
       city_slug: slugifyAnalyticsValue(city),
       booking_mode: slugifyAnalyticsValue(mode),
-      cta_location: "service_option",
-      page_type: "service",
+      cta_location: ctaLocation,
+      page_type: pageType,
     });
 
     window.dispatchEvent(

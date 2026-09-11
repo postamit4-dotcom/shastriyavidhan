@@ -1,7 +1,7 @@
 {
   "site": "Shastriya Vidhan",
   "canonicalHost": "https://www.shastriyavidhan.com",
-  "generatedAt": "2026-09-10T11:58:13.100Z",
+  "generatedAt": "2026-09-10T12:46:39.291Z",
   "source": "repository_inventory_without_live_status_checks",
   "routeCount": 56,
   "routes": [
@@ -626,13 +626,15 @@
       "pageType": "location",
       "statusCode": "repository_inventory",
       "canonicalUrl": "/locations/noida",
-      "indexState": "noindex",
+      "indexState": "index",
       "existingParent": "locations",
-      "inboundNavigationLocation": [],
+      "inboundNavigationLocation": [
+        "html_sitemap"
+      ],
       "intendedFinalUrl": "/locations/noida",
-      "action": "hide",
+      "action": "keep",
       "evidenceStatus": "partially_verified",
-      "notes": "Location page exists for direct review but stays out of the XML sitemap until service coverage is owner-verified."
+      "notes": "Noida location page is published after local booking copy, cautious coverage language, Noida-mapped service selection, enquiry CTAs, and sitemap validation."
     },
     {
       "currentUrl": "/locations/delhi",

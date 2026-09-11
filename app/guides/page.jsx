@@ -15,11 +15,19 @@ const guideSections = [
     id: "puja-preparation",
     title: "Puja Preparation",
     body: "Practical guidance for puja space, family participation, language preference, timing, and what to confirm before payment.",
+    links: [
+      { label: "Pandit Ji in Noida", href: "/locations/noida" },
+      { label: "Puja at Home", href: "/puja-at-home" },
+    ],
   },
   {
     id: "samagri-guidance",
     title: "Samagri Guidance",
     body: "Separate what the family prepares from what may be included in a quote. Samagri should never be assumed until city and package are confirmed.",
+    links: [
+      { label: "Noida Puja Services", href: "/locations/noida#popular-puja-services" },
+      { label: "Pricing and Inclusions", href: "/pricing-and-inclusions" },
+    ],
   },
   {
     id: "festival-guides",
@@ -93,6 +101,15 @@ export default function GuidesPage() {
               <p className="apple-product-desc" style={{ marginBottom: 0 }}>
                 {section.body}
               </p>
+              {section.links?.length ? (
+                <div className="service-related-link-row" style={{ justifyContent: "flex-start", marginTop: "20px" }}>
+                  {section.links.map((link) => (
+                    <Link key={link.href} href={link.href} className="apple-btn-pill apple-btn-secondary">
+                      {link.label}
+                    </Link>
+                  ))}
+                </div>
+              ) : null}
             </div>
           </div>
         </section>

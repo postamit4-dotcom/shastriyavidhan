@@ -1,0 +1,46 @@
+# Shastriya Vidhan
+
+> Puja booking and preparation information, with Pandit Ji availability, ritual scope, samagri arrangements and quotes confirmed before booking.
+
+Shastriya Vidhan helps families request Hindu puja services at home, at suitable venues, at temples where reviewed, or online when the ritual can be guided remotely. A submitted enquiry is not a confirmed booking until the team checks the ceremony, date, locality, Pandit Ji availability, samagri responsibility, quote, and booking terms.
+
+## Main pages
+
+- [Home](https://www.shastriyavidhan.com/) - Brand overview and request-first puja booking.
+- [Puja Services](https://www.shastriyavidhan.com/puja-services) - Public directory of active puja service pages.
+- [Pandit Ji in Noida](https://www.shastriyavidhan.com/locations/noida) - Local Noida booking page for puja enquiries at home, office, shop, society venues, and suitable online requests.
+- [Service Locations](https://www.shastriyavidhan.com/locations) - Public locations hub with live city pages and enquiry-first service areas.
+- [Puja at Home](https://www.shastriyavidhan.com/puja-at-home) - Home puja request mode and preparation notes.
+- [Online Puja](https://www.shastriyavidhan.com/online-puja) - Live video guidance where the ritual is suitable for remote participation.
+
+## Selected puja services
+
+- [Rudrabhishek Puja in Noida](https://www.shastriyavidhan.com/book-pandit-ji-for-rudrabhishek-puja-noida) - Shiva abhishek booking request with samagri and mode review.
+- [Shrimad Bhagwat Katha](https://www.shastriyavidhan.com/shrimad-bhagwat-katha) - Katha planning for home, temple, venue, community, and Delhi NCR enquiries after scope review.
+- [Mahamrityunjaya Jaap Puja](https://www.shastriyavidhan.com/book-pandit-ji-online-for-mahamrityunjaya-jaap-puja) - Jaap and puja request page with scope, duration, and samagri confirmation.
+- [Diwali Lakshmi Ganesh Puja](https://www.shastriyavidhan.com/book-pandit-ji-online-for-diwali-puja) - Festival puja request page with date, slot, samagri, and quote review.
+- [Krishna Janmashtami Puja](https://www.shastriyavidhan.com/book-pandit-ji-online-for-janmashtami-puja) - Janmashtami puja planning with timing and participation review.
+- [Hanuman Chalisa Path](https://www.shastriyavidhan.com/book-pandit-ji-for-hanuman-chalisa-path) - Path request page with mode, samagri, and location suitability review.
+
+## Preparation and booking
+
+- [Puja Guides](https://www.shastriyavidhan.com/guides) - Preparation, samagri, festival, and booking guidance.
+- [How Booking Works](https://www.shastriyavidhan.com/how-it-works) - Request-first booking process before payment.
+- [Pricing and Inclusions](https://www.shastriyavidhan.com/pricing-and-inclusions) - Factors that affect quote, samagri, travel, optional additions, and payment steps.
+- [Book Puja](https://www.shastriyavidhan.com/book-puja) - Booking enquiry form.
+- [Contact](https://www.shastriyavidhan.com/contact) - Booking desk contact page.
+
+## Booking terms
+
+- [Cancellation and Refund Policy](https://www.shastriyavidhan.com/cancellation-refund-policy) - Public cancellation, rescheduling, and refund guidance.
+- [Terms of Service](https://www.shastriyavidhan.com/terms) - Website and service terms.
+- [Privacy Policy](https://www.shastriyavidhan.com/privacy-policy) - Data handling information.
+- [Religious and Legal Disclaimer](https://www.shastriyavidhan.com/religious-legal-disclaimer) - Limits on devotional and advisory claims.
+
+## Service information
+
+- Booking phone: +91 7599 340 430.
+- WhatsApp booking desk: https://wa.me/917599340430
+- Noida enquiries should include puja name, preferred date, preferred time, sector or society, language preference, and samagri assistance need.
+- No fixed price, review, star rating, Noida office address, society affiliation, or guaranteed spiritual or material result is implied by this file.
+- This file is a lightweight website guide for systems that choose to use llms.txt. It does not replace HTML pages, internal links, robots.txt, sitemap.xml, or normal search engine crawling.

@@ -37,6 +37,7 @@ const steps = [
 
 const modeOptions = [
   { id: "Home", title: "Puja at Home", desc: "Pandit Ji visits residence" },
+  { id: "Shop/Office", title: "Shop / Office", desc: "Business or workplace puja" },
   { id: "Online", title: "Online Video", desc: "Video guidance if suitable" },
   { id: "Temple", title: "At Temple", desc: "Reviewed teerth request" },
 ];
@@ -137,6 +138,7 @@ export default function ContactForm({
   const [submitError, setSubmitError] = useState("");
   const [prefillNotice, setPrefillNotice] = useState("");
   const [hasStarted, setHasStarted] = useState(false);
+  const asksForVenueDetails = ["Home", "Shop/Office", "Temple"].includes(formData.mode);
 
   const safeAnalyticsParams = () => ({
     service_slug: slugifyAnalyticsValue(formData.service),
@@ -705,12 +707,16 @@ Please check Pandit Ji availability and share the quote.`;
 
             <div className="apple-form-group">
               <label htmlFor="apple-address" className="apple-form-label">
-                {formData.mode === "Home" ? "Locality / Society / Address" : "City / Country"}
+                {asksForVenueDetails ? "Sector / Society / Locality" : "City / Country"}
               </label>
               <input
                 id="apple-address"
                 type="text"
-                placeholder={formData.mode === "Home" ? "e.g. Indirapuram, Ghaziabad / Sector 78, Noida" : "e.g. Jaipur, India / Toronto, Canada"}
+                placeholder={
+                  asksForVenueDetails
+                    ? "e.g. Sector 78, Noida / Indirapuram, Ghaziabad"
+                    : "e.g. Jaipur, India / Toronto, Canada"
+                }
                 className="apple-form-input"
                 value={formData.address}
                 onChange={(e) => updateField("address", e.target.value)}
