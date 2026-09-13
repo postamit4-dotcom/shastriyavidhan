@@ -1,6 +1,7 @@
 import Link from "next/link";
 import TrackedContactLink from "@/components/TrackedContactLink";
-import { contact, site } from "@/lib/site-data";
+import TrackedOutboundLink from "@/components/TrackedOutboundLink";
+import { acharyaSursainProfile, contact, site } from "@/lib/site-data";
 import { footerNavigationGroups } from "@/lib/site-registry";
 
 export default function SiteFooter() {
@@ -50,6 +51,19 @@ export default function SiteFooter() {
           >
             Call {contact.displayPhone}
           </TrackedContactLink>
+          <TrackedOutboundLink
+            href={acharyaSursainProfile.facebookUrl}
+            eventName="social_profile_click"
+            params={{
+              platform: "facebook",
+              link_url: acharyaSursainProfile.facebookUrl,
+              placement: "footer",
+              page_type: "sitewide",
+            }}
+            showExternalIcon={false}
+          >
+            Acharya Sursain Brijwasi on Facebook
+          </TrackedOutboundLink>
         </div>
 
         <div className="apple-footer-bottom">

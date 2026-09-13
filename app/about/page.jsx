@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Check, ChevronRight } from "lucide-react";
 import PanditJiPicture, { panditJiImage } from "@/components/PanditJiPicture";
+import TrackedOutboundLink from "@/components/TrackedOutboundLink";
 import { acharyaSursainProfile, contact, site } from "@/lib/site-data";
 import { basePageMetadata } from "@/lib/seo";
 
@@ -92,6 +93,19 @@ export default function AboutPage() {
                   Acharya Sursain Brijwasi&apos;s profile
                   <ChevronRight size={15} aria-hidden="true" />
                 </Link>
+                <TrackedOutboundLink
+                  href={acharyaSursainProfile.facebookUrl}
+                  className="apple-btn-pill apple-btn-secondary"
+                  eventName="social_profile_click"
+                  params={{
+                    platform: "facebook",
+                    link_url: acharyaSursainProfile.facebookUrl,
+                    placement: "about_pandit_profile",
+                    page_type: "about",
+                  }}
+                >
+                  View on Facebook
+                </TrackedOutboundLink>
                 <span>{panditJiImage.caption}</span>
               </div>
             </div>

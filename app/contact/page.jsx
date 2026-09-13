@@ -1,8 +1,9 @@
 import Link from "next/link";
-import { ChevronRight, MapPin, MessageCircle, PhoneCall, UserPlus } from "lucide-react";
+import { ChevronRight, ExternalLink, MapPin, MessageCircle, PhoneCall, UserPlus } from "lucide-react";
 import ContactForm from "@/components/ContactForm";
 import PanditJiPicture from "@/components/PanditJiPicture";
 import TrackedContactLink from "@/components/TrackedContactLink";
+import TrackedOutboundLink from "@/components/TrackedOutboundLink";
 import { acharyaSursainProfile, contact } from "@/lib/site-data";
 import { basePageMetadata, contactPageJsonLd } from "@/lib/seo";
 
@@ -124,6 +125,28 @@ export default function ContactPage() {
               >
                 Ghaziabad Pandit Ji Profile
               </Link>
+            </div>
+
+            <div style={{ backgroundColor: "var(--white)", borderRadius: "var(--radius-lg)", padding: "24px", border: "1px solid var(--line-soft)", textAlign: "center" }}>
+              <div style={{ width: "48px", height: "48px", borderRadius: "var(--radius-md)", backgroundColor: "var(--sand-light)", color: "var(--deep-ink)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 12px" }}>
+                <ExternalLink size={22} aria-hidden="true" />
+              </div>
+              <h2 style={{ fontSize: "1.1rem", fontWeight: 700, marginBottom: "4px" }}>Facebook Profile</h2>
+              <p style={{ fontSize: "0.88rem", color: "var(--muted-text)", marginBottom: "12px" }}>View Acharya Sursain Brijwasi&apos;s public Facebook profile as a secondary discovery link.</p>
+              <TrackedOutboundLink
+                href={acharyaSursainProfile.facebookUrl}
+                className="btn-pill btn-sm btn-outline"
+                eventName="social_profile_click"
+                params={{
+                  platform: "facebook",
+                  link_url: acharyaSursainProfile.facebookUrl,
+                  placement: "contact_social_card",
+                  page_type: "contact",
+                }}
+                style={{ width: "100%", whiteSpace: "normal" }}
+              >
+                View Acharya Ji on Facebook
+              </TrackedOutboundLink>
             </div>
           </div>
         </div>

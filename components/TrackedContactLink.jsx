@@ -12,7 +12,9 @@ export default function TrackedContactLink({
   rel,
   id,
   ariaLabel,
+  "aria-label": ariaLabelAttribute,
   style,
+  ...props
 }) {
   return (
     <a
@@ -21,8 +23,9 @@ export default function TrackedContactLink({
       target={target}
       rel={rel}
       className={className}
-      aria-label={ariaLabel}
+      aria-label={ariaLabel || ariaLabelAttribute}
       style={style}
+      {...props}
       onClick={() => trackEvent(eventName, params)}
     >
       {children}

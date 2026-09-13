@@ -12,8 +12,10 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import ContactForm from "@/components/ContactForm";
+import LiteYouTubeEmbed from "@/components/LiteYouTubeEmbed";
 import PanditJiPicture, { panditJiImage } from "@/components/PanditJiPicture";
 import PujaFinder from "@/components/PujaFinder";
+import TrackedOutboundLink from "@/components/TrackedOutboundLink";
 import { trackEvent } from "@/lib/analytics";
 import { getNodeById } from "@/lib/site-registry";
 import {
@@ -25,6 +27,7 @@ import {
   panditStandards,
   pujaGuides,
   pujaModes,
+  verifiedVideoGuidance,
 } from "@/lib/site-data";
 
 export default function HomePageClient() {
@@ -331,13 +334,36 @@ export default function HomePageClient() {
                 View Pandit Ji&apos;s Ghaziabad enquiry profile before sharing your puja date,
                 location, samagri needs, and preferred ceremony details.
               </p>
-              <Link href={acharyaSursainProfile.path} className="apple-btn-pill apple-btn-secondary">
-                Ghaziabad Pandit Ji Profile
-                <ChevronRight size={15} aria-hidden="true" />
-              </Link>
+              <div className="pandit-feature-actions">
+                <Link href={acharyaSursainProfile.path} className="apple-btn-pill apple-btn-secondary">
+                  Ghaziabad Pandit Ji Profile
+                  <ChevronRight size={15} aria-hidden="true" />
+                </Link>
+                <TrackedOutboundLink
+                  href={acharyaSursainProfile.facebookUrl}
+                  className="apple-btn-pill apple-btn-secondary"
+                  eventName="social_profile_click"
+                  params={{
+                    platform: "facebook",
+                    link_url: acharyaSursainProfile.facebookUrl,
+                    placement: "home_pandit_profile",
+                    page_type: "home",
+                  }}
+                >
+                  View Facebook Profile
+                </TrackedOutboundLink>
+              </div>
               <span className="pandit-feature-caption">{panditJiImage.caption}</span>
             </div>
           </article>
+
+          <div className="home-video-guidance">
+            <LiteYouTubeEmbed
+              video={verifiedVideoGuidance.shrimadBhagwatKathaDay4}
+              placement="home_pandit_profile"
+              pageType="home"
+            />
+          </div>
 
           <div className="apple-profiles-grid">
             {panditStandards.map((standard) => (

@@ -10,7 +10,8 @@ import {
 } from "lucide-react";
 import PanditJiPicture, { panditJiImage } from "@/components/PanditJiPicture";
 import TrackedContactLink from "@/components/TrackedContactLink";
-import { contact } from "@/lib/site-data";
+import TrackedOutboundLink from "@/components/TrackedOutboundLink";
+import { acharyaSursainProfile, contact } from "@/lib/site-data";
 import { absoluteUrl, basePageMetadata, breadcrumbJsonLd } from "@/lib/seo";
 
 const profilePath = "/pandit-ji/acharya-sursain-brijwasi-raj-nagar-extension-ghaziabad";
@@ -358,6 +359,7 @@ function profileJsonLd() {
         telephone: contact.phone,
         url: parentProfileUrl,
         image: absoluteUrl(profileImage),
+        sameAs: [acharyaSursainProfile.facebookUrl],
       },
       {
         "@type": "Service",
@@ -603,6 +605,23 @@ export default function AcharyaSursainBrijwasiRajNagarExtensionPage() {
                 For the broader city profile, visit{" "}
                 <Link href={parentProfilePath}>Acharya Sursain Brijwasi - Pandit Ji in Ghaziabad</Link>.
                 Use this page when the venue is in Raj Nagar Extension or nearby RNE areas.
+              </p>
+              <p>
+                You can also view{" "}
+                <TrackedOutboundLink
+                  href={acharyaSursainProfile.facebookUrl}
+                  className="inline-external-link"
+                  eventName="social_profile_click"
+                  params={{
+                    platform: "facebook",
+                    link_url: acharyaSursainProfile.facebookUrl,
+                    placement: "rne_about_acharya",
+                    page_type: "profile",
+                  }}
+                >
+                  Acharya Sursain Brijwasi on Facebook
+                </TrackedOutboundLink>{" "}
+                as a public personal profile link.
               </p>
             </article>
 

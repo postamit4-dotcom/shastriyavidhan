@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import BookingOptionButton from "@/components/BookingOptionButton";
 import ContactForm from "@/components/ContactForm";
+import LiteYouTubeEmbed from "@/components/LiteYouTubeEmbed";
 import ServiceCard from "@/components/ServiceCard";
 import TrackedContactLink from "@/components/TrackedContactLink";
 import {
@@ -589,6 +590,7 @@ function buildServiceTocItems(service, { hasFaqs, relatedServices }) {
     { href: "#pricing", label: "Pricing" },
     { href: "#locations", label: "Locations" },
     service.relatedPanditProfile ? { href: "#pandit-authority", label: "Pandit Ji" } : null,
+    service.videoGuidance?.length ? { href: "#video-guidance", label: "Watch guidance" } : null,
     service.bookingGuide?.length ? { href: "#booking-process", label: "Booking process" } : null,
     { href: "#religious-disclaimer", label: "Disclaimer" },
     hasFaqs ? { href: "#faqs", label: "FAQs" } : null,
@@ -1175,6 +1177,36 @@ function RelatedPanditProfileSection({ profile }) {
   );
 }
 
+function ServiceVideoGuidanceSection({ service }) {
+  if (!service.videoGuidance?.length) return null;
+
+  return (
+    <section className="section-apple service-detail-section" id="video-guidance">
+      <div className="container">
+        <div className="apple-section-header">
+          <span className="apple-eyebrow">Watch and understand</span>
+          <h2>Related video guidance for {service.title}.</h2>
+          <p>
+            These public YouTube videos are shown as learning context for this page. Booking, ritual scope, and
+            samagri details are still confirmed directly with the Shastriya Vidhan booking desk.
+          </p>
+        </div>
+
+        <div className="video-guidance-grid">
+          {service.videoGuidance.map((video) => (
+            <LiteYouTubeEmbed
+              key={video.id}
+              video={video}
+              placement={`service_${service.slug}`}
+              pageType="service"
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default async function ServicePage({ params }) {
   const { slug } = await params;
   const policy = getPolicyBySlug(slug);
@@ -1429,6 +1461,7 @@ export default async function ServicePage({ params }) {
       <ServicePricingSection service={service} />
       <ServiceLocationsModesSection service={service} />
       <RelatedPanditProfileSection profile={service.relatedPanditProfile} />
+      <ServiceVideoGuidanceSection service={service} />
 
       {service.bookingGuide?.length ? (
         <section className="section-apple booking-guide-section" id="booking-process">

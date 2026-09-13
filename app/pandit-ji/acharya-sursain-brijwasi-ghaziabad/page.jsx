@@ -9,10 +9,12 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import GhaziabadServiceAreas from "@/components/GhaziabadServiceAreas";
+import LiteYouTubeEmbed from "@/components/LiteYouTubeEmbed";
 import PanditJiPicture, { panditJiImage } from "@/components/PanditJiPicture";
 import TrackedContactLink from "@/components/TrackedContactLink";
-import { contact } from "@/lib/site-data";
-import { absoluteUrl, basePageMetadata, breadcrumbJsonLd } from "@/lib/seo";
+import TrackedOutboundLink from "@/components/TrackedOutboundLink";
+import { acharyaSursainProfile, acharyaSursainProfileVideos, contact } from "@/lib/site-data";
+import { absoluteUrl, basePageMetadata, breadcrumbJsonLd, videoObjectJsonLd } from "@/lib/seo";
 
 const profilePath = "/pandit-ji/acharya-sursain-brijwasi-ghaziabad";
 const profileUrl = absoluteUrl(profilePath);
@@ -160,54 +162,65 @@ const faqs = [
 ];
 
 function profileJsonLd() {
+  const graph = [
+    {
+      "@type": "ProfilePage",
+      "@id": `${profileUrl}#webpage`,
+      url: profileUrl,
+      name: title,
+      description,
+      inLanguage: "en-IN",
+      isPartOf: {
+        "@id": `${absoluteUrl("/")}#website`,
+      },
+      primaryImageOfPage: {
+        "@type": "ImageObject",
+        "@id": `${profileUrl}#primaryimage`,
+        url: absoluteUrl(profileImage),
+        contentUrl: absoluteUrl(profileImage),
+        width: panditJiImage.width,
+        height: panditJiImage.height,
+        encodingFormat: "image/webp",
+        caption: panditJiImage.caption,
+      },
+      breadcrumb: {
+        "@id": `${profileUrl}#breadcrumb`,
+      },
+      mainEntity: {
+        "@id": `${profileUrl}#person`,
+      },
+    },
+    {
+      "@type": "Person",
+      "@id": `${profileUrl}#person`,
+      name: "Acharya Sursain Brijwasi",
+      alternateName: "Sursain Brijwasi",
+      jobTitle: "Pandit Ji",
+      telephone: contact.phone,
+      url: profileUrl,
+      image: absoluteUrl(profileImage),
+      sameAs: [acharyaSursainProfile.facebookUrl],
+    },
+    breadcrumbJsonLd(
+      [
+        { name: "Home", path: "/" },
+        { name: "Acharya Sursain Brijwasi", path: profilePath },
+      ],
+      profilePath,
+    ),
+  ];
+  const videoObjects = acharyaSursainProfileVideos
+    .map((video) => videoObjectJsonLd(video, profilePath))
+    .filter(Boolean);
+
+  if (videoObjects.length > 0) {
+    graph[0].video = videoObjects.map((video) => ({ "@id": video["@id"] }));
+    graph.push(...videoObjects);
+  }
+
   return {
     "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "ProfilePage",
-        "@id": `${profileUrl}#webpage`,
-        url: profileUrl,
-        name: title,
-        description,
-        inLanguage: "en-IN",
-        isPartOf: {
-          "@id": `${absoluteUrl("/")}#website`,
-        },
-        primaryImageOfPage: {
-          "@type": "ImageObject",
-          "@id": `${profileUrl}#primaryimage`,
-          url: absoluteUrl(profileImage),
-          contentUrl: absoluteUrl(profileImage),
-          width: panditJiImage.width,
-          height: panditJiImage.height,
-          encodingFormat: "image/webp",
-          caption: panditJiImage.caption,
-        },
-        breadcrumb: {
-          "@id": `${profileUrl}#breadcrumb`,
-        },
-        mainEntity: {
-          "@id": `${profileUrl}#person`,
-        },
-      },
-      {
-        "@type": "Person",
-        "@id": `${profileUrl}#person`,
-        name: "Acharya Sursain Brijwasi",
-        alternateName: "Sursain Brijwasi",
-        jobTitle: "Pandit Ji",
-        telephone: contact.phone,
-        url: profileUrl,
-        image: absoluteUrl(profileImage),
-      },
-      breadcrumbJsonLd(
-        [
-          { name: "Home", path: "/" },
-          { name: "Acharya Sursain Brijwasi", path: profilePath },
-        ],
-        profilePath,
-      ),
-    ],
+    "@graph": graph,
   };
 }
 
@@ -239,6 +252,30 @@ function ContactActions({ compact = false }) {
         {compact ? "Call Pandit Ji" : `Call ${contact.displayPhone}`}
       </TrackedContactLink>
     </div>
+  );
+}
+
+function ProfileVideoSection() {
+  return (
+    <section className="section-apple service-detail-section" id="profile-videos">
+      <div className="container">
+        <div className="apple-section-header">
+          <span className="apple-eyebrow">Watch Katha guidance</span>
+          <h2>Public videos featuring Shrimad Bhagwat Katha.</h2>
+          <p>
+            These public YouTube videos are included because their verified metadata identifies Acharya Sursain
+            Brijwasi in Shrimad Bhagwat Katha context. Booking enquiries remain request-first through Shastriya
+            Vidhan.
+          </p>
+        </div>
+
+        <div className="video-guidance-grid">
+          {acharyaSursainProfileVideos.map((video) => (
+            <LiteYouTubeEmbed key={video.id} video={video} placement="profile_acharya_sursain" pageType="profile" />
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -343,6 +380,21 @@ export default function AcharyaSursainBrijwasiPage() {
                 </div>
               ))}
             </div>
+            <div className="profile-social-actions">
+              <TrackedOutboundLink
+                href={acharyaSursainProfile.facebookUrl}
+                className="apple-btn-pill apple-btn-secondary"
+                eventName="social_profile_click"
+                params={{
+                  platform: "facebook",
+                  link_url: acharyaSursainProfile.facebookUrl,
+                  placement: "profile_quick_facts",
+                  page_type: "profile",
+                }}
+              >
+                View Acharya Sursain Brijwasi on Facebook
+              </TrackedOutboundLink>
+            </div>
           </article>
         </div>
       </section>
@@ -356,6 +408,7 @@ export default function AcharyaSursainBrijwasiPage() {
               <a href="#puja-enquiry">Puja enquiry support</a>
               <a href="#booking-steps">How to request</a>
               <a href="#ghaziabad-service">Ghaziabad service info</a>
+              <a href="#profile-videos">Watch Katha guidance</a>
               <a href="#ghaziabad-service-areas">Areas served</a>
               <a href="#booking-clarity">Booking transparency</a>
               <a href="#profile-faqs">FAQs</a>
@@ -399,6 +452,8 @@ export default function AcharyaSursainBrijwasiPage() {
           </div>
         </div>
       </section>
+
+      <ProfileVideoSection />
 
       <GhaziabadServiceAreas whatsappHref={profileWhatsAppLink} />
 
