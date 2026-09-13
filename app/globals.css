@@ -5238,3 +5238,1156 @@ img {
     transition: none !important;
   }
 }
+
+/* ==========================================================================
+   Ganesh Chaturthi Puja 2026 Page Styles
+   ========================================================================== */
+
+.ganesh-top-banner {
+  background-color: #120B0D;
+  border-bottom: 1px solid rgba(245, 185, 66, 0.2);
+  padding: 10px 16px;
+  font-size: 0.8125rem;
+}
+
+.ganesh-top-banner-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.ganesh-banner-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  background-color: rgba(245, 185, 66, 0.15);
+  color: var(--brand-yellow);
+  font-weight: 600;
+  font-size: 0.75rem;
+}
+
+.ganesh-banner-text {
+  color: var(--text-secondary);
+}
+
+.ganesh-banner-highlight {
+  color: #fff;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--brand-yellow);
+  text-underline-offset: 4px;
+}
+
+.ganesh-breadcrumbs {
+  background-color: var(--apple-gray-bg);
+  border-bottom: 1px solid var(--apple-line-light);
+  padding: 10px 16px;
+  font-size: 0.8125rem;
+}
+
+.ganesh-breadcrumbs-inner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  color: var(--text-tertiary);
+}
+
+.ganesh-breadcrumbs-inner a {
+  color: var(--text-secondary);
+  transition: color var(--transition-fast);
+}
+
+.ganesh-breadcrumbs-inner a:hover {
+  color: var(--brand-yellow);
+}
+
+.ganesh-breadcrumbs-inner span[aria-current="page"] {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.ganesh-hero-section {
+  padding-top: 36px;
+  padding-bottom: 56px;
+  background: radial-gradient(circle at 80% 20%, rgba(245, 185, 66, 0.08) 0%, transparent 60%),
+              var(--apple-black);
+  border-bottom: 1px solid var(--apple-line-light);
+}
+
+.ganesh-hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 36px;
+  align-items: center;
+}
+
+.ganesh-hero-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.ganesh-hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  padding: 5px 14px;
+  border-radius: 9999px;
+  background: rgba(245, 185, 66, 0.12);
+  border: 1px solid rgba(245, 185, 66, 0.28);
+  color: var(--brand-yellow);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.ganesh-hero-title {
+  font-size: clamp(2rem, 3.8vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.ganesh-hero-description {
+  font-size: clamp(1rem, 1.3vw, 1.125rem);
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.ganesh-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-top: 4px;
+}
+
+.ganesh-hero-trust-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid var(--apple-line-light);
+}
+
+.ganesh-trust-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.ganesh-trust-item svg {
+  color: var(--brand-yellow);
+  flex-shrink: 0;
+}
+
+/* Muhurat Highlight Card in Hero */
+.ganesh-hero-visual {
+  position: relative;
+}
+
+.ganesh-muhurat-card {
+  background: linear-gradient(145deg, #1C1214, #2A171B);
+  border: 1px solid rgba(245, 185, 66, 0.35);
+  border-radius: var(--radius-card);
+  padding: 24px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45), 0 0 30px rgba(245, 185, 66, 0.12);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.ganesh-muhurat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--apple-line-light);
+}
+
+.ganesh-sacred-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  background: rgba(245, 185, 66, 0.15);
+  color: var(--brand-yellow);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.ganesh-location-tag {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-tertiary);
+}
+
+.ganesh-muhurat-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.ganesh-date-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-tertiary);
+  font-weight: 600;
+}
+
+.ganesh-date-value {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-top: 2px;
+}
+
+.ganesh-tithi-sub {
+  font-size: 0.8125rem;
+  color: var(--brand-yellow);
+  font-weight: 500;
+}
+
+.ganesh-muhurat-highlight-box {
+  background: rgba(245, 185, 66, 0.08);
+  border: 1px solid rgba(245, 185, 66, 0.28);
+  border-radius: var(--radius-inner);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ganesh-muhurat-box-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ganesh-muhurat-box-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--brand-yellow);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.ganesh-muhurat-box-badge {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  background: var(--brand-yellow);
+  color: #120B0D;
+  padding: 2px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.ganesh-muhurat-time {
+  font-size: clamp(1.4rem, 2.2vw, 1.8rem);
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.01em;
+  margin-top: 2px;
+}
+
+.ganesh-muhurat-duration {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+}
+
+.ganesh-tithi-box {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--apple-line-light);
+  border-radius: var(--radius-inner);
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.8125rem;
+}
+
+.ganesh-tithi-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--text-tertiary);
+}
+
+.ganesh-tithi-row strong {
+  color: var(--text-primary);
+}
+
+.ganesh-chandra-warning {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  background: rgba(216, 72, 46, 0.1);
+  border: 1px solid rgba(216, 72, 46, 0.3);
+  border-radius: var(--radius-inner);
+  padding: 10px 12px;
+  font-size: 0.75rem;
+  color: #F8B4A8;
+  line-height: 1.45;
+}
+
+.ganesh-warning-icon {
+  color: var(--brand-red);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* Quick Facts Grid */
+.ganesh-facts-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 14px;
+}
+
+.ganesh-fact-card {
+  text-align: center;
+  padding: 18px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.ganesh-fact-icon-wrap {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(245, 185, 66, 0.12);
+  color: var(--brand-yellow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 6px;
+}
+
+.ganesh-fact-label {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-tertiary);
+}
+
+.ganesh-fact-val {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-top: 2px;
+}
+
+.ganesh-fact-sub {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+}
+
+/* Sticky TOC */
+.ganesh-toc-sticky {
+  position: sticky;
+  top: var(--nav-height);
+  z-index: 30;
+  background: rgba(28, 18, 20, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--apple-line);
+}
+
+.ganesh-toc-book-btn {
+  color: var(--brand-yellow) !important;
+  font-weight: 700 !important;
+}
+
+/* Timing Grid Cards */
+.ganesh-timing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.ganesh-timing-card {
+  padding: 24px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ganesh-timing-card.border-saffron {
+  border-left: 4px solid var(--brand-yellow);
+}
+
+.ganesh-timing-card.border-amber {
+  border-left: 4px solid #FFB800;
+}
+
+.ganesh-timing-card.border-red {
+  border-left: 4px solid var(--brand-red);
+}
+
+.ganesh-timing-tag {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-tertiary);
+}
+
+.ganesh-timing-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.ganesh-timing-box {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: var(--radius-inner);
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ganesh-big-time {
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+
+.text-saffron {
+  color: var(--brand-yellow);
+}
+
+.ganesh-time-duration {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+}
+
+.ganesh-tithi-line {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+}
+
+.ganesh-tithi-line strong {
+  color: var(--text-primary);
+}
+
+.ganesh-timing-desc {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+/* 16 Shodashopachara Grid */
+.ganesh-shodasha-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.ganesh-shodasha-card {
+  padding: 20px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: transform var(--transition-fast), border-color var(--transition-fast);
+}
+
+.ganesh-shodasha-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(245, 185, 66, 0.4);
+}
+
+.ganesh-step-num {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(245, 185, 66, 0.15);
+  color: var(--brand-yellow);
+  font-weight: 700;
+  font-size: 0.8125rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ganesh-step-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.ganesh-step-desc {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* Samagri Grid */
+.ganesh-samagri-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.ganesh-samagri-card {
+  padding: 24px;
+  text-align: left;
+}
+
+.ganesh-samagri-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--apple-line-light);
+}
+
+.ganesh-samagri-badge {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ganesh-samagri-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.ganesh-samagri-sub {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+}
+
+.ganesh-samagri-list {
+  list-style: none;
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ganesh-samagri-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+}
+
+.ganesh-qty-tag {
+  font-size: 0.75rem;
+  color: var(--brand-yellow);
+  font-family: monospace;
+  background: rgba(245, 185, 66, 0.1);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.ganesh-samagri-cta {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+/* Formats Grid */
+.ganesh-formats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.ganesh-format-card {
+  padding: 24px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.ganesh-format-tag {
+  display: inline-block;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.ganesh-format-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.ganesh-format-duration {
+  font-size: 0.75rem;
+  color: var(--brand-yellow);
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+.ganesh-format-desc {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin-top: 12px;
+}
+
+.ganesh-format-action {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--apple-line-light);
+}
+
+/* Visarjan Section */
+.ganesh-visarjan-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 36px;
+  align-items: center;
+}
+
+.ganesh-visarjan-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-align: left;
+}
+
+.ganesh-visarjan-copy h2 {
+  font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.ganesh-visarjan-copy p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.ganesh-visarjan-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 6px;
+}
+
+.ganesh-visarjan-step-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+.ganesh-visarjan-step-item strong {
+  color: var(--text-primary);
+}
+
+.ganesh-v-num {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--brand-yellow);
+  color: #120B0D;
+  font-weight: 800;
+  font-size: 0.8125rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.ganesh-eco-card {
+  background: linear-gradient(135deg, rgba(111, 176, 122, 0.12), rgba(111, 176, 122, 0.04));
+  border: 1px solid rgba(111, 176, 122, 0.3);
+  border-radius: var(--radius-card);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  text-align: left;
+}
+
+.ganesh-eco-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #6FB07A;
+}
+
+.ganesh-eco-header h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.ganesh-eco-card p {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.ganesh-eco-tips {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: var(--radius-inner);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.75rem;
+  color: #A3D4AB;
+}
+
+/* Trust Feature Cards */
+.ganesh-trust-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.ganesh-trust-feature-card {
+  padding: 28px 24px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ganesh-feature-icon-wrap {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-inner);
+  background: rgba(245, 185, 66, 0.12);
+  color: var(--brand-yellow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ganesh-trust-feature-card h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.ganesh-trust-feature-card p {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* 5-Step Pipeline Grid */
+.ganesh-pipeline-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+}
+
+.ganesh-pipeline-card {
+  background: var(--apple-white);
+  border: 1px solid var(--apple-line-light);
+  border-radius: var(--radius-bento);
+  padding: 20px 16px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ganesh-pipeline-step {
+  font-size: 0.6875rem;
+  font-weight: 800;
+  color: var(--brand-yellow);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.ganesh-pipeline-card h3 {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.ganesh-pipeline-card p {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* Coverage Grid */
+.ganesh-coverage-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.ganesh-coverage-card {
+  padding: 24px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.ganesh-cov-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--brand-yellow);
+}
+
+.ganesh-cov-header h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.ganesh-coverage-card p {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+.ganesh-cov-badge {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 4px;
+}
+
+/* Booking Form */
+.ganesh-form-wrapper {
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.ganesh-form-card {
+  padding: 36px 32px;
+  background: linear-gradient(145deg, #1A1012, #241418);
+  border: 1px solid rgba(245, 185, 66, 0.3);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+}
+
+.ganesh-form-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.ganesh-form-title {
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-top: 8px;
+}
+
+.ganesh-form-subtitle {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  max-width: 580px;
+  margin: 8px auto 0;
+  line-height: 1.5;
+}
+
+.ganesh-booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.ganesh-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.ganesh-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: left;
+}
+
+.ganesh-form-field.full-width {
+  grid-column: 1 / -1;
+}
+
+.ganesh-form-field label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.ganesh-input,
+.ganesh-select,
+.ganesh-textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: var(--radius-inner);
+  border: 1px solid var(--apple-line);
+  background: var(--apple-black);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.875rem;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.ganesh-input:focus,
+.ganesh-select:focus,
+.ganesh-textarea:focus {
+  outline: none;
+  border-color: var(--brand-yellow);
+  box-shadow: 0 0 0 3px rgba(245, 185, 66, 0.2);
+}
+
+.ganesh-form-submit-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.ganesh-submit-btn {
+  width: 100%;
+  padding: 14px 28px;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.ganesh-form-privacy {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  text-align: center;
+}
+
+.ganesh-form-success {
+  text-align: center;
+  padding: 32px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.ganesh-success-icon {
+  margin-bottom: 4px;
+}
+
+.ganesh-form-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 14px;
+}
+
+.apple-btn-whatsapp {
+  background-color: #25D366;
+  color: #fff;
+}
+
+.apple-btn-whatsapp:hover {
+  background-color: #1EBE5D;
+}
+
+/* FAQs Accordion */
+.ganesh-faqs-wrap {
+  max-width: 820px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ganesh-faq-item {
+  padding: 0;
+  overflow: hidden;
+  text-align: left;
+}
+
+.ganesh-faq-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 22px;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  cursor: pointer;
+  user-select: none;
+  list-style: none;
+}
+
+.ganesh-faq-summary::-webkit-details-marker {
+  display: none;
+}
+
+.ganesh-faq-chevron {
+  color: var(--text-tertiary);
+  transition: transform var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.ganesh-faq-item[open] .ganesh-faq-chevron {
+  transform: rotate(180deg);
+}
+
+.ganesh-faq-content {
+  padding: 0 22px 18px;
+  border-top: 1px solid var(--apple-line-light);
+}
+
+.ganesh-faq-content p {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-top: 12px;
+}
+
+/* Disclaimer Box */
+.ganesh-disclaimer-card {
+  max-width: 900px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--apple-line-light);
+  border-radius: var(--radius-inner);
+  padding: 18px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  text-align: left;
+}
+
+.ganesh-disc-line {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  line-height: 1.5;
+}
+
+.ganesh-disc-line svg {
+  color: var(--brand-yellow);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.ganesh-disc-line strong {
+  color: var(--text-secondary);
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 1024px) {
+  .ganesh-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .ganesh-facts-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .ganesh-shodasha-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .ganesh-formats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .ganesh-pipeline-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .ganesh-visarjan-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .ganesh-facts-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .ganesh-timing-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ganesh-samagri-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ganesh-formats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ganesh-trust-cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ganesh-coverage-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ganesh-form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .ganesh-hero-trust-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .ganesh-shodasha-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ganesh-pipeline-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ganesh-hero-trust-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ganesh-form-card {
+    padding: 24px 16px;
+  }
+}
+
